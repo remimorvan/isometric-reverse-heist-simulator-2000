@@ -14,7 +14,10 @@ var next_position:= Vector2i(0,0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	var current_tile = layer0.local_to_map(global_position)
+	global_position = layer0.map_to_local(current_tile)
+	print("Chair initial position (snapped to center): ", global_position)
+
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
