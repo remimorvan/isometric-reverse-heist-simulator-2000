@@ -5,7 +5,7 @@ static func get_path_to_tile(
 	start_tile: Vector2,
 	end_tile: Vector2,
 	tilemap: TileMapLayer,
-	blocked_layer: TileMapLayer
+	blocked_tiles: Array
 ) -> PackedVector2Array:
 	# If start and end are the same tile, return empty path
 	if start_tile == end_tile:
@@ -14,7 +14,6 @@ static func get_path_to_tile(
 	
 	# Get all walkable tiles (excluding blocked tiles)
 	var all_tiles = tilemap.get_used_cells()
-	var blocked_tiles = blocked_layer.get_used_cells()
 	var walkable_tiles = all_tiles.filter(func(tile): return not blocked_tiles.has(tile))
 	print("Total tiles: ", all_tiles.size(), ", Blocked tiles: ", blocked_tiles.size(), ", Walkable tiles: ", walkable_tiles.size())
 	
