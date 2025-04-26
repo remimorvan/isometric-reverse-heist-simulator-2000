@@ -9,7 +9,6 @@ var path: PackedVector2Array
 var is_moving: bool = false
 
 @onready var layer0: TileMapLayer = $"../../Layer0"
-@onready var layer1: TileMapLayer = $"../../Layer1"
 @onready var tilemap: Node2D = $"../.."
 @onready var game_object_handler: Node = $"../"
 
@@ -58,7 +57,7 @@ func play(tour_nb):
 		start_tile,
 		end_tile,
 		layer0,
-		layer1
+		get_parent().occupied_tiles_but_obj(self)
 	)
 	
 	print(new_path)
