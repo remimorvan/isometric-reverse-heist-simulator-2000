@@ -9,7 +9,6 @@ var target_position: Vector2
 var is_moving: bool = false
 
 @onready var layer0: TileMapLayer = $"../../Layer0"
-@onready var layer1: TileMapLayer = $"../../Layer1"
 
 func play(tour_nb) -> void:
 	var cyclic_path = []
@@ -25,7 +24,7 @@ func play(tour_nb) -> void:
 		start_tile,
 		end_tile,
 		layer0,
-		layer1
+		get_parent().occupied_tiles_but_obj(self)
 	)
 	
 	#print(new_path)
@@ -59,7 +58,7 @@ func check_visibility() -> bool:
 	for t in range(ceil(tile_distance * factor)):
 		var tile = Vector2i(dt * t * dir + current_tile)
 		#print(dt, dir," ",tile, " ", t, " dist: ", tile_distance)
-		if layer1.get_cell_tile_data(tile) != null:
+		if not get_parent().is_tile_free(tile):
 			print("hit blocking tile")
 			return false
 	return true
@@ -77,29 +76,29 @@ func _ready() -> void:
 	#cyclic_path.append(Vector2(-4,2))
 	#new_parameterized_path(cyclic_path,true)
 	
-func new_parameterized_path(list_of_points, is_cyclic=false):
-	var new_path = []
-	var start_pos = list_of_points[0]
-	for i in range(1,list_of_points.size()):
-		var new_pos = list_of_points[i]
-		var new_path2 = MovementUtils.get_path_to_tile(
-				start_pos,
-				new_pos,
-				layer0,
-				layer1
-			)
-		new_path.append_array(new_path2)
-		start_pos = new_pos
-	if is_cyclic:
-		var new_path2 = MovementUtils.get_path_to_tile(
-				list_of_points[-1],
-				list_of_points[0],
-				layer0,
-				layer1
-			)
-		new_path.append_array(new_path2)
-	
-	use_new_path(new_path)
+#func new_parameterized_path(list_of_points, is_cyclic=false):
+#	var new_path = []
+#	var start_pos = list_of_points[0]
+#	for i in range(1,list_of_points.size()):
+#		var new_pos = list_of_points[i]
+#		var new_path2 = MovementUtils.get_path_to_tile(
+#				start_pos,
+#				new_pos,
+#				layer0,
+#				layer1.get_used_cells()
+#			)
+#		new_path.append_array(new_path2)
+#		start_pos = new_pos
+#	if is_cyclic:
+#		var new_path2 = MovementUtils.get_path_to_tile(
+#				list_of_points[-1],
+#				list_of_points[0],
+#				layer0,
+#				layer1.get_used_cells()
+#			)
+#		new_path.append_array(new_path2)
+#	
+#	use_new_path(new_path)
 	
 func use_new_path(new_path):
 	if not new_path.is_empty():
@@ -128,7 +127,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				start_tile,
 				end_tile,
 				layer0,
-				layer1
+				get_parent().occupied_tiles_but_obj(self)
 			)
 			
 			use_new_path(new_path)

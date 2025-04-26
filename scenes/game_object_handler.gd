@@ -5,12 +5,6 @@ extends Node
 @onready var layer0: TileMapLayer = $"../Layer0"
 @onready var layer1: TileMapLayer = $"../Layer1"
 
-func new_turn():
-	for obj in self.get_children():
-		obj.play(turn_nb)
-	
-	turn_nb += 1
-
 func turn_finished():
 	for obj in self.get_children():
 		if not obj.is_done():
@@ -32,17 +26,26 @@ func occupied_tiles() -> Array:
 	var objects = get_children()
 	return layer1_tiles + objects.map(tile_of_object)
 
+func occupied_tiles_but_obj(obj) -> Array:
+	var layer1_tiles = layer1.get_used_cells()
+	var siblings = []
+	var objects = get_children().filter(
+		func(c): return layer0.local_to_map(c.global_position) != layer0.local_to_map(obj.global_position))
+	return layer1_tiles + objects.map(tile_of_object)
+
 func is_tile_valid(tile: Vector2i) -> bool:
 	return tile in layer0.get_used_cells()
 	
 func is_tile_free(tile: Vector2i) -> bool:
 	return tile not in occupied_tiles()
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_T:
-			if turn_finished():
-				print("New turn", turn_nb)
-				new_turn()
-			else:
-				print("Wait for end of turn")
+	
+func can_play() -> bool:
+	return turn_finished()
+		
+func make_new_turn() -> void:
+	if can_play():
+		print("Turn ", turn_nb)
+		for obj in get_children():
+			obj.play(turn_nb)
+		turn_nb += 1
+	print("Error: Wait for end of turn")
