@@ -23,9 +23,10 @@ float check(sampler2D tex, vec2 from, vec2 size) {
 	for (int i = 0; i < 4 * type; i++) {
 		result += texture(tex, from + DIRECTIONS[i] * size * thickness).a;
 	}
-	return gtz(result)*abs(sin(TIME));
+	return gtz(result);
 }
 
 void fragment() {
-	COLOR = mix(COLOR, clr, check(TEXTURE, UV, TEXTURE_PIXEL_SIZE) - gtz(COLOR.a));
+	//COLOR = mix(COLOR, vec4(1.), (0.3+0.3*sin(TIME))*(check(TEXTURE, UV, TEXTURE_PIXEL_SIZE) - gtz(COLOR.a)));
+	COLOR += clr * (1.+0.2*sin(TIME))*vec4(check(TEXTURE, UV, TEXTURE_PIXEL_SIZE) - gtz(COLOR.a));
 }
