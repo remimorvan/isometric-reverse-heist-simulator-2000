@@ -14,6 +14,13 @@ func turn_finished():
 			return false
 	return true
 
+func get_interactable_objects() -> Array:
+	var output = []
+	for obj in get_children():
+		if obj.is_interactable():
+			output.append(obj)
+	return output
+	
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_T:

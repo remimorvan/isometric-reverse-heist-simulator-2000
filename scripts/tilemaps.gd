@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var layer0: TileMapLayer = $Layer0
 @onready var layer1: TileMapLayer = $Layer1
+@onready var chair: TileMapLayer = $Chair
 
 var hover_effect: Polygon2D
 var select_effects: Dictionary
@@ -38,20 +39,22 @@ func stop_select_glow(tile_position: Vector2i) -> void:
 func _ready() -> void:
 	hover_effect = create_glow(Color(1, 1, 1, 0.2), 0)
 	$Layer0.add_child(hover_effect)
-	var cells1 = layer1.get_used_cells()
-	for c in cells1:
-		print("\n\nCell:\n", c, "\n\n")
+	# We create a glow for every cell **at layer 0**, however this
+	# glow in on **layer 1**.
+	# We implicitely assume that for every cell at layer 1, there is
+	# a corresponding cell at layer 0.
+	var cells = layer0.get_used_cells()
+	for c in cells:
 		select_effects[c] = create_glow(Color(1, 0.9, 0.3, 0.2), 1)
 		$Layer1.add_child(select_effects[c])	
-		#make_select_glow(c)
 
 func _process(_delta: float) -> void:
 	var mouse_pos = get_local_mouse_position()
-	var tile_pos = layer0.local_to_map(mouse_pos)
-	var used_cells = layer0.get_used_cells()
+	var tile_pos0 = layer0.local_to_map(mouse_pos)
+	var used_cells0 = layer0.get_used_cells()
 	
-	if used_cells.has(tile_pos):
+	if used_cells0.has(tile_pos0):
 		# Convert tile position back to local coordinates for the hover effect
-		make_hover_glow(tile_pos)
+		make_hover_glow(tile_pos0)
 	else:
 		stop_hover_glow()

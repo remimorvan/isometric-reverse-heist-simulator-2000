@@ -1,4 +1,4 @@
-extends Node2D
+extends GameObject
 
 @export var move_speed: float = 100.0
 @export var arrival_threshold: float = 1.0 # Smaller threshold for precise center alignment
@@ -11,12 +11,14 @@ var is_moving: bool = false
 @onready var layer0: TileMapLayer = $"../../Layer0"
 @onready var layer1: TileMapLayer = $"../../Layer1"
 @onready var tilemap: Node2D = $"../.."
+@onready var game_object_handler: Node = $"../"
 
 func _ready() -> void:
 	# Snap initial position to tile center
 	var current_tile = layer0.local_to_map(global_position)
 	global_position = layer0.map_to_local(current_tile)
 	print("Player initial position (snapped to center): ", global_position)
+	print("Interactable objects :", game_object_handler.get_interactable_objects())
 	
 func use_new_path(new_path):
 	if not new_path.is_empty():
@@ -63,9 +65,9 @@ func play(tour_nb):
 	var end_tile = selected_tile
 	
 	var adjacent_positions = layer0.get_surrounding_cells(start_tile)
-	var used_cells = layer1.get_used_cells();
+	var all_cells = layer0.get_used_cells();
 	for adj in adjacent_positions:
-		if adj in used_cells:
+		if adj in all_cells:
 			tilemap.stop_select_glow(adj)
 			
 	var new_path = MovementUtils.get_path_to_tile(
@@ -80,11 +82,10 @@ func play(tour_nb):
 	use_new_path(new_path)
 	
 	adjacent_positions = layer0.get_surrounding_cells(end_tile)
-	used_cells = layer1.get_used_cells();
+	var interactable_cells = layer1.get_used_cells()
 	for adj in adjacent_positions:
-		if adj in used_cells:
+		if adj in interactable_cells:
 			tilemap.make_select_glow(adj)
-	
 	
 func is_done() -> bool:
 	return not is_moving
