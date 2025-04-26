@@ -9,6 +9,8 @@ extends GameObject
 @onready var game_object_handler: Node = $"../"
 
 var is_highlighted: bool = false
+var should_move: bool = false
+var next_position:= Vector2i(0,0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,6 +20,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func play(time: int):
+	if should_move:
+		should_move = false
+		global_position = layer0.map_to_local(next_position)
+	
 func is_adjacent(player_position: Vector2i) -> bool:
 	var tile_position = layer1.local_to_map(global_position)
 	return tile_position in layer0.get_surrounding_cells(player_position)
@@ -39,6 +46,10 @@ func unhighlight() -> void:
 	#sprite.scale = init_scale
 	shader.set_shader_parameter("clr", Vector4(1.0, 0.9, 0.2, 0.0))
 
-func interact(player_position: Vector2i) -> void:
-	global_position = layer0.map_to_local(get_opposite_tile(player_position))
-	unhighlight()
+func _result_of_interact(player:GameObject, old_position:Vector2i) -> void:
+	player.selected_tile = old_position
+	
+func interact(player_position: Vector2i) -> Callable:
+	should_move = true
+	next_position = get_opposite_tile(player_position)
+	return func(p): _result_of_interact(p, layer1.local_to_map(global_position))

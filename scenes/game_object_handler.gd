@@ -27,7 +27,7 @@ func get_interactable_objects(player_position: Vector2i) -> Array:
 func tile_of_object(obj: Node2D) -> Vector2i:
 	return layer0.local_to_map(obj.global_position)
 
-func occupied_tiles(tile: Vector2i) -> Array:
+func occupied_tiles() -> Array:
 	var layer1_tiles = layer1.get_used_cells()
 	var objects = get_children()
 	return layer1_tiles + objects.map(tile_of_object)
@@ -36,7 +36,7 @@ func is_tile_valid(tile: Vector2i) -> bool:
 	return tile in layer0.get_used_cells()
 	
 func is_tile_free(tile: Vector2i) -> bool:
-	return tile not in occupied_tiles(tile)
+	return tile not in occupied_tiles()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
