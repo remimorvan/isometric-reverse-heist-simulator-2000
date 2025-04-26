@@ -76,7 +76,7 @@ func play(tour_nb):
 	
 	use_new_path(new_path)
 	
-	glow_adjacent_interactable_objects(end_tile)
+	glow_interactable_objects(end_tile)
 	
 func is_done() -> bool:
 	return not is_moving
@@ -120,13 +120,11 @@ func _advance_to_next_target() -> void:
 		print("New target set: ", target_position)
 
 func unglow_all_objects() -> void:
-	var interactable_objects = game_object_handler.get_interactable_objects()
-	for obj in interactable_objects:
+	var objects = game_object_handler.get_children()
+	for obj in objects:
 		obj.unhighlight()
 			
-func glow_adjacent_interactable_objects(tile: Vector2i) -> void:
+func glow_interactable_objects(tile: Vector2i) -> void:
 	var adjacent_positions = layer0.get_surrounding_cells(tile)
-	var interactable_objects = game_object_handler.get_interactable_objects()
-	for obj in interactable_objects:
-		if layer0.local_to_map(obj.global_position) in adjacent_positions:
-			obj.highlight()
+	for obj in game_object_handler.get_interactable_objects(tile):
+		obj.highlight()

@@ -2,7 +2,6 @@ extends Node2D
 
 @onready var layer0: TileMapLayer = $Layer0
 @onready var layer1: TileMapLayer = $Layer1
-@onready var chair: TileMapLayer = $Chair
 
 var hover_effect: Polygon2D
 

@@ -14,10 +14,10 @@ func turn_finished():
 			return false
 	return true
 
-func get_interactable_objects() -> Array:
+func get_interactable_objects(player_position: Vector2i) -> Array:
 	var output = []
 	for obj in get_children():
-		if obj.is_interactable():
+		if obj.is_interactable(player_position):
 			output.append(obj)
 	return output
 	
