@@ -10,6 +10,7 @@ var is_moving: bool = false
 
 @onready var layer0: TileMapLayer = $"../../Layer0"
 @onready var layer1: TileMapLayer = $"../../Layer1"
+@onready var tilemap: Node2D = $"../.."
 
 func _ready() -> void:
 	# Snap initial position to tile center
@@ -60,7 +61,13 @@ func _process(delta: float) -> void:
 func play(tour_nb):
 	var start_tile = layer0.local_to_map(global_position)
 	var end_tile = selected_tile
-
+	
+	var adjacent_positions = Utils.get_adjacent_tiles(start_tile)
+	var used_cells = layer1.get_used_cells();
+	for adj in adjacent_positions:
+		if adj in used_cells:
+			tilemap.stop_select_glow(adj)
+			
 	var new_path = MovementUtils.get_path_to_tile(
 		start_tile,
 		end_tile,
@@ -71,6 +78,12 @@ func play(tour_nb):
 	print(new_path)
 	
 	use_new_path(new_path)
+	
+	adjacent_positions = Utils.get_adjacent_tiles(end_tile)
+	used_cells = layer1.get_used_cells();
+	for adj in adjacent_positions:
+		if adj in used_cells:
+			tilemap.make_select_glow(adj)
 	
 	
 func is_done() -> bool:

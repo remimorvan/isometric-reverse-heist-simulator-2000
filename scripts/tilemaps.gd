@@ -19,13 +19,21 @@ func create_glow(color: Color, layer_index: int) -> Polygon2D:
 	glow.z_index = layer_index
 	return glow
 
-func make_tile_glow(glow: Polygon2D, layer: TileMapLayer, position: Vector2i) -> void:
-	glow.position = layer.map_to_local(position)
-	glow.position[1] -= glow.z_index * 16
+func make_hover_glow(position: Vector2i) -> void:
+	hover_effect.position = layer0.map_to_local(position)
+	hover_effect.visible = true
+	
+func make_select_glow(tile_position: Vector2i) -> void:
+	var glow = select_effects[tile_position]
+	glow.position = layer1.map_to_local(tile_position)
+	glow.position[1] -= 16
 	glow.visible = true
 
-func stop_tile_glow(glow: Polygon2D) -> void:
-	glow.visible = false
+func stop_hover_glow() -> void:
+	hover_effect.visible = false
+	
+func stop_select_glow(tile_position: Vector2i) -> void:
+	select_effects[tile_position].visible = false
 
 func _ready() -> void:
 	hover_effect = create_glow(Color(1, 1, 1, 0.2), 0)
@@ -35,7 +43,7 @@ func _ready() -> void:
 		print("\n\nCell:\n", c, "\n\n")
 		select_effects[c] = create_glow(Color(1, 0.9, 0.3, 0.2), 1)
 		$Layer1.add_child(select_effects[c])	
-		make_tile_glow(select_effects[c], layer1, c)
+		#make_select_glow(c)
 
 func _process(_delta: float) -> void:
 	var mouse_pos = get_local_mouse_position()
@@ -44,6 +52,6 @@ func _process(_delta: float) -> void:
 	
 	if used_cells.has(tile_pos):
 		# Convert tile position back to local coordinates for the hover effect
-		make_tile_glow(hover_effect, layer0, tile_pos)
+		make_hover_glow(tile_pos)
 	else:
-		stop_tile_glow(hover_effect)
+		stop_hover_glow()
