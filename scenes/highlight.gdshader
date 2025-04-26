@@ -23,7 +23,7 @@ float check(sampler2D tex, vec2 from, vec2 size) {
 	for (int i = 0; i < 4 * type; i++) {
 		result += texture(tex, from + DIRECTIONS[i] * size * thickness).a;
 	}
-	return gtz(result);
+	return gtz(result)*abs(sin(TIME));
 }
 
 void fragment() {
