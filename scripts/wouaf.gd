@@ -3,6 +3,7 @@ extends GameObject
 @export var move_speed: float = 100.0
 @export var arrival_threshold: float = 1.0 # Smaller threshold for precise center alignment
 @export var path: PackedVector2Array
+@export var view_dir: Vector2
 
 var target_position: Vector2
 var is_moving: bool = false
@@ -27,18 +28,47 @@ func play(tour_nb) -> void:
 		layer1
 	)
 	
-	print(new_path)
+	#print(new_path)
 	
 	use_new_path(new_path)
 	
 func is_done() -> bool:
 	return not is_moving
 	
+func check_visibility() -> bool:
+	var player_pos = $"../Player".global_position
+	var current_tile = Vector2(layer0.local_to_map(global_position))
+	var player_tile = layer0.local_to_map(player_pos)
+		
+	var cosangle = view_dir.dot((Vector2(player_tile)-current_tile).normalized())
+	if cosangle < 0.7:
+		return false	# not in vision cone
+		
+	#print("in vision cone", view_dir, cosangle, player_pos, global_position)
+	
+	var dir = (Vector2(player_tile) - current_tile).normalized()
+	var tile_distance = (Vector2(player_tile) - current_tile).length()
+	
+	var distance_max = 1000
+	if tile_distance > distance_max:
+		return false
+	
+	var factor = 10.
+	var dt = 1./factor
+
+	for t in range(ceil(tile_distance * factor)):
+		var tile = Vector2i(dt * t * dir + current_tile)
+		#print(dt, dir," ",tile, " ", t, " dist: ", tile_distance)
+		if layer1.get_cell_tile_data(tile) != null:
+			print("hit blocking tile")
+			return false
+	return true
+	
 func _ready() -> void:
 	# Snap initial position to tile center
 	var current_tile = layer0.local_to_map(global_position)
 	global_position = layer0.map_to_local(current_tile)
-	print("Player initial position (snapped to center): ", global_position)
+	#print("Player initial position (snapped to center): ", global_position)
 	#var cylic_path: PackedVector2Array
 	#cyclic_path = []
 	#cyclic_path.append(Vector2(2,2))
@@ -86,9 +116,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			var click_pos = get_global_mouse_position()
-			print("\nNew movement requested")
-			print("From: ", global_position)
-			print("To: ", click_pos)
+			#print("\nNew movement requested")
+			#print("From: ", global_position)
+			#print("To: ", click_pos)
 			
 			# Convert world positions to tile coordinates
 			var start_tile = layer0.local_to_map(global_position)
@@ -120,12 +150,19 @@ func _physics_process(delta: float) -> void:
 		_advance_to_next_target()
 	else:
 		var direction = (target_position - global_position).normalized()
+		
+		view_dir = Vector2(layer0.local_to_map(target_position) - 
+			layer0.local_to_map(global_position)).normalized()
 		var movement = direction * move_speed * delta
 		# Prevent overshooting by clamping movement to remaining distance
 		if movement.length() > distance_to_target:
 			movement = direction * distance_to_target
 		global_position += movement
 		#print("Moving: dir=", direction, " movement=", movement, " new_pos=", global_position)
+	
+	# true iff has seen player
+	if check_visibility():
+		print("Player seen")
 
 func add_to_path(pos):
 	path.append(pos)
@@ -137,7 +174,7 @@ func _advance_to_next_target() -> void:
 	#print("Point reached, remaining points: ", path.size())
 	
 	if path.is_empty():
-		print("Path completed")
+		#print("Path completed")
 		is_moving = false
 		return
 		
