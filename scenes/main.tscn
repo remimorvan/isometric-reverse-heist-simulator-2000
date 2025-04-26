@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://2wacm2cbuaxi"]
+[gd_scene load_steps=9 format=3 uid="uid://2wacm2cbuaxi"]
 
 [ext_resource type="Script" uid="uid://oi0r4ynbu0sa" path="res://scripts/main.gd" id="1_3lgf1"]
 [ext_resource type="PackedScene" uid="uid://bllke6nby7koo" path="res://scenes/tilemaps.tscn" id="1_uvjg0"]
 [ext_resource type="PackedScene" uid="uid://copmddbeoxptn" path="res://scenes/player.tscn" id="3_506sy"]
-[ext_resource type="Script" path="res://scripts/game_object_handler.gd" id="3_tefeu"]
+[ext_resource type="Script" uid="uid://xth84ey1qovn" path="res://scripts/game_object_handler.gd" id="3_tefeu"]
 [ext_resource type="PackedScene" uid="uid://d2xw0bduor5xm" path="res://scenes/wouaf.tscn" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://cjajyodhkxglj" path="res://scenes/dog_bawl.tscn" id="4_tipki"]
+[ext_resource type="Script" uid="uid://627utnhqsmd8" path="res://scenes/dog_bawl.gd" id="5_tipki"]
 [ext_resource type="PackedScene" uid="uid://bi8gdwd2ggyhy" path="res://scenes/chair.tscn" id="6_tefeu"]
 
 [node name="main" type="Node2D"]
@@ -15,6 +17,11 @@ script = ExtResource("1_3lgf1")
 [node name="GameObjectHandler" type="Node" parent="TileMaps"]
 script = ExtResource("3_tefeu")
 
+[node name="DogBawl" parent="TileMaps/GameObjectHandler" instance=ExtResource("4_tipki")]
+position = Vector2(-48, 32)
+scale = Vector2(0.1, 0.1)
+script = ExtResource("5_tipki")
+
 [node name="Chien" parent="TileMaps/GameObjectHandler" instance=ExtResource("4_jyhfs")]
 z_index = 1
 y_sort_enabled = true
@@ -23,7 +30,7 @@ scale = Vector2(0.05, 0.05)
 
 [node name="Chair" parent="TileMaps/GameObjectHandler" instance=ExtResource("6_tefeu")]
 z_index = 1
-position = Vector2(-18, -42)
+position = Vector2(-16, -48)
 scale = Vector2(0.1, 0.1)
 
 [node name="Player" parent="TileMaps/GameObjectHandler" instance=ExtResource("3_506sy")]
