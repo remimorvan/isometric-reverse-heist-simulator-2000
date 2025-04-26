@@ -102,6 +102,8 @@ func _physics_process(delta: float) -> void:
 			movement = direction * distance_to_target
 		global_position += movement
 		print("Moving: dir=", direction, " movement=", movement, " new_pos=", global_position)
+		
+		$CharacterBody2D/AnimatedSprite2D.scale.x = 1.-2.*float(movement.x < 0)
 
 func _advance_to_next_target() -> void:
 	path.remove_at(0)
