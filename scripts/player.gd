@@ -22,6 +22,7 @@ func _ready() -> void:
 func use_new_path(new_path):
 	if not new_path.is_empty():
 		path = new_path
+		$CharacterBody2D/AnimatedSprite2D.play("run")
 		is_moving = true
 		target_position = path[0]
 		#print("Path acceptpathed, first target: ", target_position)
@@ -89,6 +90,8 @@ func _physics_process(delta: float) -> void:
 			movement = direction * distance_to_target
 		global_position += movement
 		print("Moving: dir=", direction, " movement=", movement, " new_pos=", global_position)
+		
+		$CharacterBody2D/AnimatedSprite2D.scale.x = 1.-2.*float(movement.x < 0)
 
 func _advance_to_next_target() -> void:
 	path.remove_at(0)
@@ -96,6 +99,7 @@ func _advance_to_next_target() -> void:
 	
 	if path.is_empty():
 		print("Path completed")
+		$CharacterBody2D/AnimatedSprite2D.stop()
 		is_moving = false
 		return
 		
