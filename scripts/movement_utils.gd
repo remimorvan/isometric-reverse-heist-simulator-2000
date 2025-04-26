@@ -2,21 +2,11 @@ class_name MovementUtils
 extends Node
 
 static func get_path_to_tile(
-	start_pos: Vector2,
-	target_pos: Vector2,
+	start_tile: Vector2,
+	end_tile: Vector2,
 	tilemap: TileMapLayer,
 	blocked_layer: TileMapLayer
 ) -> PackedVector2Array:
-	print("Start pos (world): ", start_pos)
-	print("Target pos (world): ", target_pos)
-	
-	# Convert world positions to tile coordinates
-	var start_tile = tilemap.local_to_map(start_pos)
-	var end_tile = tilemap.local_to_map(target_pos)
-	
-	print("Start tile (map): ", start_tile)
-	print("End tile (map): ", end_tile)
-	
 	# If start and end are the same tile, return empty path
 	if start_tile == end_tile:
 		print("Start and end tiles are the same")

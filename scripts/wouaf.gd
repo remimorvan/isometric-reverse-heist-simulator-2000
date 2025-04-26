@@ -2,10 +2,12 @@ extends Node2D
 
 @export var move_speed: float = 100.0
 @export var arrival_threshold: float = 1.0 # Smaller threshold for precise center alignment
+@export var cyclic_path = false
+@export var path: PackedVector2Array
 
 var target_position: Vector2
-var path: PackedVector2Array
 var is_moving: bool = false
+
 
 @onready var layer0: TileMapLayer = $"../Layer0"
 @onready var layer1: TileMapLayer = $"../Layer1"
@@ -15,10 +17,52 @@ func _ready() -> void:
 	var current_tile = layer0.local_to_map(global_position)
 	global_position = layer0.map_to_local(current_tile)
 	print("Player initial position (snapped to center): ", global_position)
-
+	var cylic_path: PackedVector2Array
+	cyclic_path = []
+	cyclic_path.append(Vector2(2,2))
+	cyclic_path.append(Vector2(2,-2))
+	cyclic_path.append(Vector2(-4,-2))
+	cyclic_path.append(Vector2(-4,2))
+	new_parameterized_path(cyclic_path,true)
+	
+func new_parameterized_path(list_of_points, is_cyclic=false):
+	var new_path = []
+	var start_pos = list_of_points[0]
+	for i in range(1,list_of_points.size()):
+		var new_pos = list_of_points[i]
+		var new_path2 = MovementUtils.get_path_to_tile(
+				start_pos,
+				new_pos,
+				layer0,
+				layer1
+			)
+		new_path.append_array(new_path2)
+		start_pos = new_pos
+	if is_cyclic:
+		var new_path2 = MovementUtils.get_path_to_tile(
+				list_of_points[-1],
+				start_pos,
+				layer0,
+				layer1
+			)
+		new_path.append_array(new_path2)
+	
+	use_new_path(new_path)
+	
+func use_new_path(new_path):
+	if not new_path.is_empty():
+		path = new_path
+		is_moving = true
+		target_position = path[0]
+		#print("Path acceptpathed, first target: ", target_position)
+		# Validate that target is different from current position
+		if target_position.distance_to(global_position) < arrival_threshold:
+			#print("Warning: First target too close to current position!")
+			_advance_to_next_target()
+	
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
-		if event.button_index == MOUSE_BUTTON_LEFT:
+		if event.button_index == MOUSE_BUTTON_RIGHT:
 			var click_pos = get_global_mouse_position()
 			print("\nNew movement requested")
 			print("From: ", global_position)
@@ -35,18 +79,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				layer1
 			)
 			
-			if not new_path.is_empty():
-				path = new_path
-				is_moving = true
-				target_position = path[0]
-				print("Path accepted, first target: ", target_position)
-				# Validate that target is different from current position
-				if target_position.distance_to(global_position) < arrival_threshold:
-					print("Warning: First target too close to current position!")
-					_advance_to_next_target()
-			else:
-				print("Path was empty, movement cancelled")
-			
+			use_new_path(new_path)
 
 func _process(delta: float) -> void:
 	pass
@@ -57,7 +90,7 @@ func _physics_process(delta: float) -> void:
 		return
 		
 	var distance_to_target = global_position.distance_to(target_position)
-	print("Distance to target: ", distance_to_target)
+	#print("Distance to target: ", distance_to_target)
 	
 	if distance_to_target < arrival_threshold:
 		# Snap to exact center when close enough
@@ -70,11 +103,18 @@ func _physics_process(delta: float) -> void:
 		if movement.length() > distance_to_target:
 			movement = direction * distance_to_target
 		global_position += movement
-		print("Moving: dir=", direction, " movement=", movement, " new_pos=", global_position)
+		#print("Moving: dir=", direction, " movement=", movement, " new_pos=", global_position)
+
+func add_to_path(pos):
+	path.append(pos)
 
 func _advance_to_next_target() -> void:
+	var pos = path[0]
 	path.remove_at(0)
-	print("Point reached, remaining points: ", path.size())
+	if cyclic_path:
+		add_to_path(pos)
+		
+	#print("Point reached, remaining points: ", path.size())
 	
 	if path.is_empty():
 		print("Path completed")
@@ -83,7 +123,7 @@ func _advance_to_next_target() -> void:
 		
 	target_position = path[0]
 	if target_position.distance_to(global_position) < arrival_threshold:
-		print("Next target too close, skipping")
+		#print("Next target too close, skipping")
 		_advance_to_next_target()
-	else:
-		print("New target set: ", target_position)
+	#else:
+		#print("New target set: ", target_position)
