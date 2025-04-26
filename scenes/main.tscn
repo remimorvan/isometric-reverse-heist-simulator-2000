@@ -8,27 +8,28 @@
 [ext_resource type="PackedScene" uid="uid://bi8gdwd2ggyhy" path="res://scenes/chair.tscn" id="6_tefeu"]
 
 [node name="main" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_3lgf1")
 
 [node name="TileMaps" parent="." instance=ExtResource("1_uvjg0")]
 
-[node name="GameObjectHandler" type="Node" parent="TileMaps"]
+[node name="GameObjectHandler" type="Node2D" parent="TileMaps"]
+y_sort_enabled = true
 script = ExtResource("3_tefeu")
 
 [node name="Chien" parent="TileMaps/GameObjectHandler" instance=ExtResource("4_jyhfs")]
 z_index = 1
-y_sort_enabled = true
 position = Vector2(16, 40)
 scale = Vector2(0.05, 0.05)
 
 [node name="Chair" parent="TileMaps/GameObjectHandler" instance=ExtResource("6_tefeu")]
 z_index = 1
+y_sort_enabled = true
 position = Vector2(-18, -42)
 scale = Vector2(0.1, 0.1)
 
 [node name="Player" parent="TileMaps/GameObjectHandler" instance=ExtResource("3_506sy")]
 z_index = 1
-y_sort_enabled = true
 scale = Vector2(0.1, 0.1)
 
 [node name="Camera2D" type="Camera2D" parent="TileMaps"]
