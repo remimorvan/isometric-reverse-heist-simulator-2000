@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://oi0r4ynbu0sa" path="res://scripts/main.gd" id="1_3lgf1"]
 [ext_resource type="PackedScene" uid="uid://bllke6nby7koo" path="res://scenes/tilemaps.tscn" id="1_uvjg0"]
 [ext_resource type="PackedScene" uid="uid://copmddbeoxptn" path="res://scenes/player.tscn" id="3_506sy"]
+[ext_resource type="Script" path="res://scripts/game_object_handler.gd" id="3_tefeu"]
 [ext_resource type="PackedScene" uid="uid://d2xw0bduor5xm" path="res://scenes/wouaf.tscn" id="4_jyhfs"]
-[ext_resource type="Script" uid="uid://xth84ey1qovn" path="res://scripts/game_object_handler.gd" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://bi8gdwd2ggyhy" path="res://scenes/chair.tscn" id="6_tefeu"]
 
 [node name="main" type="Node2D"]
@@ -13,7 +13,7 @@ script = ExtResource("1_3lgf1")
 [node name="TileMaps" parent="." instance=ExtResource("1_uvjg0")]
 
 [node name="GameObjectHandler" type="Node" parent="TileMaps"]
-script = ExtResource("5_tbgi4")
+script = ExtResource("3_tefeu")
 
 [node name="Chien" parent="TileMaps/GameObjectHandler" instance=ExtResource("4_jyhfs")]
 z_index = 1
