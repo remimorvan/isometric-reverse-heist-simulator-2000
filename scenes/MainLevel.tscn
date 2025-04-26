@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cy5sbokend7fg"]
+[gd_scene load_steps=11 format=4 uid="uid://cy5sbokend7fg"]
 
 [ext_resource type="Texture2D" uid="uid://blpd5eaut68bn" path="res://assets/level/kitchen_tileset1.png" id="1_n15ua"]
 [ext_resource type="Texture2D" uid="uid://tbs27svalvov" path="res://assets/level/proto_tileset.png" id="2_jsrw5"]
@@ -8,7 +8,37 @@
 texture = ExtResource("1_n15ua")
 texture_region_size = Vector2i(480, 480)
 0:0/0 = 0
-0:0/0/texture_origin = Vector2i(0, 120)
+0:0/0/texture_origin = Vector2i(0, -120)
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, -120)
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, -120)
+3:0/0 = 0
+3:0/0/texture_origin = Vector2i(0, -120)
+4:0/0 = 0
+4:0/0/texture_origin = Vector2i(0, -120)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xum0q"]
+texture = ExtResource("2_jsrw5")
+texture_region_size = Vector2i(480, 480)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -120)
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, -120)
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, -120)
+3:0/0 = 0
+3:0/0/texture_origin = Vector2i(0, -120)
+
+[sub_resource type="TileSet" id="TileSet_48gi8"]
+tile_shape = 1
+tile_size = Vector2i(480, 240)
+sources/0 = SubResource("TileSetAtlasSource_yxyfn")
+sources/1 = SubResource("TileSetAtlasSource_xum0q")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n15ua"]
+texture = ExtResource("1_n15ua")
+texture_region_size = Vector2i(480, 480)
 1:0/0 = 0
 1:0/0/texture_origin = Vector2i(0, 120)
 2:0/0 = 0
@@ -17,8 +47,10 @@ texture_region_size = Vector2i(480, 480)
 3:0/0/texture_origin = Vector2i(0, 120)
 4:0/0 = 0
 4:0/0/texture_origin = Vector2i(0, 120)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 120)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xum0q"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jsrw5"]
 texture = ExtResource("2_jsrw5")
 texture_region_size = Vector2i(480, 480)
 0:0/0 = 0
@@ -30,45 +62,38 @@ texture_region_size = Vector2i(480, 480)
 3:0/0 = 0
 3:0/0/texture_origin = Vector2i(0, 120)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_huru0"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ykko5"]
 texture = ExtResource("3_ykko5")
 texture_region_size = Vector2i(480, 480)
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, 120)
 1:0/0 = 0
 1:0/0/texture_origin = Vector2i(0, 120)
-3:0/0 = 0
-3:0/0/texture_origin = Vector2i(0, 120)
 2:0/0 = 0
 2:0/0/texture_origin = Vector2i(0, 120)
+3:0/0 = 0
+3:0/0/texture_origin = Vector2i(0, 120)
 0:1/0 = 0
 0:1/0/texture_origin = Vector2i(0, 120)
 1:1/0 = 0
 1:1/0/texture_origin = Vector2i(0, 120)
-2:1/0 = 0
-2:1/0/texture_origin = Vector2i(0, 120)
-3:1/0 = 0
-3:1/0/texture_origin = Vector2i(0, 120)
-4:1/0 = 0
-4:1/0/texture_origin = Vector2i(0, 120)
-4:0/0 = 0
-4:0/0/texture_origin = Vector2i(0, 120)
 
-[sub_resource type="TileSet" id="TileSet_48gi8"]
+[sub_resource type="TileSet" id="TileSet_8m8wf"]
 tile_shape = 1
 tile_size = Vector2i(480, 240)
-sources/0 = SubResource("TileSetAtlasSource_yxyfn")
-sources/1 = SubResource("TileSetAtlasSource_xum0q")
-sources/2 = SubResource("TileSetAtlasSource_huru0")
+sources/0 = SubResource("TileSetAtlasSource_n15ua")
+sources/1 = SubResource("TileSetAtlasSource_jsrw5")
+sources/2 = SubResource("TileSetAtlasSource_ykko5")
 
 [node name="MainLevel" type="Node2D"]
 
 [node name="Layer0" type="TileMapLayer" parent="."]
 y_sort_enabled = true
-tile_map_data = PackedByteArray(0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+tile_map_data = PackedByteArray("AAD///3/AQABAAAAAAAAAP7/AQABAAAAAAAAAP//AQABAAAAAAABAP7/AQABAAAAAAABAP3/AQABAAAAAAACAPz/AQABAAAAAAACAPv/AQABAAAAAAADAPr/AQABAAAAAAD///z/AQABAAAAAAD///v/AQABAAAAAAAAAPr/AQABAAAAAAAAAPn/AQABAAAAAAABAPj/AQABAAAAAAABAPf/AQABAAAAAAACAPj/AQABAAAAAAACAPn/AQABAAAAAAACAPr/AQABAAAAAAABAPv/AQABAAAAAAABAPr/AQABAAAAAAABAPn/AQABAAAAAAAAAPv/AQABAAAAAAAAAPz/AQABAAAAAAAAAP3/AQABAAAAAAABAPz/AQABAAAAAAAAAAAAAQADAAAAAAD+//3/AQADAAAAAAD+//z/AQADAAAAAAD+//v/AQADAAAAAAD///r/AQADAAAAAAD///n/AQADAAAAAAAAAPj/AQADAAAAAAAAAPf/AQAAAAAAAAABAPb/AQADAAAAAAABAPX/AQADAAAAAAACAPb/AQADAAAAAAACAPf/AQADAAAAAAADAPj/AQADAAAAAAADAPn/AQADAAAAAAABAPT/AQADAAAAAAAAAPP/AQADAAAAAAAAAPL/AQADAAAAAAD///H/AQADAAAAAAD///L/AQADAAAAAAD+//P/AQADAAAAAAD+//T/AQADAAAAAAD///f/AQAAAAAAAAD///P/AQAAAAAAAAAAAPT/AQAAAAAAAAAAAPX/AQAAAAAAAAAAAPb/AQAAAAAAAAD///X/AQAAAAAAAAD///b/AQAAAAAAAAD+//X/AQAAAAAAAAD///T/AQAAAAAAAAD///7/AQABAAAAAAD/////AQABAAAAAAD9//3/AQADAAAAAAD9//7/AQADAAAAAAD8////AQADAAAAAAD8/wAAAQADAAAAAAD+/wQAAAAAAAAAAAD//wIAAAAAAAAAAAD//wAAAAAAAAAAAAD+/wIAAAAAAAAAAAD9/wIAAAAAAAAAAAD+/wAAAAAAAAAAAAD+//7/AAAAAAAAAAD9/wAAAAAAAAAAAAD9////AAABAAAAAAD+////AAABAAAAAAD+/wEAAAABAAAAAAD9/wEAAAABAAAAAAD8/wEAAAABAAAAAAD9/wMAAAABAAAAAAD+/wMAAAABAAAAAAD//wEAAAABAAAAAAA=")
 tile_set = SubResource("TileSet_48gi8")
 
 [node name="Layer1" type="TileMapLayer" parent="."]
 z_index = 1
 y_sort_enabled = true
-tile_set = SubResource("TileSet_48gi8")
+tile_map_data = PackedByteArray("AAD+//T/AgACAAAAAAD///H/AgAAAAEAAAAAAPL/AgAAAAAAAAAAAPP/AgAAAAAAAAABAPT/AgAAAAAAAAABAPX/AgAAAAAAAAACAPb/AgAAAAAAAAADAPn/AgAAAAAAAAABAPb/AgACAAAAAAAAAPj/AgACAAAAAAD///n/AgACAAAAAAD///r/AgACAAAAAAD+//v/AgACAAAAAAD+//z/AgABAAEAAAD+//3/AgAAAAAAAAAAAAAAAgAAAAAAAAD9//3/AgACAAAAAAD8/wAAAgACAAAAAAD9//7/AQACAAAAAAD8////AQACAAAAAAACAPf/AQACAAAAAAADAPj/AQACAAAAAAD///L/AQACAAAAAAD+//P/AQACAAAAAAD///P/AQABAAAAAAD///T/AQABAAAAAAD+//7/AQADAAAAAAD///f/AQADAAAAAAACAPv/AAABAAAAAAAAAP//AAAAAAAAAAAAAP3/AQAAAAAAAAD9/wAAAQAAAAAAAAD8/wEAAAACAAAAAAD9/wIAAAACAAAAAAD9/wMAAAACAAAAAAD+/wQAAAACAAAAAAD+/wMAAAACAAAAAAD//wIAAAACAAAAAAD//wEAAAACAAAAAAA=")
+tile_set = SubResource("TileSet_8m8wf")
