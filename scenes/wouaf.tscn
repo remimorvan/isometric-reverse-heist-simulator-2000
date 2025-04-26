@@ -8,7 +8,6 @@ radius = 65.0
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_mmk17")
-cyclic_path = true
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 

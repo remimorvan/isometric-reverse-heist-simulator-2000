@@ -15,6 +15,8 @@ func _ready() -> void:
 	var current_tile = layer0.local_to_map(global_position)
 	global_position = layer0.map_to_local(current_tile)
 	print("Player initial position (snapped to center): ", global_position)
+	
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:

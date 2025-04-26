@@ -1,16 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://2wacm2cbuaxi"]
+[gd_scene load_steps=6 format=3 uid="uid://2wacm2cbuaxi"]
 
 [ext_resource type="Script" uid="uid://oi0r4ynbu0sa" path="res://scripts/main.gd" id="1_3lgf1"]
 [ext_resource type="PackedScene" uid="uid://bllke6nby7koo" path="res://scenes/tilemaps.tscn" id="1_uvjg0"]
 [ext_resource type="PackedScene" uid="uid://copmddbeoxptn" path="res://scenes/player.tscn" id="3_506sy"]
 [ext_resource type="PackedScene" uid="uid://boeu8iujw43bq" path="res://scenes/wouaf.tscn" id="4_jyhfs"]
+[ext_resource type="Script" uid="uid://xth84ey1qovn" path="res://scenes/game_object_handler.gd" id="5_tbgi4"]
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_3lgf1")
 
 [node name="TileMaps" parent="." instance=ExtResource("1_uvjg0")]
 
-[node name="Chien" parent="TileMaps" instance=ExtResource("4_jyhfs")]
+[node name="GameObjectHandler" type="Node" parent="TileMaps"]
+script = ExtResource("5_tbgi4")
+
+[node name="Chien" parent="TileMaps/GameObjectHandler" instance=ExtResource("4_jyhfs")]
 z_index = 1
 y_sort_enabled = true
 position = Vector2(16, 40)

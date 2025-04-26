@@ -1,0 +1,24 @@
+extends Node
+
+@export var turn_nb = 0
+
+func new_turn():
+	for obj in self.get_children():
+		obj.play(turn_nb)
+	
+	turn_nb += 1
+
+func turn_finished():
+	for obj in self.get_children():
+		if not obj.is_done():
+			return false
+	return true
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_T:
+			if turn_finished():
+				print("New turn", turn_nb)
+				new_turn()
+			else:
+				print("Wait for end of turn")

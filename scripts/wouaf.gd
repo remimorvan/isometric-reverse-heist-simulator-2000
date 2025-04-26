@@ -1,29 +1,51 @@
-extends Node2D
+extends GameObject
 
 @export var move_speed: float = 100.0
 @export var arrival_threshold: float = 1.0 # Smaller threshold for precise center alignment
-@export var cyclic_path = false
 @export var path: PackedVector2Array
 
 var target_position: Vector2
 var is_moving: bool = false
 
+@onready var layer0: TileMapLayer = $"../../Layer0"
+@onready var layer1: TileMapLayer = $"../../Layer1"
 
-@onready var layer0: TileMapLayer = $"../Layer0"
-@onready var layer1: TileMapLayer = $"../Layer1"
+func play(tour_nb) -> void:
+	var cyclic_path = []
+	cyclic_path.append(Vector2(2,2))
+	cyclic_path.append(Vector2(2,-2))
+	cyclic_path.append(Vector2(-4,-2))
+	cyclic_path.append(Vector2(-4,2))
 
+	var start_tile = layer0.local_to_map(global_position)
+	var end_tile = cyclic_path[tour_nb%4]
+	
+	var new_path = MovementUtils.get_path_to_tile(
+		start_tile,
+		end_tile,
+		layer0,
+		layer1
+	)
+	
+	print(new_path)
+	
+	use_new_path(new_path)
+	
+func is_done() -> bool:
+	return not is_moving
+	
 func _ready() -> void:
 	# Snap initial position to tile center
 	var current_tile = layer0.local_to_map(global_position)
 	global_position = layer0.map_to_local(current_tile)
 	print("Player initial position (snapped to center): ", global_position)
-	var cylic_path: PackedVector2Array
-	cyclic_path = []
-	cyclic_path.append(Vector2(2,2))
-	cyclic_path.append(Vector2(2,-2))
-	cyclic_path.append(Vector2(-4,-2))
-	cyclic_path.append(Vector2(-4,2))
-	new_parameterized_path(cyclic_path,true)
+	#var cylic_path: PackedVector2Array
+	#cyclic_path = []
+	#cyclic_path.append(Vector2(2,2))
+	#cyclic_path.append(Vector2(2,-2))
+	#cyclic_path.append(Vector2(-4,-2))
+	#cyclic_path.append(Vector2(-4,2))
+	#new_parameterized_path(cyclic_path,true)
 	
 func new_parameterized_path(list_of_points, is_cyclic=false):
 	var new_path = []
@@ -41,7 +63,7 @@ func new_parameterized_path(list_of_points, is_cyclic=false):
 	if is_cyclic:
 		var new_path2 = MovementUtils.get_path_to_tile(
 				list_of_points[-1],
-				start_pos,
+				list_of_points[0],
 				layer0,
 				layer1
 			)
@@ -111,8 +133,6 @@ func add_to_path(pos):
 func _advance_to_next_target() -> void:
 	var pos = path[0]
 	path.remove_at(0)
-	if cyclic_path:
-		add_to_path(pos)
 		
 	#print("Point reached, remaining points: ", path.size())
 	
