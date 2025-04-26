@@ -15,5 +15,8 @@ func play(t) -> void:
 func is_done() -> bool:
 	return true
 
-func is_interactable() -> bool:
+func is_interactable(player_position: Vector2i) -> bool:
 	return false
+	
+func unhighlight() -> void:
+	pass
