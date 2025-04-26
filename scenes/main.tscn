@@ -27,7 +27,8 @@ y_sort_enabled = true
 scale = Vector2(0.1, 0.1)
 
 [node name="Chair" parent="TileMaps/GameObjectHandler" instance=ExtResource("6_tefeu")]
-position = Vector2(0, -32)
+z_index = 1
+position = Vector2(-18, -42)
 scale = Vector2(0.1, 0.1)
 
 [node name="Camera2D" type="Camera2D" parent="TileMaps"]

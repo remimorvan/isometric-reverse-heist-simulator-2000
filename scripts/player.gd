@@ -34,27 +34,15 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			var click_pos = get_global_mouse_position()
-			selected_tile = layer0.local_to_map(click_pos)
+			var cliked_tile = layer0.local_to_map(click_pos)
+			var player_tile = game_object_handler.tile_of_object(self)
+			var interactable_objects = game_object_handler.get_interactable_objects(player_tile)
+			for obj in interactable_objects:
+				if game_object_handler.tile_of_object(obj) == cliked_tile:
+					obj.interact(player_tile)
+					return
+			selected_tile = cliked_tile
 			print("\nNew tile selected:", selected_tile)
-			
-			#var new_path = MovementUtils.get_path_to_tile(
-			#	start_tile,
-			#	end_tile,
-			#	layer0,
-			#	layer1
-			#)
-			#
-			#if not new_path.is_empty():
-			#	path = new_path
-			#	is_moving = true
-			#	target_position = path[0]
-			#	print("Path accepted, first target: ", target_position)
-			#	# Validate that target is different from current position
-			#	if target_position.distance_to(global_position) < arrival_threshold:
-			#		print("Warning: First target too close to current position!")
-			#		_advance_to_next_target()
-			#else:
-			#	print("Path was empty, movement cancelled")
 
 func _process(delta: float) -> void:
 	pass
