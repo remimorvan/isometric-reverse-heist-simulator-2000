@@ -45,9 +45,9 @@ func update_sprite() -> void:
 
 func play(time: int):
 	if state > 0:
+		print("> Todo: play() of dog_bawl. Play sound and empty only if dog is adjacent.")
 		state -= 1
 		update_sprite()
-		print(">>> Bowl state is now: ", state)
 	
 func is_adjacent(player_position: Vector2i) -> bool:
 	var tile_position = layer1.local_to_map(global_position)

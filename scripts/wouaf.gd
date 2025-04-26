@@ -11,6 +11,7 @@ var is_moving: bool = false
 @onready var layer0: TileMapLayer = $"../../Layer0"
 
 func play(tour_nb) -> void:
+	print("> Todo: play() of wouaf. Go to bawl if full.")
 	var cyclic_path = []
 	cyclic_path.append(Vector2(2,2))
 	cyclic_path.append(Vector2(2,-2))
