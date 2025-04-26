@@ -12,20 +12,41 @@ var is_highlighted: bool = false
 var should_move: bool = false
 var next_position:= Vector2i(0,0)
 
-var nb_turns_until_empty = 13
+const nb_turns_until_empty = 13
 var state = 0; # How many turns left until empty
+
+var full_bawl: Resource
+var semi_full_bawl: Resource
+var semi_empty_bawl: Resource
+var empty_bawl: Resource
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
-	
+	full_bawl = load("res://assets/level/gamelle/gamelle-1.png")
+	semi_full_bawl = load("res://assets/level/gamelle/gamelle-2.png")
+	semi_empty_bawl = load("res://assets/level/gamelle/gamelle-3.png")
+	empty_bawl = load("res://assets/level/gamelle/gamelle-4.png")
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
+func get_texture() -> Resource:
+	if state == 0:
+		return empty_bawl
+	if state <= 4:
+		return semi_empty_bawl
+	if state <= 9:
+		return semi_full_bawl
+	return full_bawl
+
+func update_sprite() -> void:
+	sprite.texture = get_texture()
+
 func play(time: int):
 	if state > 0:
 		state -= 1
+		update_sprite()
 		print(">>> Bowl state is now: ", state)
 	
 func is_adjacent(player_position: Vector2i) -> bool:
@@ -47,5 +68,5 @@ func unhighlight() -> void:
 func interact(player_position: Vector2i) -> Callable:
 	if state == 0:
 		state = nb_turns_until_empty
-		print(">>> Bowl state is now: ", state)
+		update_sprite()
 	return func(player): pass
