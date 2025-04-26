@@ -18,7 +18,6 @@ func _ready() -> void:
 	var current_tile = layer0.local_to_map(global_position)
 	global_position = layer0.map_to_local(current_tile)
 	print("Player initial position (snapped to center): ", global_position)
-	print("Interactable objects :", game_object_handler.get_interactable_objects())
 	
 func use_new_path(new_path):
 	if not new_path.is_empty():
@@ -64,11 +63,7 @@ func play(tour_nb):
 	var start_tile = layer0.local_to_map(global_position)
 	var end_tile = selected_tile
 	
-	var adjacent_positions = layer0.get_surrounding_cells(start_tile)
-	var all_cells = layer0.get_used_cells();
-	for adj in adjacent_positions:
-		if adj in all_cells:
-			tilemap.stop_select_glow(adj)
+	unglow_all_objects()
 			
 	var new_path = MovementUtils.get_path_to_tile(
 		start_tile,
@@ -81,11 +76,7 @@ func play(tour_nb):
 	
 	use_new_path(new_path)
 	
-	adjacent_positions = layer0.get_surrounding_cells(end_tile)
-	var interactable_cells = layer1.get_used_cells()
-	for adj in adjacent_positions:
-		if adj in interactable_cells:
-			tilemap.make_select_glow(adj)
+	glow_adjacent_interactable_objects(end_tile)
 	
 func is_done() -> bool:
 	return not is_moving
@@ -127,3 +118,15 @@ func _advance_to_next_target() -> void:
 		_advance_to_next_target()
 	else:
 		print("New target set: ", target_position)
+
+func unglow_all_objects() -> void:
+	var interactable_objects = game_object_handler.get_interactable_objects()
+	for obj in interactable_objects:
+		obj.unhighlight()
+			
+func glow_adjacent_interactable_objects(tile: Vector2i) -> void:
+	var adjacent_positions = layer0.get_surrounding_cells(tile)
+	var interactable_objects = game_object_handler.get_interactable_objects()
+	for obj in interactable_objects:
+		if layer0.local_to_map(obj.global_position) in adjacent_positions:
+			obj.highlight()
