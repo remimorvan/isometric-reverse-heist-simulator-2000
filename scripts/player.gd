@@ -107,6 +107,7 @@ func _advance_to_next_target() -> void:
 		return
 		
 	target_position = path[0]
+	
 	if target_position.distance_to(global_position) < arrival_threshold:
 		print("Next target too close, skipping")
 		_advance_to_next_target()
