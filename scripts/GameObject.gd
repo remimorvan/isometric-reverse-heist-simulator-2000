@@ -8,7 +8,7 @@ extends Node2D
 #============================================================
 
 #called by the handler, prepare an action or a sequence of actions at turn t
-func play(t) -> void:
+func play(time: int) -> void:
 	pass
 	
 #for the handler, say if the object is done

@@ -40,8 +40,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			var interactable_objects = game_object_handler.get_interactable_objects(player_tile)
 			for obj in interactable_objects:
 				if game_object_handler.tile_of_object(obj) == cliked_tile:
-					obj.interact(player_tile)
-					return
+					var result_interaction = obj.interact(player_tile)
+					result_interaction.call(self)
+					return 
 			selected_tile = cliked_tile
 			print("\nNew tile selected:", selected_tile)
 
