@@ -14,15 +14,19 @@ shader_parameter/thickness = 2.0
 radius = 112.004
 
 [node name="Chair" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_hxd06")
 metadata/_custom_type_script = "uid://cgek256grw13s"
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+y_sort_enabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+y_sort_enabled = true
 material = SubResource("ShaderMaterial_dhd05")
 texture = ExtResource("3_hxd06")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+y_sort_enabled = true
 scale = Vector2(1.08011, 1.0793)
 shape = SubResource("CircleShape2D_hxd06")

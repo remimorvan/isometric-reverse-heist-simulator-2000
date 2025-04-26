@@ -4,7 +4,7 @@
 [ext_resource type="TileSet" uid="uid://iwr8yvyyljif" path="res://assets/layer0.tres" id="1_lfi36"]
 [ext_resource type="TileSet" uid="uid://cbnffwt8jxdgo" path="res://assets/layer1.tres" id="2_p5sh7"]
 
-[node name="TileMaps" type="Node2D"]
+[node name="TileMaps2" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_j3la0")
 
