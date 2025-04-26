@@ -4,11 +4,12 @@ extends Node2D
 @export var arrival_threshold: float = 1.0 # Smaller threshold for precise center alignment
 
 var target_position: Vector2
+var selected_tile: Vector2
 var path: PackedVector2Array
 var is_moving: bool = false
 
-@onready var layer0: TileMapLayer = $"../Layer0"
-@onready var layer1: TileMapLayer = $"../Layer1"
+@onready var layer0: TileMapLayer = $"../../Layer0"
+@onready var layer1: TileMapLayer = $"../../Layer1"
 
 func _ready() -> void:
 	# Snap initial position to tile center
@@ -16,42 +17,64 @@ func _ready() -> void:
 	global_position = layer0.map_to_local(current_tile)
 	print("Player initial position (snapped to center): ", global_position)
 	
-
+func use_new_path(new_path):
+	if not new_path.is_empty():
+		path = new_path
+		is_moving = true
+		target_position = path[0]
+		#print("Path acceptpathed, first target: ", target_position)
+		# Validate that target is different from current position
+		if target_position.distance_to(global_position) < arrival_threshold:
+			#print("Warning: First target too close to current position!")
+			_advance_to_next_target()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			var click_pos = get_global_mouse_position()
-			print("\nNew movement requested")
-			print("From: ", global_position)
-			print("To: ", click_pos)
+			selected_tile = layer0.local_to_map(click_pos)
+			print("\nNew tile selected:", selected_tile)
 			
-			# Convert world positions to tile coordinates
-			var start_tile = layer0.local_to_map(global_position)
-			var end_tile = layer0.local_to_map(click_pos)
-			
-			var new_path = MovementUtils.get_path_to_tile(
-				start_tile,
-				end_tile,
-				layer0,
-				layer1
-			)
-			
-			if not new_path.is_empty():
-				path = new_path
-				is_moving = true
-				target_position = path[0]
-				print("Path accepted, first target: ", target_position)
-				# Validate that target is different from current position
-				if target_position.distance_to(global_position) < arrival_threshold:
-					print("Warning: First target too close to current position!")
-					_advance_to_next_target()
-			else:
-				print("Path was empty, movement cancelled")
-			
+			#var new_path = MovementUtils.get_path_to_tile(
+			#	start_tile,
+			#	end_tile,
+			#	layer0,
+			#	layer1
+			#)
+			#
+			#if not new_path.is_empty():
+			#	path = new_path
+			#	is_moving = true
+			#	target_position = path[0]
+			#	print("Path accepted, first target: ", target_position)
+			#	# Validate that target is different from current position
+			#	if target_position.distance_to(global_position) < arrival_threshold:
+			#		print("Warning: First target too close to current position!")
+			#		_advance_to_next_target()
+			#else:
+			#	print("Path was empty, movement cancelled")
 
 func _process(delta: float) -> void:
 	pass
+
+func play(tour_nb):
+	var start_tile = layer0.local_to_map(global_position)
+	var end_tile = selected_tile
+
+	var new_path = MovementUtils.get_path_to_tile(
+		start_tile,
+		end_tile,
+		layer0,
+		layer1
+	)
+	
+	print(new_path)
+	
+	use_new_path(new_path)
+	
+	
+func is_done() -> bool:
+	return not is_moving
 
 
 func _physics_process(delta: float) -> void:

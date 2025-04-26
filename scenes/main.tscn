@@ -20,7 +20,7 @@ y_sort_enabled = true
 position = Vector2(16, 40)
 scale = Vector2(0.05, 0.05)
 
-[node name="Player" parent="TileMaps" instance=ExtResource("3_506sy")]
+[node name="Player" parent="TileMaps/GameObjectHandler" instance=ExtResource("3_506sy")]
 z_index = 1
 y_sort_enabled = true
 scale = Vector2(0.1, 0.1)
