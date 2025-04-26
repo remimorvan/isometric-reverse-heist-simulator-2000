@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=4 uid="uid://cy5sbokend7fg"]
+[gd_scene load_steps=13 format=4 uid="uid://cy5sbokend7fg"]
 
 [ext_resource type="Texture2D" uid="uid://blpd5eaut68bn" path="res://assets/level/kitchen_tileset1.png" id="1_n15ua"]
 [ext_resource type="Texture2D" uid="uid://tbs27svalvov" path="res://assets/level/proto_tileset.png" id="2_jsrw5"]
 [ext_resource type="Texture2D" uid="uid://bwrcmk366krot" path="res://assets/level/wall_proto_1.png" id="3_ykko5"]
+[ext_resource type="Texture2D" uid="uid://cuiiudqigee7g" path="res://assets/level/tile_kitchen.png" id="4_jsrw5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yxyfn"]
 texture = ExtResource("1_n15ua")
@@ -78,12 +79,27 @@ texture_region_size = Vector2i(480, 480)
 1:1/0 = 0
 1:1/0/texture_origin = Vector2i(0, 120)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_huru0"]
+texture = ExtResource("4_jsrw5")
+texture_region_size = Vector2i(480, 480)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 120)
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, 120)
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, 120)
+3:0/0 = 0
+3:0/0/texture_origin = Vector2i(0, 120)
+4:0/0 = 0
+4:0/0/texture_origin = Vector2i(0, 120)
+
 [sub_resource type="TileSet" id="TileSet_8m8wf"]
 tile_shape = 1
 tile_size = Vector2i(480, 240)
 sources/0 = SubResource("TileSetAtlasSource_n15ua")
 sources/1 = SubResource("TileSetAtlasSource_jsrw5")
 sources/2 = SubResource("TileSetAtlasSource_ykko5")
+sources/3 = SubResource("TileSetAtlasSource_huru0")
 
 [node name="MainLevel" type="Node2D"]
 
@@ -95,5 +111,5 @@ tile_set = SubResource("TileSet_48gi8")
 [node name="Layer1" type="TileMapLayer" parent="."]
 z_index = 1
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAD+//T/AgACAAAAAAD///H/AgAAAAEAAAAAAPL/AgAAAAAAAAAAAPP/AgAAAAAAAAABAPT/AgAAAAAAAAABAPX/AgAAAAAAAAACAPb/AgAAAAAAAAADAPn/AgAAAAAAAAABAPb/AgACAAAAAAAAAPj/AgACAAAAAAD///n/AgACAAAAAAD///r/AgACAAAAAAD+//v/AgACAAAAAAD+//z/AgABAAEAAAD+//3/AgAAAAAAAAAAAAAAAgAAAAAAAAD9//3/AgACAAAAAAD8/wAAAgACAAAAAAD9//7/AQACAAAAAAD8////AQACAAAAAAACAPf/AQACAAAAAAADAPj/AQACAAAAAAD///L/AQACAAAAAAD+//P/AQACAAAAAAD///P/AQABAAAAAAD///T/AQABAAAAAAD+//7/AQADAAAAAAD///f/AQADAAAAAAACAPv/AAABAAAAAAAAAP//AAAAAAAAAAAAAP3/AQAAAAAAAAD9/wAAAQAAAAAAAAD8/wEAAAACAAAAAAD9/wIAAAACAAAAAAD9/wMAAAACAAAAAAD+/wQAAAACAAAAAAD+/wMAAAACAAAAAAD//wIAAAACAAAAAAD//wEAAAACAAAAAAA=")
+tile_map_data = PackedByteArray("AAD+//T/AgACAAAAAAD///H/AgAAAAEAAAAAAPL/AgAAAAAAAAAAAPP/AgAAAAAAAAABAPT/AgAAAAAAAAABAPX/AgAAAAAAAAACAPb/AgAAAAAAAAADAPn/AgAAAAAAAAABAPb/AgACAAAAAAAAAPj/AgACAAAAAAD///n/AgACAAAAAAD///r/AgACAAAAAAD+//v/AgACAAAAAAD+//z/AgABAAEAAAD+//3/AgAAAAAAAAAAAAAAAgAAAAAAAAD9//3/AgACAAAAAAD8/wAAAgACAAAAAAD9//7/AQACAAAAAAD8////AQACAAAAAAACAPf/AQACAAAAAAADAPj/AQACAAAAAAD///L/AQACAAAAAAD+//P/AQACAAAAAAD///P/AQABAAAAAAD///T/AQABAAAAAAD+//7/AQADAAAAAAD///f/AQADAAAAAAACAPv/AAABAAAAAAAAAP//AAAAAAAAAAAAAP3/AQAAAAAAAAD9/wAAAQAAAAAAAAD8/wEAAwAEAAAAABD9/wIAAwABAAAAAAD9/wMAAwAAAAAAAAD+/wQAAwACAAAAAAD+/wMAAwADAAAAAAD//wIAAwAEAAAAAAD//wEAAwAEAAAAAAA=")
 tile_set = SubResource("TileSet_8m8wf")
