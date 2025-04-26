@@ -62,7 +62,7 @@ func play(tour_nb):
 	var start_tile = layer0.local_to_map(global_position)
 	var end_tile = selected_tile
 	
-	var adjacent_positions = Utils.get_adjacent_tiles(start_tile)
+	var adjacent_positions = layer0.get_surrounding_cells(start_tile)
 	var used_cells = layer1.get_used_cells();
 	for adj in adjacent_positions:
 		if adj in used_cells:
@@ -79,7 +79,7 @@ func play(tour_nb):
 	
 	use_new_path(new_path)
 	
-	adjacent_positions = Utils.get_adjacent_tiles(end_tile)
+	adjacent_positions = layer0.get_surrounding_cells(end_tile)
 	used_cells = layer1.get_used_cells();
 	for adj in adjacent_positions:
 		if adj in used_cells:
