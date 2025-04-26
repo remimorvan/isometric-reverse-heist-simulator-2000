@@ -22,6 +22,7 @@ func _ready() -> void:
 func use_new_path(new_path):
 	if not new_path.is_empty():
 		path = new_path
+		$CharacterBody2D/AnimatedSprite2D.play("run")
 		is_moving = true
 		target_position = path[0]
 		#print("Path acceptpathed, first target: ", target_position)
@@ -108,6 +109,7 @@ func _advance_to_next_target() -> void:
 	
 	if path.is_empty():
 		print("Path completed")
+		$CharacterBody2D/AnimatedSprite2D.stop()
 		is_moving = false
 		return
 		
