@@ -5,12 +5,6 @@ extends Node
 @onready var layer0: TileMapLayer = $"../Layer0"
 @onready var layer1: TileMapLayer = $"../Layer1"
 
-func new_turn():
-	for obj in self.get_children():
-		obj.play(turn_nb)
-	
-	turn_nb += 1
-
 func turn_finished():
 	for obj in self.get_children():
 		if not obj.is_done():
@@ -37,12 +31,14 @@ func is_tile_valid(tile: Vector2i) -> bool:
 	
 func is_tile_free(tile: Vector2i) -> bool:
 	return tile not in occupied_tiles()
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_T:
-			if turn_finished():
-				print("New turn", turn_nb)
-				new_turn()
-			else:
-				print("Wait for end of turn")
+	
+func can_play() -> bool:
+	return turn_finished()
+		
+func make_new_turn() -> void:
+	if can_play():
+		print("Turn ", turn_nb)
+		for obj in get_children():
+			obj.play(turn_nb)
+		turn_nb += 1
+	print("Error: Wait for end of turn")

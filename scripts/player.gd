@@ -32,8 +32,8 @@ func use_new_path(new_path):
 			_advance_to_next_target()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed:
-		if event.button_index == MOUSE_BUTTON_LEFT:
+	if game_object_handler.can_play():
+		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			var click_pos = get_global_mouse_position()
 			var cliked_tile = layer0.local_to_map(click_pos)
 			var player_tile = game_object_handler.tile_of_object(self)
@@ -42,28 +42,28 @@ func _unhandled_input(event: InputEvent) -> void:
 				if game_object_handler.tile_of_object(obj) == cliked_tile:
 					var result_interaction = obj.interact(player_tile)
 					result_interaction.call(self)
+					game_object_handler.make_new_turn()
 					return 
 			selected_tile = cliked_tile
-			print("\nNew tile selected:", selected_tile)
+			print("Tile selected: ", selected_tile)
+			game_object_handler.make_new_turn()
 
 func _process(delta: float) -> void:
 	pass
 
-func play(tour_nb):
+func play(tour_nb: int) -> void:
 	var start_tile = layer0.local_to_map(global_position)
 	var end_tile = selected_tile
 	
 	unglow_all_objects()
-			
+	
 	var new_path = MovementUtils.get_path_to_tile(
 		start_tile,
 		end_tile,
 		layer0,
 		layer1
 	)
-	
 	print(new_path)
-	
 	use_new_path(new_path)
 	
 	glow_interactable_objects(end_tile)
