@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bi8gdwd2ggyhy" path="res://scenes/chair.tscn" id="7_6ib6r"]
 [ext_resource type="PackedScene" uid="uid://c5wpxfi4qnx80" path="res://scenes/dog_eating_position.tscn" id="8_2cvyt"]
 [ext_resource type="PackedScene" uid="uid://4vr03d7x2ase" path="res://scenes/closet.tscn" id="9_wcvik"]
-[ext_resource type="PackedScene" uid="uid://74ccwirwx4id" path="res://scenes/window_people.tscn" id="10_2cvyt"]
+[ext_resource type="PackedScene" path="res://scenes/window_people.tscn" id="10_2cvyt"]
 [ext_resource type="Texture2D" uid="uid://jpyfq50le85u" path="res://assets/level/background.jpeg" id="10_6ib6r"]
 [ext_resource type="PackedScene" uid="uid://copmddbeoxptn" path="res://scenes/player.tscn" id="10_rqv6b"]
 [ext_resource type="PackedScene" uid="uid://bbac7vf2pr0wi" path="res://scenes/bed_head.tscn" id="11_4t260"]
