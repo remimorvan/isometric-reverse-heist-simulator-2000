@@ -8,12 +8,12 @@
 shader = ExtResource("2_phhrf")
 shader_parameter/clr = Color(0, 0, 0, 0)
 shader_parameter/type = 2
-shader_parameter/thickness = 2.0
+shader_parameter/thickness = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hxd06"]
 radius = 112.004
 
-[node name="Chair" type="Node2D"]
+[node name="Dog Bawl" type="Node2D"]
 script = ExtResource("1_hfv8l")
 metadata/_custom_type_script = "uid://cgek256grw13s"
 

@@ -28,5 +28,5 @@ float check(sampler2D tex, vec2 from, vec2 size) {
 
 void fragment() {
 	//COLOR = mix(COLOR, vec4(1.), (0.3+0.3*sin(TIME))*(check(TEXTURE, UV, TEXTURE_PIXEL_SIZE) - gtz(COLOR.a)));
-	COLOR += clr * (1.+0.2*sin(TIME))*vec4(check(TEXTURE, UV, TEXTURE_PIXEL_SIZE) - gtz(COLOR.a));
+	COLOR += clr * (1.+0.2*sin(3.0*TIME))*vec4(check(TEXTURE, UV, TEXTURE_PIXEL_SIZE) - gtz(COLOR.a));
 }

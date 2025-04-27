@@ -26,6 +26,8 @@ func _ready() -> void:
 	semi_full_bawl = load("res://assets/level/gamelle/gamelle-2.png")
 	semi_empty_bawl = load("res://assets/level/gamelle/gamelle-3.png")
 	empty_bawl = load("res://assets/level/gamelle/gamelle-4.png")
+	var current_tile = layer0.local_to_map(global_position)
+	global_position = layer0.map_to_local(current_tile)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -55,7 +57,7 @@ func is_adjacent(player_position: Vector2i) -> bool:
 
 func is_interactable(player_position: Vector2i) -> bool:
 	var is_adjacent = is_adjacent(player_position)
-	return is_adjacent
+	return is_adjacent and state == 0
 
 func highlight() -> void:
 	#sprite.scale = init_scale*1.4
