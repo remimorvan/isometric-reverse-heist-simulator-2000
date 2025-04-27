@@ -86,8 +86,9 @@ func _process(_delta: float) -> void:
 		return not blocked_tiles1.has(tile))
 		
 	#print(walkable_tiles)
-
-	var blocked_tiles = $GameObjectHandler.occupied_tiles_but_objs([dog])
+	var player = $GameObjectHandler/Player
+	var player_tile = layer0.local_to_map(player.global_position)
+	var blocked_tiles = $GameObjectHandler.occupied_tiles_but_objs([dog,player])
 	for i in range(walkable_tiles.size()):
 		var pos = walkable_tiles[i]
 		var effect = dog_FOV_effects[i]
@@ -96,6 +97,9 @@ func _process(_delta: float) -> void:
 		#print("View dir:", dog_dir, " tile:", dog_tile)
 		if MovementUtils.check_visibility(dog_tile, dog_dir, pos, blocked_tiles, 0.7, 1000):
 			#print("Oui:",pos)
+			if pos == player_tile:
+				print("Player tile:", player_tile)
+				get_tree().change_scene_to_file("res://scenes/mission_failed.tscn")
 			make_glow(pos, effect)
 		else:
 			#print("Non:",pos)
