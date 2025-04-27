@@ -1,3 +1,4 @@
+class_name GameObjectHandler
 extends Node
 
 @export var turn_nb = 0
@@ -18,6 +19,9 @@ func _process(delta: float) -> void:
 		turn_processing = false
 		player.glow_interactable_objects(tile_of_object(player))
 
+func interactable_tiles_should_glow() -> bool:
+	return not turn_processing
+	
 func turn_finished() -> bool:
 	for obj in self.get_children():
 		if not obj.is_done():
