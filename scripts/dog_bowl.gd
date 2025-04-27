@@ -13,7 +13,7 @@ var is_highlighted: bool = false
 var should_move: bool = false
 var next_position:= Vector2i(0,0)
 
-const nb_turns_until_empty = 13
+@export var nb_turns_until_empty = 11#13
 const delay_until_dog_comes = 0
 var state = 0; # How many turns left until empty
 
@@ -45,8 +45,8 @@ func get_texture() -> Resource:
 	return full_bowl
 
 func is_non_empty() -> bool:
-	# State < nb_turns_until_empty is necessary, otherwise dog will go to bowl as soon as it is filled.
-	return state > 0 && state < nb_turns_until_empty
+	# State <= nb_turns_until_empty is necessary, otherwise dog will go to bowl as soon as it is filled.
+	return state > 0 && state <= nb_turns_until_empty
 
 func update_sprite() -> void:
 	sprite.texture = get_texture()
