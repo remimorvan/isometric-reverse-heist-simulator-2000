@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5wpxfi4qnx80"]
+
+[ext_resource type="Script" uid="uid://cgudol4kdp7dn" path="res://scripts/dog_eating_position.gd" id="1_jknnc"]
+[ext_resource type="Texture2D" uid="uid://cb2rbd5nykaxi" path="res://icon.svg" id="2_ttcep"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fg8xd"]
+radius = 65.0
+
+[node name="DogEatingPosition" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_jknnc")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+y_sort_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+y_sort_enabled = true
+texture = ExtResource("2_ttcep")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+y_sort_enabled = true
+shape = SubResource("CircleShape2D_fg8xd")

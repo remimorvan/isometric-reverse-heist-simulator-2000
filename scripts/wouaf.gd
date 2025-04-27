@@ -7,8 +7,11 @@ extends GameObject
 
 var target_position: Vector2
 var is_moving: bool = false
+var dog_eating_position: Vector2i
 
 @onready var layer0: TileMapLayer = $"../../Layer0"
+@onready var game_object_handler: Node = $"../"
+@onready var dog_eating_position_obj: GameObject = $"../DogEatingPosition"
 
 func play(tour_nb) -> void:
 	print("> Todo: play() of wouaf. Go to bawl if full.")
@@ -68,6 +71,8 @@ func _ready() -> void:
 	# Snap initial position to tile center
 	var current_tile = layer0.local_to_map(global_position)
 	global_position = layer0.map_to_local(current_tile)
+	#dog_eating_position = game_object_handler.tile_of_object(dog_eating_position_obj)
+	#print("[Dog] Dog eating position:", dog_eating_position)
 	#print("Player initial position (snapped to center): ", global_position)
 	#var cylic_path: PackedVector2Array
 	#cyclic_path = []
