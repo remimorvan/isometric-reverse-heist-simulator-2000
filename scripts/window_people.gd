@@ -50,6 +50,10 @@ func start_mean_person() -> void:
 func end_mean_person() -> void:
 	aim_pos = end_pos
 	movetime = abs((aim_pos-global_position).x)/speed
+	
+func is_mean_person() -> bool:
+	var t = turn-start_play
+	return t >= 0 and t%(stay_time+away_time) < stay_time
 
 func update_mean_person(r:float) -> void:
 	aim_pos = start_pos + (end_pos-start_pos)*r
