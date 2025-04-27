@@ -118,7 +118,7 @@ func _process(_delta: float) -> void:
 		# check window vision
 		# I'm sorry for however has to look at this - Timothé
 		
-		var window_positions = [Vector2i(-3,2), Vector2i(-1,-7), Vector2i(-7,5)]
+		var window_positions = [Vector2i(-3,2), Vector2i(-1,-7), Vector2i(-7,-6)]
 		var windows = [$GameObjectHandler/WindowPeopleMainRoomKitchen,
 					   $GameObjectHandler/WindowPeopleMainRoom,
 					   $GameObjectHandler/WindowPeopleBedroom]
