@@ -120,6 +120,7 @@ func _process(_delta: float) -> void:
 	# -1, -7	;	0, 1
 	# -7, -5	;	1, 0
 	# check window vision
+	# I'm sorry for however has to look at this - Timothé
 	if player_tile != closet_pos1 and player_tile != closet_pos2:
 		blocked_tiles = $GameObjectHandler.occupied_tiles_but_objs([player])
 		var window_positions = [Vector2i(-3,2), Vector2i(-1,-7), Vector2i(-7,5)]
@@ -132,7 +133,9 @@ func _process(_delta: float) -> void:
 			var window_pos = window_positions[i]
 			var window_dir = window_directions[i]
 			var otherwindow = window_positions[i] +	 Vector2i(window_dir.y, window_dir.x)
-			var extras = [window_pos, otherwindow]
+			var bed1 = Vector2i(-6,-6)
+			var bed2 = Vector2i(-6,-5)
+			var extras = [window_pos, otherwindow, bed1, bed2]
 			var blocked_minus_extras = blocked_tiles.filter(func(o): return !extras.has(o))
 			if MovementUtils.check_visibility(window_pos, window_dir, player_tile, 
 					blocked_minus_extras, 0.7, window_vision_distance) and window.is_mean_person():
