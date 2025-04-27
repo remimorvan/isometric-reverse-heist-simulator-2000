@@ -19,8 +19,8 @@ func get_interactable_objects(player_position: Vector2i) -> Array:
 	return output
 	
 func tile_of_object(obj: Node2D) -> Vector2i:
-	print(layer0)
-	print(get_parent().get_children())
+	#print(layer0)
+	#print(get_parent().get_children())
 	return layer0.local_to_map(obj.global_position)
 
 func occupied_tiles() -> Array:

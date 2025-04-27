@@ -30,6 +30,7 @@ position = Vector2(-2359.09, 170.861)
 z_index = 1
 position = Vector2(288.91, -387.139)
 move_speed = 1000.0
+view_dir = Vector2(-1, 0)
 
 [node name="Chair" parent="Mayson/GameObjectHandler" instance=ExtResource("7_6ib6r")]
 z_index = 1
