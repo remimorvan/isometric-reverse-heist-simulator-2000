@@ -9,7 +9,7 @@ extends GameObject
 @onready var game_object_handler: Node = $"../"
 @onready var bed_head: Node = $"../BedHead"
 @onready var underwear: Node = $"../Underwear"
-@onready var victory_screen: Node = $"../../../VictoryScreen"
+@onready var victory_screen: Node = $"../../VictoryScreen"
 
 var has_underwear: bool = false;
 
