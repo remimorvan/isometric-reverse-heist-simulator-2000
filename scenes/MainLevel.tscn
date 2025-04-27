@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cy5sbokend7fg"]
+[gd_scene load_steps=18 format=3 uid="uid://cy5sbokend7fg"]
 
 [ext_resource type="Script" uid="uid://oi0r4ynbu0sa" path="res://scripts/main.gd" id="1_jsrw5"]
 [ext_resource type="PackedScene" uid="uid://bqtadeysdvdy" path="res://scenes/mayson.tscn" id="2_jsrw5"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bw4ywe0ot1xtn" path="res://scenes/bed.tscn" id="11_rqv6b"]
 [ext_resource type="PackedScene" uid="uid://de1mdtgmcrxr4" path="res://scenes/underwear.tscn" id="11_wd4wg"]
 [ext_resource type="PackedScene" uid="uid://dptrqojvi3uk4" path="res://scenes/mission_failed.tscn" id="13_wd4wg"]
+[ext_resource type="PackedScene" uid="uid://xs4el8hun23k" path="res://scenes/start_screen.tscn" id="17_2ve45"]
 
 [node name="MainLevel" type="Node2D"]
 y_sort_enabled = true
@@ -126,5 +127,10 @@ z_index = -1
 position = Vector2(426, -147)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("10_6ib6r")
+
+[node name="StartScreen" parent="." instance=ExtResource("17_2ve45")]
+z_index = 2
+position = Vector2(314, -375)
+scale = Vector2(3, 3)
 
 [connection signal="pressed" from="Mayson/Restart/Button" to="." method="_on_restart_button_pressed"]
