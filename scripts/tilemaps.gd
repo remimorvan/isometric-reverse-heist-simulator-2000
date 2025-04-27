@@ -92,6 +92,8 @@ func _process(_delta: float) -> void:
 	var closet_pos1 = layer0.local_to_map($GameObjectHandler/Closet.global_position)
 	var closet_pos2 = layer0.local_to_map($GameObjectHandler/Closet2.global_position)
 	var blocked_tiles = $GameObjectHandler.occupied_tiles_but_objs([dog,player])
+	blocked_tiles.append(closet_pos1)
+	blocked_tiles.append(closet_pos2)
 	for i in range(walkable_tiles.size()):
 		var do_glow = false
 		var pos = walkable_tiles[i]

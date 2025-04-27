@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dptrqojvi3uk4"]
 
-[ext_resource type="Script" path="res://scenes/try_again_button.gd" id="1_v0lrm"]
+[ext_resource type="Script" uid="uid://57m4k372d6m" path="res://scenes/try_again_button.gd" id="1_v0lrm"]
 [ext_resource type="Texture2D" uid="uid://jpyfq50le85u" path="res://assets/level/background.jpeg" id="2_ffcvo"]
 
 [node name="Node2D" type="Node2D"]
