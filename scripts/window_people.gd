@@ -1,3 +1,5 @@
+class_name WindowPeople
+
 extends GameObject
 
 #============================================================
@@ -23,17 +25,18 @@ extends GameObject
 #	Code here
 #============================================================
 
-var turn: int = 0
+#var turn: int = 0
 var start_pos: Vector2
 var end_pos: Vector2
 var aim_pos: Vector2
 
-var movetime: float = 0
+var movetime: float = 0 #security for end of update
+var mean_active: bool = false
 
 #called by the handler, prepare an action or a sequence of actions at turn t
 func play(time: int) -> void:
-	turn = time
-	var t = turn - start_play #relative turn
+	#turn = time
+	var t = time - start_play #relative turn
 	if t < 0:
 		return #do nothing
 	t = t % (stay_time+away_time)
@@ -46,14 +49,17 @@ func play(time: int) -> void:
 
 func start_mean_person() -> void:
 	global_position = start_pos
+	mean_active = true
 
 func end_mean_person() -> void:
 	aim_pos = end_pos
 	movetime = abs((aim_pos-global_position).x)/speed
+	mean_active = false
 	
 func is_mean_person() -> bool:
-	var t = turn-start_play
-	return t >= 0 and t%(stay_time+away_time) < stay_time
+	return mean_active
+	#var t = turn-start_play
+	#return t >= 0 and t%(stay_time+away_time) < stay_time
 
 func update_mean_person(r:float) -> void:
 	aim_pos = start_pos + (end_pos-start_pos)*r
