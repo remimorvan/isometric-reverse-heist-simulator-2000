@@ -2,12 +2,17 @@ extends Node2D
 
 @onready var layer0: TileMapLayer = $Layer0
 @onready var layer1: TileMapLayer = $Layer1
-@onready var dog  = $GameObjectHandler/Chien
+@onready var dog: GameObject = $GameObjectHandler/Chien
+@onready var handler: Node2D = $GameObjectHandler
+@onready var player: Node2D = $"GameObjectHandler/Player"
 
 var walkable_tiles : Array[Vector2i]
 var dog_FOV_effects: Array[Polygon2D]
+var highlight_interactable_tiles: Dictionary[Vector2i, Polygon2D]
 var hover_effect: Polygon2D
-@export var tile_size = 16.
+@export var tile_size = 480.
+
+const color_interactable_tile = Color(1.0, 0.9, 0.3, 1.0)
 
 func create_glow(color: Color, layer_index: int) -> Polygon2D:
 	var glow = Polygon2D.new()
@@ -34,6 +39,12 @@ func _ready() -> void:
 	hover_effect = create_glow(Color(1, 1, 1, 0.2), 0)
 	$Layer0.add_child(hover_effect)
 	
+	# Effect for interactable tiles
+	
+	for pos in layer0.get_used_cells():
+		highlight_interactable_tiles[pos] = create_glow(color_interactable_tile,0)
+		$Layer0.add_child(highlight_interactable_tiles[pos])
+	
 	# effect for the dog FOV
 	var all_tiles = layer0.get_used_cells()
 	var blocked_tiles = layer1.get_used_cells()
@@ -50,6 +61,18 @@ func _process(_delta: float) -> void:
 	var mouse_pos = get_local_mouse_position()
 	var tile_pos0 = layer0.local_to_map(mouse_pos)
 	var used_cells0 = layer0.get_used_cells()
+	
+	if handler.interactable_tiles_should_glow():
+		var player_tile = handler.tile_of_object(player)
+		var surrounding_tiles = layer0.get_surrounding_cells(player_tile)
+		var occupied_tiles = handler.occupied_tiles()
+		for pos in layer0.get_used_cells():
+			if pos in surrounding_tiles and pos not in occupied_tiles:
+			# Change alpha level depending on system time (glowing effect)
+				highlight_interactable_tiles[pos].color.a = 0.2+0.8*abs(sin(Time.get_unix_time_from_system()))
+				make_glow(pos, highlight_interactable_tiles[pos])
+			else:
+				stop_glow(highlight_interactable_tiles[pos])
 	
 	if used_cells0.has(tile_pos0):
 		# Convert tile position back to local coordinates for the hover effect
