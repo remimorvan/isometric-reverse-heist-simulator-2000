@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dptrqojvi3uk4"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+offset_left = -539.0
+offset_top = -137.0
+offset_right = 536.0
+offset_bottom = 140.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.913725, 0.792157, 0.423529, 1)
+theme_override_colors/font_outline_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "MISSION FAILED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
