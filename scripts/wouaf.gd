@@ -7,14 +7,26 @@ extends GameObject
 
 var target_position: Vector2
 var is_moving: bool = false
-var dog_eating_position: Vector2i
+var _dog_eating_position_defined: bool = false
+var _dog_eating_position:= Vector2i(0,0)
 
 @onready var layer0: TileMapLayer = $"../../Layer0"
 @onready var game_object_handler: Node = $"../"
-@onready var dog_eating_position_obj: GameObject = $"../DogEatingPosition"
+@onready var _dog_eating_position_obj: GameObject = $"../DogEatingPosition"
+@onready var _dog_bowl: GameObject = $"../DogBowl"
+
+func get_dog_eating_position():
+	if not(_dog_eating_position_defined):
+		_dog_eating_position_defined = true
+		_dog_eating_position = game_object_handler.tile_of_object(_dog_eating_position_obj)
+	return _dog_eating_position
+
+func is_bowl_non_empty():
+	return _dog_bowl.is_non_empty()
 
 func play(tour_nb) -> void:
-	print("> Todo: play() of wouaf. Go to bawl if full.")
+	print("> Todo: play() of wouaf. Go to bowl if full.")
+	print("Dogo eating position is: ", get_dog_eating_position())
 	var cyclic_path = []
 	cyclic_path.append(Vector2(2,2))
 	cyclic_path.append(Vector2(2,-2))
@@ -22,7 +34,13 @@ func play(tour_nb) -> void:
 	cyclic_path.append(Vector2(-4,2))
 
 	var start_tile = layer0.local_to_map(global_position)
-	var end_tile = cyclic_path[tour_nb%4]
+	var end_tile
+	if is_bowl_non_empty():
+		print("[Dog] FOOOOOOOOOD!")
+		end_tile = get_dog_eating_position()
+	else:
+		print("[Dog] Walking, going to: ", cyclic_path[tour_nb%4])
+		end_tile = cyclic_path[tour_nb%4]
 	
 	var new_path = MovementUtils.get_path_to_tile(
 		start_tile,
@@ -30,8 +48,6 @@ func play(tour_nb) -> void:
 		layer0,
 		get_parent().occupied_tiles_but_obj(self)
 	)
-	
-	#print(new_path)
 	
 	use_new_path(new_path)
 	
@@ -71,8 +87,6 @@ func _ready() -> void:
 	# Snap initial position to tile center
 	var current_tile = layer0.local_to_map(global_position)
 	global_position = layer0.map_to_local(current_tile)
-	#dog_eating_position = game_object_handler.tile_of_object(dog_eating_position_obj)
-	#print("[Dog] Dog eating position:", dog_eating_position)
 	#print("Player initial position (snapped to center): ", global_position)
 	#var cylic_path: PackedVector2Array
 	#cyclic_path = []
