@@ -1,8 +1,26 @@
-[gd_scene load_steps=4 format=4 uid="uid://bqtadeysdvdy"]
+[gd_scene load_steps=8 format=4 uid="uid://bqtadeysdvdy"]
 
 [ext_resource type="Script" uid="uid://ck4o86td42s4m" path="res://scripts/tilemaps.gd" id="1_m1b3p"]
 [ext_resource type="TileSet" uid="uid://iwr8yvyyljif" path="res://assets/layer0.tres" id="2_svqss"]
 [ext_resource type="TileSet" uid="uid://cbnffwt8jxdgo" path="res://assets/layer1.tres" id="3_m1b3p"]
+[ext_resource type="Texture2D" uid="uid://dxp6qwnvmjya" path="res://assets/level/fenetre_arriere_plan.png" id="4_svqss"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_olmxp"]
+texture = ExtResource("4_svqss")
+texture_region_size = Vector2i(403, 371)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(-120, 120)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_svqss"]
+texture = ExtResource("4_svqss")
+texture_region_size = Vector2i(403, 371)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(-80, 40)
+
+[sub_resource type="TileSet" id="TileSet_m1b3p"]
+tile_size = Vector2i(480, 240)
+sources/0 = SubResource("TileSetAtlasSource_olmxp")
+sources/1 = SubResource("TileSetAtlasSource_svqss")
 
 [node name="TileMaps" type="Node2D"]
 y_sort_enabled = true
@@ -19,3 +37,9 @@ y_sort_enabled = true
 tile_map_data = PackedByteArray("AAD9//7/BAACAAAAAAD9//3/BAACAAAAAAD9//z/BAACAAAAAAD5//n/BAAAAAEAAAD6//n/BAAAAAAAAAD7//n/BAAAAAAAAAD8//n/BAAAAAAAAAD+//n/BAAAAAAAAAABAPn/BAAAAAAAAAABAAAABAAAAAAAAAD5//z/BAACAAAAAAD8//z/AgADAAAAAAD6//r/AgABAAAAAAD6//v/AgABAAAAAAABAAEAAwAEAAAAAAABAAIAAwAEAAAAAAABAAMAAwADAAAAAAABAAQAAwACAAAAAAD//wQAAwABAAAAAAAAAAQAAwAAAAAAAAD9/wQABAACAAAAAAD9/wAACAAAAAAAAAD9//n/CAABAAAAAAD9/wEABAACAAEAAAD+/wAABAACAAEAAAD9////BAACAAEAAAD9//r/BAACAAEAAAAAAPn/BgAAAAAAAAD///n/BAACAAEAAAD5//v/BgABAAAAAAD5//r/BAACAAEAAAD4//r/BAACAAEAAAD9/wMABgABAAAAAAD9/wIABAACAAEAAAA=")
 tile_set = ExtResource("3_m1b3p")
 y_sort_origin = 1
+
+[node name="Layer2" type="TileMapLayer" parent="."]
+z_index = 1
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAD9/wAAAAAAAAAAAAD///r/AAAAAAAAAAADAPz/AQAAAAAAABA=")
+tile_set = SubResource("TileSet_m1b3p")
