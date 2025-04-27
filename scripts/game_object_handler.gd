@@ -41,10 +41,11 @@ func occupied_tiles() -> Array:
 	objects = objects.filter(func(x): return x.occupies_space())
 	return layer1_tiles + objects.map(tile_of_object)
 
-func occupied_tiles_but_obj(obj) -> Array:
+func occupied_tiles_but_objs(obj_list: Array) -> Array:
 	var layer1_tiles = layer1.get_used_cells()
 	var objects = get_children()
-	objects = objects.filter(func(x): return x.occupies_space() and (tile_of_object(x) != tile_of_object(obj)))
+	var positions_to_remove = obj_list.map(tile_of_object)
+	objects = objects.filter(func(x): return x.occupies_space() and tile_of_object(x) not in positions_to_remove)
 	return layer1_tiles + objects.map(tile_of_object)
 
 func is_tile_valid(tile: Vector2i) -> bool:
