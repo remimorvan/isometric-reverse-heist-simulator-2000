@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cjajyodhkxglj"]
 
-[ext_resource type="Script" uid="uid://b72m8ds8gbmpo" path="res://scripts/chair.gd" id="1_hfv8l"]
+[ext_resource type="Script" uid="uid://627utnhqsmd8" path="res://scripts/dog_bowl.gd" id="1_g8ekq"]
 [ext_resource type="Shader" uid="uid://c8f3mp10uiiga" path="res://scenes/highlight.gdshader" id="2_phhrf"]
 [ext_resource type="Texture2D" uid="uid://bjtvb3dfuiuly" path="res://assets/level/gamelle/gamelle-4.png" id="3_hfv8l"]
 
@@ -13,8 +13,8 @@ shader_parameter/thickness = 8.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_hxd06"]
 radius = 112.004
 
-[node name="Dog Bawl" type="Node2D"]
-script = ExtResource("1_hfv8l")
+[node name="Dog Bowl" type="Node2D"]
+script = ExtResource("1_g8ekq")
 metadata/_custom_type_script = "uid://cgek256grw13s"
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]

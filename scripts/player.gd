@@ -16,19 +16,7 @@ func _ready() -> void:
 	# Snap initial position to tile center
 	var current_tile = layer0.local_to_map(global_position)
 	global_position = layer0.map_to_local(current_tile)
-	print("Player initial position (snapped to center): ", global_position)
-	
-func use_new_path(new_path):
-	if not new_path.is_empty():
-		path = new_path
-		$CharacterBody2D/AnimatedSprite2D.play("run")
-		is_moving = true
-		target_position = path[0]
-		#print("Path acceptpathed, first target: ", target_position)
-		# Validate that target is different from current position
-		if target_position.distance_to(global_position) < arrival_threshold:
-			#print("Warning: First target too close to current position!")
-			_advance_to_next_target()
+	print("[Player] Initial position: ", global_position)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if game_object_handler.can_play():
@@ -43,13 +31,17 @@ func _unhandled_input(event: InputEvent) -> void:
 					result_interaction.call(self)
 					game_object_handler.make_new_turn()
 					return 
-			selected_tile = cliked_tile
-			print("Tile selected: ", selected_tile)
-			game_object_handler.make_new_turn()
+			if cliked_tile in layer0.get_surrounding_cells(player_tile):
+				selected_tile = cliked_tile
+				print("[Player] Tile selected: ", selected_tile)
+				game_object_handler.make_new_turn()
 
 func _process(delta: float) -> void:
 	pass
 
+func is_done() -> bool:
+	return not is_moving
+	
 func play(tour_nb: int) -> void:
 	var start_tile = layer0.local_to_map(global_position)
 	var end_tile = selected_tile
@@ -62,13 +54,20 @@ func play(tour_nb: int) -> void:
 		layer0,
 		get_parent().occupied_tiles_but_obj(self)
 	)
-	print(new_path)
-	use_new_path(new_path)
-	
-	glow_interactable_objects(end_tile)
-	
-func is_done() -> bool:
-	return not is_moving
+	print("[Player] New path is: ", new_path)
+	_use_new_path(new_path)
+
+func _use_new_path(new_path):
+	if not new_path.is_empty():
+		path = new_path
+		$CharacterBody2D/AnimatedSprite2D.play("run")
+		is_moving = true
+		target_position = path[0]
+		#print("Path acceptpathed, first target: ", target_position)
+		# Validate that target is different from current position
+		if target_position.distance_to(global_position) < arrival_threshold:
+			#print("Warning: First target too close to current position!")
+			_advance_to_next_target()
 
 
 func _physics_process(delta: float) -> void:
@@ -76,7 +75,7 @@ func _physics_process(delta: float) -> void:
 		return
 		
 	var distance_to_target = global_position.distance_to(target_position)
-	print("Distance to target: ", distance_to_target)
+	print("[Player] Distance to target: ", distance_to_target)
 	
 	if distance_to_target < arrival_threshold:
 		# Snap to exact center when close enough
@@ -89,27 +88,28 @@ func _physics_process(delta: float) -> void:
 		if movement.length() > distance_to_target:
 			movement = direction * distance_to_target
 		global_position += movement
-		print("Moving: dir=", direction, " movement=", movement, " new_pos=", global_position)
+		#print("[Player] Moving: dir=", direction, " movement=", movement, " new_pos=", global_position)
 		
 		$CharacterBody2D/AnimatedSprite2D.scale.x = 1.-2.*float(movement.x < 0)
 
 func _advance_to_next_target() -> void:
 	path.remove_at(0)
-	print("Point reached, remaining points: ", path.size())
+	print("[Player] Point reached, remaining points: ", path.size())
 	
 	if path.is_empty():
-		print("Path completed")
+		print("[Player] Path completed")
 		$CharacterBody2D/AnimatedSprite2D.stop()
 		is_moving = false
+		glow_interactable_objects(layer0.local_to_map(global_position))
 		return
 		
 	target_position = path[0]
 	
 	if target_position.distance_to(global_position) < arrival_threshold:
-		print("Next target too close, skipping")
+		print("[Player] Next target too close, skipping")
 		_advance_to_next_target()
 	else:
-		print("New target set: ", target_position)
+		print("[Player] New target set: ", target_position)
 
 func unglow_all_objects() -> void:
 	var objects = game_object_handler.get_children()
