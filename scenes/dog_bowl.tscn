@@ -21,6 +21,7 @@ metadata/_custom_type_script = "uid://cgek256grw13s"
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 material = SubResource("ShaderMaterial_dhd05")
+position = Vector2(-25, -94)
 texture = ExtResource("3_hfv8l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]

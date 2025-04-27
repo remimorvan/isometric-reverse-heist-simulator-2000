@@ -1,8 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://cy5sbokend7fg"]
+[gd_scene load_steps=9 format=3 uid="uid://cy5sbokend7fg"]
 
 [ext_resource type="Script" uid="uid://oi0r4ynbu0sa" path="res://scripts/main.gd" id="1_jsrw5"]
 [ext_resource type="PackedScene" uid="uid://dvr7cd1qwqui4" path="res://scenes/mayson.tscn" id="2_jsrw5"]
 [ext_resource type="Script" uid="uid://xth84ey1qovn" path="res://scripts/game_object_handler.gd" id="5_6ib6r"]
+[ext_resource type="PackedScene" uid="uid://cjajyodhkxglj" path="res://scenes/dog_bowl.tscn" id="5_huru0"]
+[ext_resource type="PackedScene" uid="uid://d2xw0bduor5xm" path="res://scenes/wouaf.tscn" id="6_wcvik"]
+[ext_resource type="PackedScene" uid="uid://bi8gdwd2ggyhy" path="res://scenes/chair.tscn" id="7_6ib6r"]
+[ext_resource type="PackedScene" uid="uid://c5wpxfi4qnx80" path="res://scenes/dog_eating_position.tscn" id="8_2cvyt"]
 [ext_resource type="PackedScene" uid="uid://copmddbeoxptn" path="res://scenes/player.tscn" id="10_rqv6b"]
 
 [node name="MainLevel" type="Node2D"]
@@ -16,6 +20,23 @@ tile_size = 240.0
 y_sort_enabled = true
 position = Vector2(1402.09, 30.1388)
 script = ExtResource("5_6ib6r")
+
+[node name="DogBowl" parent="Mayson/GameObjectHandler" instance=ExtResource("5_huru0")]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(-2359.09, 170.861)
+
+[node name="Chien" parent="Mayson/GameObjectHandler" instance=ExtResource("6_wcvik")]
+z_index = 1
+position = Vector2(288.91, -387.139)
+move_speed = 1000.0
+
+[node name="Chair" parent="Mayson/GameObjectHandler" instance=ExtResource("7_6ib6r")]
+z_index = 1
+position = Vector2(-687.09, -171.139)
+
+[node name="DogEatingPosition" parent="Mayson/GameObjectHandler" instance=ExtResource("8_2cvyt")]
+position = Vector2(-2133.09, 339.861)
 
 [node name="Player" parent="Mayson/GameObjectHandler" instance=ExtResource("10_rqv6b")]
 z_index = 1
