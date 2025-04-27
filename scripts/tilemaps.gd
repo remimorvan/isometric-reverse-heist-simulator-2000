@@ -136,9 +136,9 @@ func _process(_delta: float) -> void:
 			var blocked_minus_extras = blocked_tiles.filter(func(o): return !extras.has(o))
 			if MovementUtils.check_visibility(window_pos, window_dir, player_tile, 
 					blocked_minus_extras, 0.7, window_vision_distance) and window.is_mean_person():
-				print("Window ",i," sees")
+				print(window.name," sees")
 				var timer := Timer.new()
-				add_child(timer)
+				#add_child(timer)
 				timer.wait_time = 1.0
 				timer.one_shot = true
 				timer.timeout.connect(func(): $"GAME OVER SCREEN".visible = true)
