@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cy5sbokend7fg"]
+[gd_scene load_steps=13 format=3 uid="uid://cy5sbokend7fg"]
 
 [ext_resource type="Script" uid="uid://oi0r4ynbu0sa" path="res://scripts/main.gd" id="1_jsrw5"]
 [ext_resource type="PackedScene" uid="uid://bqtadeysdvdy" path="res://scenes/mayson.tscn" id="2_jsrw5"]
@@ -8,8 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://bi8gdwd2ggyhy" path="res://scenes/chair.tscn" id="7_6ib6r"]
 [ext_resource type="PackedScene" uid="uid://c5wpxfi4qnx80" path="res://scenes/dog_eating_position.tscn" id="8_2cvyt"]
 [ext_resource type="PackedScene" uid="uid://4vr03d7x2ase" path="res://scenes/closet.tscn" id="9_wcvik"]
+[ext_resource type="PackedScene" uid="uid://bw4ywe0ot1xtn" path="res://scenes/bed.tscn" id="10_2cvyt"]
 [ext_resource type="Texture2D" uid="uid://jpyfq50le85u" path="res://assets/level/background.jpeg" id="10_6ib6r"]
 [ext_resource type="PackedScene" uid="uid://copmddbeoxptn" path="res://scenes/player.tscn" id="10_rqv6b"]
+[ext_resource type="PackedScene" uid="uid://bbac7vf2pr0wi" path="res://scenes/bed_head.tscn" id="11_4t260"]
 
 [node name="MainLevel" type="Node2D"]
 y_sort_enabled = true
@@ -44,11 +46,6 @@ view_dir = Vector2(-1, 0)
 z_index = 1
 position = Vector2(-687.09, -171.139)
 
-[node name="Player" parent="Mayson/GameObjectHandler" instance=ExtResource("10_rqv6b")]
-z_index = 1
-position = Vector2(-694, 92)
-move_speed = 1000.0
-
 [node name="Closet" parent="Mayson/GameObjectHandler" instance=ExtResource("9_wcvik")]
 z_index = 1
 position = Vector2(-1888.09, -40.1388)
@@ -57,6 +54,19 @@ position = Vector2(-1888.09, -40.1388)
 z_index = 1
 position = Vector2(-1128.09, -843.139)
 orientation = 1
+
+[node name="Bed" parent="Mayson/GameObjectHandler" instance=ExtResource("10_2cvyt")]
+z_index = 1
+position = Vector2(-1391.09, -1253.14)
+
+[node name="BedHead" parent="Mayson/GameObjectHandler" instance=ExtResource("11_4t260")]
+z_index = 1
+position = Vector2(-1146.09, -1372.14)
+
+[node name="Player" parent="Mayson/GameObjectHandler" instance=ExtResource("10_rqv6b")]
+z_index = 1
+position = Vector2(-694, 92)
+move_speed = 1000.0
 
 [node name="Camera2D" type="Camera2D" parent="Mayson"]
 position = Vector2(319.09, -322.861)
