@@ -46,7 +46,7 @@ func play(tour_nb) -> void:
 		start_tile,
 		end_tile,
 		layer0,
-		get_parent().occupied_tiles_but_obj(self)
+		get_parent().occupied_tiles_but_objs([self])
 	)
 	
 	use_new_path(new_path)
@@ -147,7 +147,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				start_tile,
 				end_tile,
 				layer0,
-				get_parent().occupied_tiles_but_obj(self)
+				get_parent().occupied_tiles_but_objs([self])
 			)
 			
 			use_new_path(new_path)

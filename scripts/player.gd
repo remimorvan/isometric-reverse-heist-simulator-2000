@@ -52,13 +52,14 @@ func play(tour_nb: int) -> void:
 		start_tile,
 		end_tile,
 		layer0,
-		get_parent().occupied_tiles_but_obj(self)
+		get_parent().occupied_tiles_but_objs([self])
 	)
 	print("[Player] New path is: ", new_path)
 	_use_new_path(new_path)
 
 func _use_new_path(new_path):
 	if not new_path.is_empty():
+		visible = true
 		path = new_path
 		$CharacterBody2D/AnimatedSprite2D.play("run")
 		is_moving = true

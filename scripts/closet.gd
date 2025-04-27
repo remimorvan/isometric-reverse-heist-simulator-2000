@@ -12,8 +12,9 @@ var is_highlighted: bool = false
 var should_move: bool = false
 var next_position:= Vector2i(0,0)
 
-var state = 0; # 0: empty closet; 1: player is inside
-
+func occupies_space() -> bool:
+	return true
+	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var current_tile = layer0.local_to_map(global_position)
@@ -39,21 +40,33 @@ func update_sprite() -> void:
 func play(time: int):
 	pass
 	
-func is_adjacent(player_position: Vector2i) -> bool:
+func is_adjacent_or_in(player_position: Vector2i) -> bool:
 	var tile_position = layer1.local_to_map(global_position)
-	return tile_position in layer0.get_surrounding_cells(player_position)
+	return tile_position == player_position or tile_position in layer0.get_surrounding_cells(player_position)
 
 func is_interactable(player_position: Vector2i) -> bool:
-	var is_adjacent = is_adjacent(player_position)
-	return is_adjacent
+	return is_adjacent_or_in(player_position)
 
 func highlight() -> void:
-	#sprite.scale = init_scale*1.4
 	shader.set_shader_parameter("clr", Vector4(1.0, 0.9, 0.2, 1.0))
+	rotation = PI
 	
 func unhighlight() -> void:
-	#sprite.scale = init_scale
 	shader.set_shader_parameter("clr", Vector4(1.0, 0.9, 0.2, 0.0))
+	rotation = 0
+	
+func _result_of_interact(player:GameObject) -> void:
+	var start_tile = game_object_handler.tile_of_object(player)
+	var end_tile = game_object_handler.tile_of_object(self)
+	var new_path = MovementUtils.get_path_to_tile(
+		start_tile,
+		end_tile,
+		layer0,
+		get_parent().occupied_tiles_but_objs([player, self])
+	)
+	player._use_new_path(new_path)
+	player.visible = false
 	
 func interact(player_position: Vector2i) -> Callable:
-	return func(player): pass
+	return _result_of_interact
+		
