@@ -1,3 +1,4 @@
+class_name GameObjectHandler
 extends Node
 
 @export var turn_nb = 0

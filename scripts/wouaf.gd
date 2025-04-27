@@ -11,10 +11,11 @@ var is_moving: bool = false
 var _dog_eating_positions_defined: bool = false
 var _dog_eating_positions:= [Vector2i(0,0),Vector2i(0,0)]
 #ai position
-var original_position: Vector2#(0,0)
+var original_position: Vector2i#(0,0)
+var original_positions = []
 
 @onready var layer0: TileMapLayer = $"../../Layer0"
-@onready var game_object_handler: Node = $"../"
+@onready var game_object_handler: GameObjectHandler = $"../"
 @onready var _dog_eating_position_obj1: GameObject = $"../DogEatingPosition1"
 @onready var _dog_eating_position_obj2: GameObject = $"../DogEatingPosition2"
 @onready var _dog_bowl: GameObject = $"../DogBowl"
@@ -40,7 +41,9 @@ func path_to_eating_position(eating_position: Vector2i) -> PackedVector2Array:
 func play(tour_nb) -> void:
 	if tour_nb == 0: #first turn, save your oriignal position
 		original_position = layer0.local_to_map(global_position)
-	var goal_position: Vector2
+		original_positions = [original_position,original_position+Vector2i(-1,0),original_position+Vector2i(0,1)]
+		print("[Dog] MY POSITIONS",original_positions)
+	var goal_position: Vector2i
 	if is_bowl_non_empty():
 		print("[Dog] Free Food :)")
 		var potential_goal_positions: Array = get_dog_eating_positions()
@@ -56,6 +59,12 @@ func play(tour_nb) -> void:
 	else:
 		print("[Dog] Expensive Food :(")
 		goal_position = original_position
+		var my_pos = layer0.local_to_map(global_position)
+		for p in original_positions:
+			if my_pos == p or not game_object_handler.occupied_tiles().has(p):
+				goal_position = p
+				break
+		
 	var new_path = MovementUtils.get_path_to_tile(
 		layer0.local_to_map(global_position), #my_pos
 		goal_position,
@@ -143,6 +152,8 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if not is_moving or path.is_empty():
+		if original_positions.has(layer0.local_to_map(global_position)):
+			view_dir = Vector2(-1,0)
 		return
 		
 	var distance_to_target = global_position.distance_to(target_position)
