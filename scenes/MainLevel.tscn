@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cy5sbokend7fg"]
+[gd_scene load_steps=15 format=3 uid="uid://cy5sbokend7fg"]
 
 [ext_resource type="Script" uid="uid://oi0r4ynbu0sa" path="res://scripts/main.gd" id="1_jsrw5"]
 [ext_resource type="PackedScene" uid="uid://bqtadeysdvdy" path="res://scenes/mayson.tscn" id="2_jsrw5"]
@@ -13,12 +13,33 @@
 [ext_resource type="PackedScene" uid="uid://copmddbeoxptn" path="res://scenes/player.tscn" id="10_rqv6b"]
 [ext_resource type="PackedScene" uid="uid://bbac7vf2pr0wi" path="res://scenes/bed_head.tscn" id="11_4t260"]
 
+[sub_resource type="Gradient" id="Gradient_4t260"]
+offsets = PackedFloat32Array(0.36039, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wd4wg"]
+gradient = SubResource("Gradient_4t260")
+width = 600
+height = 200
+
 [node name="MainLevel" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_jsrw5")
 
 [node name="Mayson" parent="." instance=ExtResource("2_jsrw5")]
 tile_size = 240.0
+
+[node name="Restart" type="Node2D" parent="Mayson"]
+position = Vector2(-2132, -677)
+
+[node name="Button" type="Button" parent="Mayson/Restart"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(600, 200)
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Mayson/Restart"]
+texture = SubResource("GradientTexture2D_wd4wg")
 
 [node name="GameObjectHandler" type="Node2D" parent="Mayson"]
 y_sort_enabled = true
@@ -77,3 +98,5 @@ z_index = -1
 position = Vector2(426, -147)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("10_6ib6r")
+
+[connection signal="pressed" from="Mayson/Restart/Button" to="." method="_on_restart_button_pressed"]
