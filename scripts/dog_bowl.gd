@@ -7,12 +7,14 @@ extends GameObject
 @onready var layer1: TileMapLayer = $"../../Layer1"
 @onready var tilemap: Node2D = $"../.."
 @onready var game_object_handler: Node = $"../"
+@onready var dog: Node = $"../Chien"
 
 var is_highlighted: bool = false
 var should_move: bool = false
 var next_position:= Vector2i(0,0)
 
 const nb_turns_until_empty = 13
+const delay_until_dog_comes = 1
 var state = 0; # How many turns left until empty
 
 var full_bowl: Resource
@@ -42,12 +44,21 @@ func get_texture() -> Resource:
 		return semi_full_bowl
 	return full_bowl
 
+func is_non_empty() -> bool:
+	# State < nb_turns_until_empty is necessary, otherwise dog will go to bowl as soon as it is filled.
+	return state > 0 && state < nb_turns_until_empty
+
 func update_sprite() -> void:
 	sprite.texture = get_texture()
 
+func dog_is_adjacent() -> bool:
+	return game_object_handler.tile_of_object(dog) in layer0.get_surrounding_cells(game_object_handler.tile_of_object(self))
+
 func play(time: int):
-	if state > 0:
-		print("> Todo: play() of dog_bowl. Play sound and empty only if dog is adjacent.")
+	# print("[Dog bowl]: ", state, "/", nb_turns_until_empty, " -> ", state == nb_turns_until_empty + 1)
+	if state >= nb_turns_until_empty:
+		state -= 1
+	elif state > 0 and dog_is_adjacent():
 		state -= 1
 		update_sprite()
 	
@@ -69,6 +80,6 @@ func unhighlight() -> void:
 	
 func interact(player_position: Vector2i) -> Callable:
 	if state == 0:
-		state = nb_turns_until_empty
+		state = nb_turns_until_empty + delay_until_dog_comes
 		update_sprite()
 	return func(player): pass
