@@ -52,6 +52,11 @@ move_speed = 1000.0
 z_index = 1
 position = Vector2(-1888.09, -40.1388)
 
+[node name="Closet2" parent="Mayson/GameObjectHandler" instance=ExtResource("9_wcvik")]
+z_index = 1
+position = Vector2(-1128.09, -843.139)
+orientation = 1
+
 [node name="Camera2D" type="Camera2D" parent="Mayson"]
 position = Vector2(319.09, -322.861)
 zoom = Vector2(0.45, 0.45)

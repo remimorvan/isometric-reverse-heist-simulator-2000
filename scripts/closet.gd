@@ -8,22 +8,27 @@ extends GameObject
 @onready var tilemap: Node2D = $"../.."
 @onready var game_object_handler: Node = $"../"
 
+@export var orientation: int = 0
+
 var is_highlighted: bool = false
 var should_move: bool = false
 var next_position:= Vector2i(0,0)
 
-var texture_closed: Resource;
-var texture_open: Resource;
+var texture_closed: Array = [null, null];
+var texture_open: Array = [null, null];
 
 func occupies_space() -> bool:
 	return true
 	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	texture_closed = load("res://assets/level/placard/fermé.png")
-	texture_open = load("res://assets/level/placard/ouvert.png")
+	texture_closed[0] = load("res://assets/level/placard/fermé.png")
+	texture_open[0] = load("res://assets/level/placard/ouvert.png")
+	texture_closed[1] = load("res://assets/level/placard/dos.png")
+	texture_open[1] = load("res://assets/level/placard/dos_ouvert.png")
 	var current_tile = layer0.local_to_map(global_position)
 	global_position = layer0.map_to_local(current_tile)
+	sprite.texture = texture_closed[orientation]
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -56,11 +61,11 @@ func is_interactable(player_position: Vector2i) -> bool:
 
 func highlight() -> void:
 	shader.set_shader_parameter("clr", Vector4(1.0, 0.9, 0.2, 1.0))
-	sprite.texture = texture_open
+	sprite.texture = texture_open[orientation]
 	
 func unhighlight() -> void:
 	shader.set_shader_parameter("clr", Vector4(1.0, 0.9, 0.2, 0.0))
-	sprite.texture = texture_closed
+	sprite.texture = texture_closed[orientation]
 	
 func _result_of_interact(player:GameObject) -> void:
 	var start_tile = game_object_handler.tile_of_object(player)
