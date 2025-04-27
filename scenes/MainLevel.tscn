@@ -27,8 +27,11 @@ z_index = 1
 y_sort_enabled = true
 position = Vector2(-2359.09, 170.861)
 
-[node name="DogEatingPosition" parent="Mayson/GameObjectHandler" instance=ExtResource("8_2cvyt")]
+[node name="DogEatingPosition1" parent="Mayson/GameObjectHandler" instance=ExtResource("8_2cvyt")]
 position = Vector2(-2133.09, 339.861)
+
+[node name="DogEatingPosition2" parent="Mayson/GameObjectHandler" instance=ExtResource("8_2cvyt")]
+position = Vector2(-2131.09, 89.8612)
 
 [node name="Chien" parent="Mayson/GameObjectHandler" instance=ExtResource("6_wcvik")]
 z_index = 1
