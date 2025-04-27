@@ -43,8 +43,12 @@ position = Vector2(-2132, -677)
 modulate = Color(1, 1, 1, 0)
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(600, 200)
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = -301.0
+offset_top = -100.0
+offset_right = 299.0
+offset_bottom = 100.0
+action_mode = 0
+icon_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="Mayson/Restart"]
 texture = SubResource("GradientTexture2D_wd4wg")
