@@ -24,14 +24,14 @@ func tile_of_object(obj: Node2D) -> Vector2i:
 func occupied_tiles() -> Array:
 	var layer1_tiles = layer1.get_used_cells()
 	var objects = get_children()
-	objects = objects.filter(func(x): x.occupies_space())
+	objects = objects.filter(func(x): return x.occupies_space())
 	return layer1_tiles + objects.map(tile_of_object)
 
 func occupied_tiles_but_obj(obj) -> Array:
 	var layer1_tiles = layer1.get_used_cells()
-	var siblings = []
-	var objects = get_children().filter(
-		func(c): return layer0.local_to_map(c.global_position) != layer0.local_to_map(obj.global_position))
+	var objects = get_children()
+	objects = objects.filter(func(x): return x.occupies_space())
+	objects = objects.filter(func(x): return x != obj)
 	return layer1_tiles + objects.map(tile_of_object)
 
 func is_tile_valid(tile: Vector2i) -> bool:

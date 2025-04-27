@@ -37,9 +37,8 @@ func get_opposite_tile(player_position: Vector2i) -> Vector2i:
 	return 2*tile_position-player_position
 
 func is_interactable(player_position: Vector2i) -> bool:
-	var is_adjacent = is_adjacent(player_position)
 	var opposite_tile = get_opposite_tile(player_position)
-	return is_adjacent and game_object_handler.is_tile_valid(opposite_tile) and game_object_handler.is_tile_free(opposite_tile)
+	return is_adjacent(player_position) and game_object_handler.is_tile_valid(opposite_tile) and game_object_handler.is_tile_free(opposite_tile)
 
 func highlight() -> void:
 	#sprite.scale = init_scale*1.4
