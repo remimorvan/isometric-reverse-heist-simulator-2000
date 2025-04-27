@@ -8,34 +8,53 @@ extends GameObject
 
 var target_position: Vector2
 var is_moving: bool = false
-var _dog_eating_position_defined: bool = false
-var _dog_eating_position:= Vector2i(0,0)
+var _dog_eating_positions_defined: bool = false
+var _dog_eating_positions:= [Vector2i(0,0),Vector2i(0,0)]
 #ai position
 var original_position: Vector2#(0,0)
 
 @onready var layer0: TileMapLayer = $"../../Layer0"
 @onready var game_object_handler: Node = $"../"
-@onready var _dog_eating_position_obj: GameObject = $"../DogEatingPosition"
+@onready var _dog_eating_position_obj1: GameObject = $"../DogEatingPosition1"
+@onready var _dog_eating_position_obj2: GameObject = $"../DogEatingPosition2"
 @onready var _dog_bowl: GameObject = $"../DogBowl"
 
-func get_dog_eating_position() -> Vector2i:
-	if not(_dog_eating_position_defined):
-		_dog_eating_position_defined = true
-		_dog_eating_position = game_object_handler.tile_of_object(_dog_eating_position_obj)
-	return _dog_eating_position
+func get_dog_eating_positions() -> Array:
+	if not(_dog_eating_positions_defined):
+		_dog_eating_positions_defined = true
+		_dog_eating_positions = [game_object_handler.tile_of_object(_dog_eating_position_obj1), game_object_handler.tile_of_object(_dog_eating_position_obj2)]
+	return _dog_eating_positions
 
 func is_bowl_non_empty() -> bool:
 	return _dog_bowl.is_non_empty()
+
+func path_to_eating_position(eating_position: Vector2i) -> PackedVector2Array:
+	return MovementUtils.get_path_to_tile(
+		layer0.local_to_map(global_position), #my_pos
+		eating_position,
+		layer0,
+		get_parent().occupied_tiles_but_objs([self])
+	)
+
 
 func play(tour_nb) -> void:
 	if tour_nb == 0: #first turn, save your oriignal position
 		original_position = layer0.local_to_map(global_position)
 	var goal_position: Vector2
 	if is_bowl_non_empty():
-		print("Free Food :)")
-		goal_position = get_dog_eating_position()
+		print("[Dog] Free Food :)")
+		var potential_goal_positions: Array = get_dog_eating_positions()
+		if game_object_handler.tile_of_object(self) in potential_goal_positions:
+			print("[Dog] I'm eating, nomnom!")
+			return
+		for potential_goal_position in get_dog_eating_positions():
+			var path = path_to_eating_position(potential_goal_position)
+			if not path.is_empty():
+				goal_position = potential_goal_position
+				print("[Dog] Going to eat at ", goal_position)
+				break
 	else:
-		print("Expensive Food :(")
+		print("[Dog] Expensive Food :(")
 		goal_position = original_position
 	var new_path = MovementUtils.get_path_to_tile(
 		layer0.local_to_map(global_position), #my_pos
@@ -45,31 +64,6 @@ func play(tour_nb) -> void:
 	)
 	use_new_path(new_path.slice(0,move_points))
 	return
-	
-	print("> Todo: play() of wouaf. Go to bowl if full.")
-	print("Dogo eating position is: ", get_dog_eating_position())
-	var cyclic_path = []
-	cyclic_path.append(Vector2(2,2))
-	cyclic_path.append(Vector2(2,-2))
-	cyclic_path.append(Vector2(-4,-2))
-	cyclic_path.append(Vector2(-4,2))
-
-	var start_tile = layer0.local_to_map(global_position)
-	var end_tile
-	if is_bowl_non_empty():
-		print("[Dog] FOOOOOOOOOD!")
-		end_tile = get_dog_eating_position()
-	else:
-		print("[Dog] Walking, going to: ", cyclic_path[tour_nb%4])
-		end_tile = cyclic_path[tour_nb%4]
-	
-	new_path = MovementUtils.get_path_to_tile(
-		start_tile,
-		end_tile,
-		layer0,
-		get_parent().occupied_tiles_but_objs([self])
-	)
-	use_new_path(new_path.slice(0,move_points))
 	
 func is_done() -> bool:
 	return not is_moving
