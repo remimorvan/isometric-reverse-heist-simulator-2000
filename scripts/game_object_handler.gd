@@ -14,8 +14,9 @@ func _process(delta: float) -> void:
 		prepare_turn = false
 		play_others_turns()
 		turn_nb += 1
-	if turn_processing:
-		turn_processing = not turn_finished()
+	if turn_processing and turn_finished():
+		turn_processing = false
+		player.glow_interactable_objects(tile_of_object(player))
 
 func turn_finished() -> bool:
 	for obj in self.get_children():
@@ -55,10 +56,12 @@ func is_tile_free(tile: Vector2i) -> bool:
 	return tile not in occupied_tiles()
 	
 func can_play() -> bool:
-	return not turn_processing#turn_finished()
+	return not turn_processing # turn_finished()
 
 #first play player's turn, then wait for its end to player the other's turn
 func make_new_turn() -> void:
+	print("[Game Object Handler] New turn: ", turn_nb)
+	player.unglow_all_objects()
 	player.play(turn_nb)
 	turn_processing = true
 	prepare_turn = true

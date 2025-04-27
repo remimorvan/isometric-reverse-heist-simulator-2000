@@ -47,8 +47,6 @@ func play(tour_nb: int) -> void:
 	var start_tile = layer0.local_to_map(global_position)
 	var end_tile = selected_tile
 	
-	unglow_all_objects()
-	
 	var new_path = MovementUtils.get_path_to_tile(
 		start_tile,
 		end_tile,
@@ -102,7 +100,6 @@ func _advance_to_next_target() -> void:
 		print("[Player] Path completed")
 		$CharacterBody2D/AnimatedSprite2D.stop()
 		is_moving = false
-		glow_interactable_objects(layer0.local_to_map(global_position))
 		return
 		
 	target_position = path[0]
