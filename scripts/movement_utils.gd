@@ -30,6 +30,7 @@ static func get_path_to_tile(
 	for tile in walkable_tiles:
 		var point_id = _get_point_id(tile)
 		
+		print("Tile:", tile, " with neighbors: ",  _get_neighbors(tile))
 		# Check orthogonal neighbors for isometric grid
 		for neighbor in _get_neighbors(tile):
 			if walkable_tiles.has(neighbor):

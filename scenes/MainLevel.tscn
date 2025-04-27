@@ -1,9 +1,12 @@
-[gd_scene load_steps=13 format=4 uid="uid://cy5sbokend7fg"]
+[gd_scene load_steps=16 format=4 uid="uid://cy5sbokend7fg"]
 
 [ext_resource type="Texture2D" uid="uid://blpd5eaut68bn" path="res://assets/level/kitchen_tileset1.png" id="1_n15ua"]
+[ext_resource type="Script" uid="uid://ck4o86td42s4m" path="res://scripts/tilemaps.gd" id="1_xum0q"]
 [ext_resource type="Texture2D" uid="uid://tbs27svalvov" path="res://assets/level/proto_tileset.png" id="2_jsrw5"]
 [ext_resource type="Texture2D" uid="uid://bwrcmk366krot" path="res://assets/level/wall_proto_1.png" id="3_ykko5"]
 [ext_resource type="Texture2D" uid="uid://cuiiudqigee7g" path="res://assets/level/tile_kitchen.png" id="4_jsrw5"]
+[ext_resource type="Script" uid="uid://xth84ey1qovn" path="res://scripts/game_object_handler.gd" id="5_6ib6r"]
+[ext_resource type="PackedScene" uid="uid://copmddbeoxptn" path="res://scenes/player.tscn" id="10_rqv6b"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yxyfn"]
 texture = ExtResource("1_n15ua")
@@ -102,6 +105,9 @@ sources/2 = SubResource("TileSetAtlasSource_ykko5")
 sources/3 = SubResource("TileSetAtlasSource_huru0")
 
 [node name="MainLevel" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_xum0q")
+tile_size = 240.0
 
 [node name="Layer0" type="TileMapLayer" parent="."]
 y_sort_enabled = true
@@ -111,5 +117,18 @@ tile_set = SubResource("TileSet_48gi8")
 [node name="Layer1" type="TileMapLayer" parent="."]
 z_index = 1
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAD+//T/AgACAAAAAAD///H/AgAAAAEAAAAAAPL/AgAAAAAAAAAAAPP/AgAAAAAAAAABAPT/AgAAAAAAAAABAPX/AgAAAAAAAAACAPb/AgAAAAAAAAADAPn/AgAAAAAAAAABAPb/AgACAAAAAAAAAPj/AgACAAAAAAD///n/AgACAAAAAAD///r/AgACAAAAAAD+//v/AgACAAAAAAD+//z/AgABAAEAAAD+//3/AgAAAAAAAAAAAAAAAgAAAAAAAAD9//3/AgACAAAAAAD8/wAAAgACAAAAAAD9//7/AQACAAAAAAD8////AQACAAAAAAACAPf/AQACAAAAAAADAPj/AQACAAAAAAD///L/AQACAAAAAAD+//P/AQACAAAAAAD///P/AQABAAAAAAD///T/AQABAAAAAAD+//7/AQADAAAAAAD///f/AQADAAAAAAACAPv/AAABAAAAAAAAAP//AAAAAAAAAAAAAP3/AQAAAAAAAAD9/wAAAQAAAAAAAAD8/wEAAwAEAAAAABD9/wIAAwABAAAAAAD+/wQAAwACAAAAAAD+/wMAAwADAAAAAAD//wIAAwAEAAAAAAD//wEAAwAEAAAAAAD9/wMAAwAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAD+//T/AgACAAAAAAD///H/AgAAAAEAAAAAAPL/AgAAAAAAAAAAAPP/AgAAAAAAAAABAPT/AgAAAAAAAAABAPX/AgAAAAAAAAACAPb/AgAAAAAAAAADAPn/AgAAAAAAAAABAPb/AgACAAAAAAAAAPj/AgACAAAAAAD///n/AgACAAAAAAD///r/AgACAAAAAAD+//v/AgACAAAAAAD+//z/AgABAAEAAAD+//3/AgAAAAAAAAAAAAAAAgAAAAAAAAD9//3/AgACAAAAAAD8/wAAAgACAAAAAAD8////AQACAAAAAAACAPf/AQACAAAAAAADAPj/AQACAAAAAAD///L/AQACAAAAAAD+//P/AQACAAAAAAD///P/AQABAAAAAAD///T/AQABAAAAAAD+//7/AQADAAAAAAD///f/AQADAAAAAAD8/wEAAwAEAAAAABD9/wIAAwABAAAAAAD+/wQAAwACAAAAAAD+/wMAAwADAAAAAAD//wIAAwAEAAAAAAD//wEAAwAEAAAAAAD9/wMAAwAAAAAAAAD9//7/AQACAAAAAAA=")
 tile_set = SubResource("TileSet_8m8wf")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(33, -494)
+zoom = Vector2(0.45, 0.45)
+
+[node name="GameObjectHandler" type="Node2D" parent="."]
+y_sort_enabled = true
+script = ExtResource("5_6ib6r")
+
+[node name="Player" parent="GameObjectHandler" instance=ExtResource("10_rqv6b")]
+z_index = 1
+position = Vector2(455, 9.53674e-07)
+move_speed = 1000.0

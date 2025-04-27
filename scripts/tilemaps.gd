@@ -4,14 +4,15 @@ extends Node2D
 @onready var layer1: TileMapLayer = $Layer1
 
 var hover_effect: Polygon2D
+@export var tile_size = 16.
 
 func create_glow(color: Color, layer_index: int) -> Polygon2D:
 	var glow = Polygon2D.new()
 	glow.polygon = PackedVector2Array([
-		Vector2(0, -8), # Top
-		Vector2(16, 0), # Right
-		Vector2(0, 8), # Bottom
-		Vector2(-16, 0) # Left
+		Vector2(0, -tile_size*0.5), # Top
+		Vector2(tile_size, 0), # Right
+		Vector2(0, tile_size*0.5), # Bottom
+		Vector2(-tile_size, 0) # Left
 	])
 	glow.color = color
 	glow.visible = false
