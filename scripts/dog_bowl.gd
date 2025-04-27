@@ -13,7 +13,7 @@ var is_highlighted: bool = false
 var should_move: bool = false
 var next_position:= Vector2i(0,0)
 
-const nb_turns_until_empty = 9#13
+@export var nb_turns_until_empty = 11#13
 const delay_until_dog_comes = 0
 var state = 0; # How many turns left until empty
 
