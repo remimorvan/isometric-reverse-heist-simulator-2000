@@ -99,7 +99,7 @@ func _process(_delta: float) -> void:
 			#print("Oui:",pos)
 			if pos == player_tile:
 				print("Player tile:", player_tile)
-				get_tree().change_scene_to_file("res://scenes/mission_failed.tscn")
+				#get_tree().change_scene_to_file("res://scenes/mission_failed.tscn")
 			make_glow(pos, effect)
 		else:
 			#print("Non:",pos)
