@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfepqixh57hnu"]
+
+[ext_resource type="Script" uid="uid://i1uujdl6f0op" path="res://scripts/underwear.gd" id="1_24q7x"]
+[ext_resource type="Texture2D" uid="uid://cb2rbd5nykaxi" path="res://icon.svg" id="2_63h1u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fg8xd"]
+radius = 65.0
+
+[node name="Underwear" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_24q7x")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+y_sort_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+y_sort_enabled = true
+texture = ExtResource("2_63h1u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+y_sort_enabled = true
+shape = SubResource("CircleShape2D_fg8xd")

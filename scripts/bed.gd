@@ -8,6 +8,7 @@ extends GameObject
 @onready var tilemap: Node2D = $"../.."
 @onready var game_object_handler: Node = $"../"
 @onready var bed_head: Node = $"../BedHead"
+@onready var underwear: Node = $"../Underwear"
 
 
 # Called when the node enters the scene tree for the first time.
@@ -39,5 +40,5 @@ func unhighlight() -> void:
 	shader.set_shader_parameter("clr", Vector4(1.0, 0.9, 0.2, 0.0))
 	
 func interact(player_position: Vector2i) -> Callable:
-	print("[Bed] You've won!")
+	underwear.appear()
 	return func(player): pass
