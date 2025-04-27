@@ -15,8 +15,12 @@ func play(time: int) -> void:
 func is_done() -> bool:
 	return true
 
+# Does this object prevent the player from being on the same tile?
+func occupies_space() -> bool:
+	return true
+	
 func is_interactable(player_position: Vector2i) -> bool:
 	return false
-	
+
 func unhighlight() -> void:
 	pass

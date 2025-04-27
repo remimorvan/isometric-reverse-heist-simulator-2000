@@ -15,17 +15,17 @@ var next_position:= Vector2i(0,0)
 const nb_turns_until_empty = 13
 var state = 0; # How many turns left until empty
 
-var full_bawl: Resource
-var semi_full_bawl: Resource
-var semi_empty_bawl: Resource
-var empty_bawl: Resource
+var full_bowl: Resource
+var semi_full_bowl: Resource
+var semi_empty_bowl: Resource
+var empty_bowl: Resource
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	full_bawl = load("res://assets/level/gamelle/gamelle-1.png")
-	semi_full_bawl = load("res://assets/level/gamelle/gamelle-2.png")
-	semi_empty_bawl = load("res://assets/level/gamelle/gamelle-3.png")
-	empty_bawl = load("res://assets/level/gamelle/gamelle-4.png")
+	full_bowl = load("res://assets/level/gamelle/gamelle-1.png")
+	semi_full_bowl = load("res://assets/level/gamelle/gamelle-2.png")
+	semi_empty_bowl = load("res://assets/level/gamelle/gamelle-3.png")
+	empty_bowl = load("res://assets/level/gamelle/gamelle-4.png")
 	var current_tile = layer0.local_to_map(global_position)
 	global_position = layer0.map_to_local(current_tile)
 
@@ -35,19 +35,19 @@ func _process(delta: float) -> void:
 
 func get_texture() -> Resource:
 	if state == 0:
-		return empty_bawl
+		return empty_bowl
 	if state <= 4:
-		return semi_empty_bawl
+		return semi_empty_bowl
 	if state <= 9:
-		return semi_full_bawl
-	return full_bawl
+		return semi_full_bowl
+	return full_bowl
 
 func update_sprite() -> void:
 	sprite.texture = get_texture()
 
 func play(time: int):
 	if state > 0:
-		print("> Todo: play() of dog_bawl. Play sound and empty only if dog is adjacent.")
+		print("> Todo: play() of dog_bowl. Play sound and empty only if dog is adjacent.")
 		state -= 1
 		update_sprite()
 	
