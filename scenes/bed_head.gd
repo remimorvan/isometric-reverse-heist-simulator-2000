@@ -9,6 +9,7 @@ extends GameObject
 @onready var game_object_handler: Node = $"../"
 @onready var bed: Node = $"../Bed"
 
+# REMI J'AI FAIM
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -113,13 +113,23 @@ func _process(_delta: float) -> void:
 			#print("Non:",pos)
 			stop_glow(effect)
 			
+			
+	# Window positions + viewdir
+	# -3, 2		;	1, 0
+	# -1, -7	;	0, 1
+	# -7, -5	;	1, 0
 	# check window vision
-	#if MovementUtils.check_visibility(dog_tile, dog_dir, pos, blocked_tiles, 0.7, 1000):
-		#print("Oui:",pos)
-	#	print("Window1 sees")
-		#var timer := Timer.new()
-		#add_child(timer)
-		#timer.wait_time = 1.0
-		#timer.one_shot = true
-				#timer.timeout.connect(func(): $"GAME OVER SCREEN".visible = true)
-				#timer.start()
+	var window_positions = [Vector2i(-3,2), Vector2i(-1,-7), Vector2i(-7,5)]
+	var window_directions = [Vector2i(1,0),Vector2i(0,1),Vector2i(1,0)]
+	for i in range(3):
+		var window_pos = window_positions[i]
+		var window_dir = window_directions[i]
+		#var otherwindow = window_positions[i] + window_dir.yx
+		if MovementUtils.check_visibility(window_pos, window_dir, player_tile, blocked_tiles, 0.7, 1000):
+			print("Window1 sees")
+			#var timer := Timer.new()
+			#add_child(timer)
+			#timer.wait_time = 1.0
+			#timer.one_shot = true
+			#timer.timeout.connect(func(): $"GAME OVER SCREEN".visible = true)
+			#timer.start()
