@@ -86,17 +86,50 @@ func _process(_delta: float) -> void:
 		return not blocked_tiles1.has(tile))
 		
 	#print(walkable_tiles)
-
-	var blocked_tiles = $GameObjectHandler.occupied_tiles_but_objs([dog])
+	var player = $GameObjectHandler/Player
+	var player_tile = layer0.local_to_map(player.global_position)
+	var closet_pos1 = layer0.local_to_map($GameObjectHandler/Closet.global_position)
+	var closet_pos2 = layer0.local_to_map($GameObjectHandler/Closet2.global_position)
+	var blocked_tiles = $GameObjectHandler.occupied_tiles_but_objs([dog,player])
 	for i in range(walkable_tiles.size()):
 		var pos = walkable_tiles[i]
 		var effect = dog_FOV_effects[i]
 		var dog_tile = layer0.local_to_map(dog.global_position)
 		var dog_dir = dog.view_dir
 		#print("View dir:", dog_dir, " tile:", dog_tile)
+		
+		# check dog vision
 		if MovementUtils.check_visibility(dog_tile, dog_dir, pos, blocked_tiles, 0.7, 1000):
 			#print("Oui:",pos)
+			if pos == player_tile and pos != closet_pos1 and pos != closet_pos2:
+				var timer := Timer.new()
+				add_child(timer)
+				timer.wait_time = 1.0
+				timer.one_shot = true
+				timer.timeout.connect(func(): $"GAME OVER SCREEN".visible = true)
+				timer.start()
 			make_glow(pos, effect)
 		else:
 			#print("Non:",pos)
 			stop_glow(effect)
+			
+			
+	# Window positions + viewdir
+	# -3, 2		;	1, 0
+	# -1, -7	;	0, 1
+	# -7, -5	;	1, 0
+	# check window vision
+	var window_positions = [Vector2i(-3,2), Vector2i(-1,-7), Vector2i(-7,5)]
+	var window_directions = [Vector2i(1,0),Vector2i(0,1),Vector2i(1,0)]
+	for i in range(3):
+		var window_pos = window_positions[i]
+		var window_dir = window_directions[i]
+		#var otherwindow = window_positions[i] + window_dir.yx
+		if MovementUtils.check_visibility(window_pos, window_dir, player_tile, blocked_tiles, 0.7, 1000):
+			print("Window1 sees")
+			#var timer := Timer.new()
+			#add_child(timer)
+			#timer.wait_time = 1.0
+			#timer.one_shot = true
+			#timer.timeout.connect(func(): $"GAME OVER SCREEN".visible = true)
+			#timer.start()

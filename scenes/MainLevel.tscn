@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cy5sbokend7fg"]
+[gd_scene load_steps=18 format=3 uid="uid://cy5sbokend7fg"]
 
 [ext_resource type="Script" uid="uid://oi0r4ynbu0sa" path="res://scripts/main.gd" id="1_jsrw5"]
 [ext_resource type="PackedScene" uid="uid://bqtadeysdvdy" path="res://scenes/mayson.tscn" id="2_jsrw5"]
@@ -11,6 +11,18 @@
 [ext_resource type="PackedScene" uid="uid://74ccwirwx4id" path="res://scenes/window_people.tscn" id="10_2cvyt"]
 [ext_resource type="Texture2D" uid="uid://jpyfq50le85u" path="res://assets/level/background.jpeg" id="10_6ib6r"]
 [ext_resource type="PackedScene" uid="uid://copmddbeoxptn" path="res://scenes/player.tscn" id="10_rqv6b"]
+[ext_resource type="PackedScene" path="res://scenes/bed_head.tscn" id="11_4t260"]
+[ext_resource type="PackedScene" path="res://scenes/bed.tscn" id="11_rqv6b"]
+[ext_resource type="PackedScene" path="res://scenes/underwear.tscn" id="11_wd4wg"]
+[ext_resource type="PackedScene" path="res://scenes/mission_failed.tscn" id="13_wd4wg"]
+
+[sub_resource type="Gradient" id="Gradient_4t260"]
+offsets = PackedFloat32Array(0.36039, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wd4wg"]
+gradient = SubResource("Gradient_4t260")
+width = 600
+height = 200
 
 [node name="MainLevel" type="Node2D"]
 y_sort_enabled = true
@@ -18,6 +30,29 @@ script = ExtResource("1_jsrw5")
 
 [node name="Mayson" parent="." instance=ExtResource("2_jsrw5")]
 tile_size = 240.0
+
+[node name="GAME OVER SCREEN" parent="Mayson" instance=ExtResource("13_wd4wg")]
+visible = false
+z_index = 2
+position = Vector2(319.09, -322.861)
+scale = Vector2(3, 3)
+
+[node name="Restart" type="Node2D" parent="Mayson"]
+position = Vector2(-2132, -677)
+
+[node name="Button" type="Button" parent="Mayson/Restart"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(600, 200)
+offset_left = -301.0
+offset_top = -100.0
+offset_right = 299.0
+offset_bottom = 100.0
+action_mode = 0
+icon_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Mayson/Restart"]
+texture = SubResource("GradientTexture2D_wd4wg")
 
 [node name="GameObjectHandler" type="Node2D" parent="Mayson"]
 y_sort_enabled = true
@@ -45,11 +80,6 @@ view_dir = Vector2(-1, 0)
 z_index = 1
 position = Vector2(-687.09, -171.139)
 
-[node name="Player" parent="Mayson/GameObjectHandler" instance=ExtResource("10_rqv6b")]
-z_index = 1
-position = Vector2(-694, 92)
-move_speed = 1000.0
-
 [node name="Closet" parent="Mayson/GameObjectHandler" instance=ExtResource("9_wcvik")]
 z_index = 1
 position = Vector2(-1888.09, -40.1388)
@@ -62,13 +92,30 @@ orientation = 1
 [node name="WindowPeopleMainRoom" parent="Mayson/GameObjectHandler" instance=ExtResource("10_2cvyt")]
 position = Vector2(176.91, -920.139)
 
-[node name="WindowPeopleKitchen" parent="Mayson/GameObjectHandler" instance=ExtResource("10_2cvyt")]
+[node name="WindowPeopleMainRoomKitchen" parent="Mayson/GameObjectHandler" instance=ExtResource("10_2cvyt")]
 position = Vector2(-2616.09, 130.861)
 left = true
 
 [node name="WindowPeopleBedroom" parent="Mayson/GameObjectHandler" instance=ExtResource("10_2cvyt")]
 position = Vector2(-1652.09, -1315.14)
 left = true
+
+[node name="Bed" parent="Mayson/GameObjectHandler" instance=ExtResource("11_rqv6b")]
+z_index = 1
+position = Vector2(-1391.09, -1253.14)
+
+[node name="BedHead" parent="Mayson/GameObjectHandler" instance=ExtResource("11_4t260")]
+z_index = 1
+position = Vector2(-1146.09, -1372.14)
+
+[node name="Underwear" parent="Mayson/GameObjectHandler" instance=ExtResource("11_wd4wg")]
+z_index = 1
+position = Vector2(-1390.09, -1250.14)
+
+[node name="Player" parent="Mayson/GameObjectHandler" instance=ExtResource("10_rqv6b")]
+z_index = 1
+position = Vector2(-694, 92)
+move_speed = 1000.0
 
 [node name="Camera2D" type="Camera2D" parent="Mayson"]
 position = Vector2(319.09, -322.861)
@@ -80,3 +127,5 @@ z_index = -1
 position = Vector2(426, -147)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("10_6ib6r")
+
+[connection signal="pressed" from="Mayson/Restart/Button" to="." method="_on_restart_button_pressed"]
