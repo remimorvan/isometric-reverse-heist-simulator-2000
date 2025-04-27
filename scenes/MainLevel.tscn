@@ -1,134 +1,48 @@
-[gd_scene load_steps=16 format=4 uid="uid://cy5sbokend7fg"]
+[gd_scene load_steps=9 format=3 uid="uid://cy5sbokend7fg"]
 
-[ext_resource type="Texture2D" uid="uid://blpd5eaut68bn" path="res://assets/level/kitchen_tileset1.png" id="1_n15ua"]
-[ext_resource type="Script" uid="uid://ck4o86td42s4m" path="res://scripts/tilemaps.gd" id="1_xum0q"]
-[ext_resource type="Texture2D" uid="uid://tbs27svalvov" path="res://assets/level/proto_tileset.png" id="2_jsrw5"]
-[ext_resource type="Texture2D" uid="uid://bwrcmk366krot" path="res://assets/level/wall_proto_1.png" id="3_ykko5"]
-[ext_resource type="Texture2D" uid="uid://cuiiudqigee7g" path="res://assets/level/tile_kitchen.png" id="4_jsrw5"]
+[ext_resource type="Script" uid="uid://oi0r4ynbu0sa" path="res://scripts/main.gd" id="1_jsrw5"]
+[ext_resource type="PackedScene" uid="uid://dvr7cd1qwqui4" path="res://scenes/mayson.tscn" id="2_jsrw5"]
 [ext_resource type="Script" uid="uid://xth84ey1qovn" path="res://scripts/game_object_handler.gd" id="5_6ib6r"]
+[ext_resource type="PackedScene" uid="uid://cjajyodhkxglj" path="res://scenes/dog_bowl.tscn" id="5_huru0"]
+[ext_resource type="PackedScene" uid="uid://d2xw0bduor5xm" path="res://scenes/wouaf.tscn" id="6_wcvik"]
+[ext_resource type="PackedScene" uid="uid://bi8gdwd2ggyhy" path="res://scenes/chair.tscn" id="7_6ib6r"]
+[ext_resource type="PackedScene" uid="uid://c5wpxfi4qnx80" path="res://scenes/dog_eating_position.tscn" id="8_2cvyt"]
 [ext_resource type="PackedScene" uid="uid://copmddbeoxptn" path="res://scenes/player.tscn" id="10_rqv6b"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yxyfn"]
-texture = ExtResource("1_n15ua")
-texture_region_size = Vector2i(480, 480)
-0:0/0 = 0
-0:0/0/texture_origin = Vector2i(0, -120)
-1:0/0 = 0
-1:0/0/texture_origin = Vector2i(0, -120)
-2:0/0 = 0
-2:0/0/texture_origin = Vector2i(0, -120)
-3:0/0 = 0
-3:0/0/texture_origin = Vector2i(0, -120)
-4:0/0 = 0
-4:0/0/texture_origin = Vector2i(0, -120)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xum0q"]
-texture = ExtResource("2_jsrw5")
-texture_region_size = Vector2i(480, 480)
-0:0/0 = 0
-0:0/0/texture_origin = Vector2i(0, -120)
-1:0/0 = 0
-1:0/0/texture_origin = Vector2i(0, -120)
-2:0/0 = 0
-2:0/0/texture_origin = Vector2i(0, -120)
-3:0/0 = 0
-3:0/0/texture_origin = Vector2i(0, -120)
-
-[sub_resource type="TileSet" id="TileSet_48gi8"]
-tile_shape = 1
-tile_size = Vector2i(480, 240)
-sources/0 = SubResource("TileSetAtlasSource_yxyfn")
-sources/1 = SubResource("TileSetAtlasSource_xum0q")
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n15ua"]
-texture = ExtResource("1_n15ua")
-texture_region_size = Vector2i(480, 480)
-1:0/0 = 0
-1:0/0/texture_origin = Vector2i(0, 120)
-2:0/0 = 0
-2:0/0/texture_origin = Vector2i(0, 120)
-3:0/0 = 0
-3:0/0/texture_origin = Vector2i(0, 120)
-4:0/0 = 0
-4:0/0/texture_origin = Vector2i(0, 120)
-0:0/0 = 0
-0:0/0/texture_origin = Vector2i(0, 120)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jsrw5"]
-texture = ExtResource("2_jsrw5")
-texture_region_size = Vector2i(480, 480)
-0:0/0 = 0
-0:0/0/texture_origin = Vector2i(0, 120)
-1:0/0 = 0
-1:0/0/texture_origin = Vector2i(0, 120)
-2:0/0 = 0
-2:0/0/texture_origin = Vector2i(0, 120)
-3:0/0 = 0
-3:0/0/texture_origin = Vector2i(0, 120)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ykko5"]
-texture = ExtResource("3_ykko5")
-texture_region_size = Vector2i(480, 480)
-0:0/0 = 0
-0:0/0/texture_origin = Vector2i(0, 120)
-1:0/0 = 0
-1:0/0/texture_origin = Vector2i(0, 120)
-2:0/0 = 0
-2:0/0/texture_origin = Vector2i(0, 120)
-3:0/0 = 0
-3:0/0/texture_origin = Vector2i(0, 120)
-0:1/0 = 0
-0:1/0/texture_origin = Vector2i(0, 120)
-1:1/0 = 0
-1:1/0/texture_origin = Vector2i(0, 120)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_huru0"]
-texture = ExtResource("4_jsrw5")
-texture_region_size = Vector2i(480, 480)
-0:0/0 = 0
-0:0/0/texture_origin = Vector2i(0, 120)
-1:0/0 = 0
-1:0/0/texture_origin = Vector2i(0, 120)
-2:0/0 = 0
-2:0/0/texture_origin = Vector2i(0, 120)
-3:0/0 = 0
-3:0/0/texture_origin = Vector2i(0, 120)
-4:0/0 = 0
-4:0/0/texture_origin = Vector2i(0, 120)
-
-[sub_resource type="TileSet" id="TileSet_8m8wf"]
-tile_shape = 1
-tile_size = Vector2i(480, 240)
-sources/0 = SubResource("TileSetAtlasSource_n15ua")
-sources/1 = SubResource("TileSetAtlasSource_jsrw5")
-sources/2 = SubResource("TileSetAtlasSource_ykko5")
-sources/3 = SubResource("TileSetAtlasSource_huru0")
 
 [node name="MainLevel" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_xum0q")
+script = ExtResource("1_jsrw5")
+
+[node name="Mayson" parent="." instance=ExtResource("2_jsrw5")]
 tile_size = 240.0
 
-[node name="Layer0" type="TileMapLayer" parent="."]
+[node name="GameObjectHandler" type="Node2D" parent="Mayson"]
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAD///3/AQABAAAAAAAAAP7/AQABAAAAAAAAAP//AQABAAAAAAABAP7/AQABAAAAAAABAP3/AQABAAAAAAACAPz/AQABAAAAAAACAPv/AQABAAAAAAADAPr/AQABAAAAAAD///z/AQABAAAAAAD///v/AQABAAAAAAAAAPr/AQABAAAAAAAAAPn/AQABAAAAAAABAPj/AQABAAAAAAABAPf/AQABAAAAAAACAPj/AQABAAAAAAACAPn/AQABAAAAAAACAPr/AQABAAAAAAABAPv/AQABAAAAAAABAPr/AQABAAAAAAABAPn/AQABAAAAAAAAAPv/AQABAAAAAAAAAPz/AQABAAAAAAAAAP3/AQABAAAAAAABAPz/AQABAAAAAAAAAAAAAQADAAAAAAD+//3/AQADAAAAAAD+//z/AQADAAAAAAD+//v/AQADAAAAAAD///r/AQADAAAAAAD///n/AQADAAAAAAAAAPj/AQADAAAAAAAAAPf/AQAAAAAAAAABAPb/AQADAAAAAAABAPX/AQADAAAAAAACAPb/AQADAAAAAAACAPf/AQADAAAAAAADAPj/AQADAAAAAAADAPn/AQADAAAAAAABAPT/AQADAAAAAAAAAPP/AQADAAAAAAAAAPL/AQADAAAAAAD///H/AQADAAAAAAD///L/AQADAAAAAAD+//P/AQADAAAAAAD+//T/AQADAAAAAAD///f/AQAAAAAAAAD///P/AQAAAAAAAAAAAPT/AQAAAAAAAAAAAPX/AQAAAAAAAAAAAPb/AQAAAAAAAAD///X/AQAAAAAAAAD///b/AQAAAAAAAAD+//X/AQAAAAAAAAD///T/AQAAAAAAAAD///7/AQABAAAAAAD/////AQABAAAAAAD9//3/AQADAAAAAAD9//7/AQADAAAAAAD8////AQADAAAAAAD8/wAAAQADAAAAAAD+/wQAAAAAAAAAAAD//wIAAAAAAAAAAAD//wAAAAAAAAAAAAD+/wIAAAAAAAAAAAD9/wIAAAAAAAAAAAD+/wAAAAAAAAAAAAD+//7/AAAAAAAAAAD9/wAAAAAAAAAAAAD9////AAABAAAAAAD+////AAABAAAAAAD+/wEAAAABAAAAAAD9/wEAAAABAAAAAAD8/wEAAAABAAAAAAD9/wMAAAABAAAAAAD+/wMAAAABAAAAAAD//wEAAAABAAAAAAA=")
-tile_set = SubResource("TileSet_48gi8")
-
-[node name="Layer1" type="TileMapLayer" parent="."]
-z_index = 1
-y_sort_enabled = true
-tile_map_data = PackedByteArray("AAD+//T/AgACAAAAAAD///H/AgAAAAEAAAAAAPL/AgAAAAAAAAAAAPP/AgAAAAAAAAABAPT/AgAAAAAAAAABAPX/AgAAAAAAAAACAPb/AgAAAAAAAAADAPn/AgAAAAAAAAABAPb/AgACAAAAAAAAAPj/AgACAAAAAAD///n/AgACAAAAAAD///r/AgACAAAAAAD+//v/AgACAAAAAAD+//z/AgABAAEAAAD+//3/AgAAAAAAAAAAAAAAAgAAAAAAAAD9//3/AgACAAAAAAD8/wAAAgACAAAAAAD8////AQACAAAAAAACAPf/AQACAAAAAAADAPj/AQACAAAAAAD///L/AQACAAAAAAD+//P/AQACAAAAAAD///P/AQABAAAAAAD///T/AQABAAAAAAD+//7/AQADAAAAAAD///f/AQADAAAAAAD8/wEAAwAEAAAAABD9/wIAAwABAAAAAAD+/wQAAwACAAAAAAD+/wMAAwADAAAAAAD//wIAAwAEAAAAAAD//wEAAwAEAAAAAAD9/wMAAwAAAAAAAAD9//7/AQACAAAAAAA=")
-tile_set = SubResource("TileSet_8m8wf")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(33, -494)
-zoom = Vector2(0.45, 0.45)
-
-[node name="GameObjectHandler" type="Node2D" parent="."]
-y_sort_enabled = true
+position = Vector2(1402.09, 30.1388)
 script = ExtResource("5_6ib6r")
 
-[node name="Player" parent="GameObjectHandler" instance=ExtResource("10_rqv6b")]
+[node name="DogBowl" parent="Mayson/GameObjectHandler" instance=ExtResource("5_huru0")]
 z_index = 1
-position = Vector2(455, 9.53674e-07)
+y_sort_enabled = true
+position = Vector2(-2359.09, 170.861)
+
+[node name="Chien" parent="Mayson/GameObjectHandler" instance=ExtResource("6_wcvik")]
+z_index = 1
+position = Vector2(288.91, -387.139)
 move_speed = 1000.0
+
+[node name="Chair" parent="Mayson/GameObjectHandler" instance=ExtResource("7_6ib6r")]
+z_index = 1
+position = Vector2(-687.09, -171.139)
+
+[node name="DogEatingPosition" parent="Mayson/GameObjectHandler" instance=ExtResource("8_2cvyt")]
+position = Vector2(-2133.09, 339.861)
+
+[node name="Player" parent="Mayson/GameObjectHandler" instance=ExtResource("10_rqv6b")]
+z_index = 1
+position = Vector2(-694, 92)
+move_speed = 1000.0
+
+[node name="Camera2D" type="Camera2D" parent="Mayson"]
+position = Vector2(319.09, -322.861)
+zoom = Vector2(0.45, 0.45)
