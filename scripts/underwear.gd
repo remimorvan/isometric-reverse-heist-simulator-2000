@@ -1,11 +1,15 @@
 extends GameObject
 
 @onready var layer0: TileMapLayer = $"../../Layer0"
+@onready var player: GameObject = $"../Player"
+
+var final_position: Vector2i
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var current_tile = layer0.local_to_map(global_position)
 	global_position = layer0.map_to_local(current_tile)
+	final_position = global_position
 	visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -28,4 +32,6 @@ func unhighlight() -> void:
 	pass
 	
 func appear() -> void:
+	#global_position = player.global_position
+	#z_index = 2
 	visible = true

@@ -41,6 +41,7 @@ func unhighlight() -> void:
 	shader.set_shader_parameter("clr", Vector4(1.0, 0.9, 0.2, 0.0))
 	
 func interact(player_position: Vector2i) -> Callable:
-	has_underwear = true
-	underwear.appear()
+	if not has_underwear:
+		has_underwear = true
+		underwear.appear()
 	return func(player): pass
