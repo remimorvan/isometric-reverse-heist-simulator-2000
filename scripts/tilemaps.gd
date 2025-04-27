@@ -97,6 +97,8 @@ func _process(_delta: float) -> void:
 		var dog_tile = layer0.local_to_map(dog.global_position)
 		var dog_dir = dog.view_dir
 		#print("View dir:", dog_dir, " tile:", dog_tile)
+		
+		# check dog vision
 		if MovementUtils.check_visibility(dog_tile, dog_dir, pos, blocked_tiles, 0.7, 1000):
 			#print("Oui:",pos)
 			if pos == player_tile and pos != closet_pos1 and pos != closet_pos2:
@@ -110,3 +112,14 @@ func _process(_delta: float) -> void:
 		else:
 			#print("Non:",pos)
 			stop_glow(effect)
+			
+	# check window vision
+	#if MovementUtils.check_visibility(dog_tile, dog_dir, pos, blocked_tiles, 0.7, 1000):
+		#print("Oui:",pos)
+	#	print("Window1 sees")
+		#var timer := Timer.new()
+		#add_child(timer)
+		#timer.wait_time = 1.0
+		#timer.one_shot = true
+				#timer.timeout.connect(func(): $"GAME OVER SCREEN".visible = true)
+				#timer.start()
