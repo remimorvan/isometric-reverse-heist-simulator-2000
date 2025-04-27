@@ -9,13 +9,13 @@ static func get_path_to_tile(
 ) -> PackedVector2Array:
 	# If start and end are the same tile, return empty path
 	if start_tile == end_tile:
-		print("Start and end tiles are the same")
+		# print("Start and end tiles are the same")
 		return PackedVector2Array([])
 	
 	# Get all walkable tiles (excluding blocked tiles)
 	var all_tiles = tilemap.get_used_cells()
 	var walkable_tiles = all_tiles.filter(func(tile): return not blocked_tiles.has(tile))
-	print("Total tiles: ", all_tiles.size(), ", Blocked tiles: ", blocked_tiles.size(), ", Walkable tiles: ", walkable_tiles.size())
+	# print("Total tiles: ", all_tiles.size(), ", Blocked tiles: ", blocked_tiles.size(), ", Walkable tiles: ", walkable_tiles.size())
 	
 	# Create AStar2D pathfinder
 	var astar = AStar2D.new()
@@ -44,7 +44,7 @@ static func get_path_to_tile(
 	
 	# Return empty path if either start or end is not in the graph
 	if not astar.has_point(start_id) or not astar.has_point(end_id):
-		print("No valid path: start or end point not in graph")
+		# print("[Movement utils] No valid path: start or end point not in graph")
 		return PackedVector2Array([])
 	
 	# Get path in tile coordinates
@@ -56,13 +56,13 @@ static func get_path_to_tile(
 		var world_pos = tilemap.map_to_local(Vector2i(tile_pos))
 		# Include all points to ensure precise center-to-center movement
 		world_path.append(world_pos)
-		print("Adding world pos to path: ", world_pos)
+		#print("[Movement utils] Adding world pos to path: ", world_pos)
 	
-	print("Final path length: ", world_path.size())
-	if world_path.is_empty():
-		print("Warning: Generated path is empty!")
-	else:
-		print("First path point: ", world_path[0])
+	#print("Final path length: ", world_path.size())
+	# if world_path.is_empty():
+	# 	print("Warning: Generated path is empty!")
+	# else:
+	# 	print("First path point: ", world_path[0])
 	return world_path
 
 static func check_visibility(dog_tile : Vector2i, dog_dir: Vector2, 

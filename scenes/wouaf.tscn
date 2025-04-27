@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://d2xw0bduor5xm"]
 
 [ext_resource type="Script" uid="uid://df83k53xgatl3" path="res://scripts/wouaf.gd" id="1_mmk17"]
-[ext_resource type="Texture2D" uid="uid://dus2v5mxd7d1e" path="res://assets/player/woaf.png" id="3_blhiq"]
+[ext_resource type="Texture2D" uid="uid://usmudi8ble0k" path="res://assets/player/woaf.png" id="3_blhiq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tpbal"]
 atlas = ExtResource("3_blhiq")

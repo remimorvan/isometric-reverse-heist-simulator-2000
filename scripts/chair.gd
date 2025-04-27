@@ -16,7 +16,7 @@ var next_position:= Vector2i(0,0)
 func _ready() -> void:
 	var current_tile = layer0.local_to_map(global_position)
 	global_position = layer0.map_to_local(current_tile)
-	print("Chair initial position (snapped to center): ", global_position)
+	print("[Chair] Initial position:", global_position)
 
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -24,6 +24,7 @@ func _process(delta: float) -> void:
 	pass
 
 func play(time: int):
+	return
 	if should_move:
 		should_move = false
 		global_position = layer0.map_to_local(next_position)
@@ -49,9 +50,11 @@ func unhighlight() -> void:
 	shader.set_shader_parameter("clr", Vector4(1.0, 0.9, 0.2, 0.0))
 
 func _result_of_interact(player:GameObject, old_position:Vector2i) -> void:
+	print("YOLO",old_position,layer1.local_to_map(player.global_position))
 	player.selected_tile = old_position
 	
 func interact(player_position: Vector2i) -> Callable:
-	should_move = true
-	next_position = get_opposite_tile(player_position)
-	return func(p): _result_of_interact(p, layer1.local_to_map(global_position))
+	var old_pos = layer1.local_to_map(global_position)
+	var ret = func(p): _result_of_interact(p, old_pos)
+	global_position = layer0.map_to_local(get_opposite_tile(player_position))
+	return ret

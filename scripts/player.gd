@@ -26,6 +26,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			var player_tile = game_object_handler.tile_of_object(self)
 			var interactable_objects = game_object_handler.get_interactable_objects(player_tile)
 			for obj in interactable_objects:
+				print("[Player Unhandled Input] interactable_objects: ", interactable_objects)
 				if game_object_handler.tile_of_object(obj) == cliked_tile:
 					var result_interaction = obj.interact(player_tile)
 					result_interaction.call(self)
@@ -52,13 +53,14 @@ func play(tour_nb: int) -> void:
 		start_tile,
 		end_tile,
 		layer0,
-		get_parent().occupied_tiles_but_obj(self)
+		get_parent().occupied_tiles_but_objs([self])
 	)
 	print("[Player] New path is: ", new_path)
 	_use_new_path(new_path)
 
 func _use_new_path(new_path):
 	if not new_path.is_empty():
+		visible = true
 		path = new_path
 		$CharacterBody2D/AnimatedSprite2D.play("run")
 		is_moving = true
@@ -75,7 +77,7 @@ func _physics_process(delta: float) -> void:
 		return
 		
 	var distance_to_target = global_position.distance_to(target_position)
-	print("[Player] Distance to target: ", distance_to_target)
+	#print("[Player] Distance to target: ", distance_to_target)
 	
 	if distance_to_target < arrival_threshold:
 		# Snap to exact center when close enough

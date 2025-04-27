@@ -14,7 +14,7 @@ var should_move: bool = false
 var next_position:= Vector2i(0,0)
 
 const nb_turns_until_empty = 13
-const delay_until_dog_comes = 1
+const delay_until_dog_comes = 0
 var state = 0; # How many turns left until empty
 
 var full_bowl: Resource
