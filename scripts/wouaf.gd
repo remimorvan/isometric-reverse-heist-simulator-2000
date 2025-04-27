@@ -4,27 +4,48 @@ extends GameObject
 @export var arrival_threshold: float = 1.0 # Smaller threshold for precise center alignment
 @export var path: PackedVector2Array
 @export var view_dir: Vector2
+@export var move_points: int = 4 #number of move points per turn
 
 var target_position: Vector2
 var is_moving: bool = false
 var _dog_eating_position_defined: bool = false
 var _dog_eating_position:= Vector2i(0,0)
+#ai position
+var original_position: Vector2#(0,0)
 
 @onready var layer0: TileMapLayer = $"../../Layer0"
 @onready var game_object_handler: Node = $"../"
 @onready var _dog_eating_position_obj: GameObject = $"../DogEatingPosition"
 @onready var _dog_bowl: GameObject = $"../DogBowl"
 
-func get_dog_eating_position():
+func get_dog_eating_position() -> Vector2i:
 	if not(_dog_eating_position_defined):
 		_dog_eating_position_defined = true
 		_dog_eating_position = game_object_handler.tile_of_object(_dog_eating_position_obj)
 	return _dog_eating_position
 
-func is_bowl_non_empty():
+func is_bowl_non_empty() -> bool:
 	return _dog_bowl.is_non_empty()
 
 func play(tour_nb) -> void:
+	if tour_nb == 0: #first turn, save your oriignal position
+		original_position = layer0.local_to_map(global_position)
+	var goal_position: Vector2
+	if is_bowl_non_empty():
+		print("Free Food :)")
+		goal_position = get_dog_eating_position()
+	else:
+		print("Expensive Food :(")
+		goal_position = original_position
+	var new_path = MovementUtils.get_path_to_tile(
+		layer0.local_to_map(global_position), #my_pos
+		goal_position,
+		layer0,
+		get_parent().occupied_tiles_but_obj(self)
+	)
+	use_new_path(new_path.slice(0,move_points))
+	return
+	
 	print("> Todo: play() of wouaf. Go to bowl if full.")
 	print("Dogo eating position is: ", get_dog_eating_position())
 	var cyclic_path = []
@@ -42,14 +63,13 @@ func play(tour_nb) -> void:
 		print("[Dog] Walking, going to: ", cyclic_path[tour_nb%4])
 		end_tile = cyclic_path[tour_nb%4]
 	
-	var new_path = MovementUtils.get_path_to_tile(
+	new_path = MovementUtils.get_path_to_tile(
 		start_tile,
 		end_tile,
 		layer0,
 		get_parent().occupied_tiles_but_obj(self)
 	)
-	
-	use_new_path(new_path)
+	use_new_path(new_path.slice(0,move_points))
 	
 func is_done() -> bool:
 	return not is_moving
@@ -120,7 +140,7 @@ func _ready() -> void:
 #	
 #	use_new_path(new_path)
 	
-func use_new_path(new_path):
+func use_new_path(new_path) -> void:
 	if not new_path.is_empty():
 		path = new_path
 		is_moving = true
@@ -183,7 +203,7 @@ func _physics_process(delta: float) -> void:
 	if check_visibility():
 		print("Player seen")
 
-func add_to_path(pos):
+func add_to_path(pos) -> void:
 	path.append(pos)
 
 func _advance_to_next_target() -> void:

@@ -4,8 +4,20 @@ extends Node
 
 @onready var layer0: TileMapLayer = $"../Layer0"
 @onready var layer1: TileMapLayer = $"../Layer1"
+@onready var player: GameObject = 	$"Player"
 
-func turn_finished():
+var turn_processing: bool = false #is the turn in process?
+var prepare_turn: bool = false #are we waiting to play other's units turn?
+
+func _process(delta: float) -> void:
+	if player.is_done() and prepare_turn:
+		prepare_turn = false
+		play_others_turns()
+		turn_nb += 1
+	if turn_processing:
+		turn_processing = not turn_finished()
+
+func turn_finished() -> bool:
 	for obj in self.get_children():
 		if not obj.is_done():
 			return false
@@ -42,12 +54,22 @@ func is_tile_free(tile: Vector2i) -> bool:
 	return tile not in occupied_tiles()
 	
 func can_play() -> bool:
-	return turn_finished()
-		
+	return not turn_processing#turn_finished()
+
+#first play player's turn, then wait for its end to player the other's turn
 func make_new_turn() -> void:
-	if can_play():
-		print("Turn ", turn_nb)
-		for obj in get_children():
+	player.play(turn_nb)
+	turn_processing = true
+	prepare_turn = true
+
+#play the other objects turn AFTER the player
+func play_others_turns() -> void:
+	for obj in get_children():
+		if obj != player:
 			obj.play(turn_nb)
-		turn_nb += 1
-	print("Error: Wait for end of turn")
+	#if can_play():
+	#	print("Turn ", turn_nb)
+	#	for obj in get_children():
+	#		obj.play(turn_nb)
+	#	turn_nb += 1
+	#print("Error: Wait for end of turn")
