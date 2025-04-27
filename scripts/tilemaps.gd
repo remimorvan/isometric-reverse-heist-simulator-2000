@@ -28,6 +28,8 @@ func stop_hover_glow() -> void:
 
 func _ready() -> void:
 	hover_effect = create_glow(Color(1, 1, 1, 0.2), 0)
+	#for i in get_children():
+	#	print(i.name)
 	$Layer0.add_child(hover_effect)
 
 func _process(_delta: float) -> void:

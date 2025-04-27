@@ -31,7 +31,7 @@ func occupied_tiles_but_obj(obj) -> Array:
 	var layer1_tiles = layer1.get_used_cells()
 	var siblings = []
 	var objects = get_children().filter(
-		func(c): return layer0.local_to_map(c.global_position) != layer0.local_to_map(obj.global_position))
+		func(c): return tile_of_object(c) != tile_of_object(obj))
 	return layer1_tiles + objects.map(tile_of_object)
 
 func is_tile_valid(tile: Vector2i) -> bool:
