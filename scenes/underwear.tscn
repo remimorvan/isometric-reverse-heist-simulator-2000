@@ -15,7 +15,7 @@ y_sort_enabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 y_sort_enabled = true
-position = Vector2(64, -64)
+position = Vector2(10, -90)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("2_24q7x")
 
