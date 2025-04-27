@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://4vr03d7x2ase"]
+
+[ext_resource type="Script" uid="uid://da13tfhul617i" path="res://scripts/closet.gd" id="1_l4o33"]
+[ext_resource type="Shader" uid="uid://c8f3mp10uiiga" path="res://scenes/highlight.gdshader" id="2_71km3"]
+[ext_resource type="Texture2D" uid="uid://cb2rbd5nykaxi" path="res://icon.svg" id="2_uj11n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cgwhh"]
+shader = ExtResource("2_71km3")
+shader_parameter/clr = Color(0, 0, 0, 0)
+shader_parameter/type = 2
+shader_parameter/thickness = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fg8xd"]
+radius = 65.0
+
+[node name="Closet" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_l4o33")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+y_sort_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_cgwhh")
+texture = ExtResource("2_uj11n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+y_sort_enabled = true
+shape = SubResource("CircleShape2D_fg8xd")
