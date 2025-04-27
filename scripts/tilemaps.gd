@@ -64,7 +64,7 @@ func _process(_delta: float) -> void:
 		
 	#print(walkable_tiles)
 
-	var blocked_tiles = $GameObjectHandler.occupied_tiles_but_obj(dog)
+	var blocked_tiles = $GameObjectHandler.occupied_tiles_but_objs([dog])
 	for i in range(walkable_tiles.size()):
 		var pos = walkable_tiles[i]
 		var effect = dog_FOV_effects[i]
