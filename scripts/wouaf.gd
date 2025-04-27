@@ -73,36 +73,7 @@ func play(tour_nb) -> void:
 	
 func is_done() -> bool:
 	return not is_moving
-	
-func check_visibility() -> bool:
-	var player_pos = $"../Player".global_position
-	var current_tile = Vector2(layer0.local_to_map(global_position))
-	var player_tile = layer0.local_to_map(player_pos)
 		
-	var cosangle = view_dir.dot((Vector2(player_tile)-current_tile).normalized())
-	if cosangle < 0.7:
-		return false	# not in vision cone
-		
-	#print("in vision cone", view_dir, cosangle, player_pos, global_position)
-	
-	var dir = (Vector2(player_tile) - current_tile).normalized()
-	var tile_distance = (Vector2(player_tile) - current_tile).length()
-	
-	var distance_max = 1000
-	if tile_distance > distance_max:
-		return false
-	
-	var factor = 10.
-	var dt = 1./factor
-
-	for t in range(ceil(tile_distance * factor)):
-		var tile = Vector2i(dt * t * dir + current_tile)
-		#print(dt, dir," ",tile, " ", t, " dist: ", tile_distance)
-		if not get_parent().is_tile_free(tile):
-			print("[Dog] Hit blocking tile")
-			return false
-	return true
-	
 func _ready() -> void:
 	# Snap initial position to tile center
 	var current_tile = layer0.local_to_map(global_position)
@@ -190,8 +161,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		var direction = (target_position - global_position).normalized()
 		
-		view_dir = Vector2(layer0.local_to_map(target_position) - 
-			layer0.local_to_map(global_position)).normalized()
+		var displacement = layer0.local_to_map(target_position) - layer0.local_to_map(global_position)
+		if displacement.length() > 0.01:
+			view_dir = Vector2(displacement).normalized()
+		
 		var movement = direction * move_speed * delta
 		# Prevent overshooting by clamping movement to remaining distance
 		if movement.length() > distance_to_target:
@@ -200,8 +173,8 @@ func _physics_process(delta: float) -> void:
 		#print("Moving: dir=", direction, " movement=", movement, " new_pos=", global_position)
 	
 	# true iff has seen player
-	if check_visibility():
-		print("[Dog] Player seen")
+	#if check_visibility():
+	#	print("[Dog] Player seen")
 
 func add_to_path(pos) -> void:
 	path.append(pos)

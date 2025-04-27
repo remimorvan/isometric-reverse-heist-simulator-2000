@@ -60,7 +60,7 @@ func _result_of_interact(player:GameObject) -> void:
 	var start_tile = game_object_handler.tile_of_object(player)
 	var end_tile = game_object_handler.tile_of_object(self)
 	player.selected_tile = end_tile
-	print("[Closet] Start tile:", start_tile, " end tile: ", end_tile)
+	#print("[Closet] Start tile:", start_tile, " end tile: ", end_tile)
 	if start_tile != end_tile:
 		var new_path = MovementUtils.get_path_to_tile(
 			start_tile,
@@ -69,10 +69,9 @@ func _result_of_interact(player:GameObject) -> void:
 			get_parent().occupied_tiles_but_objs([player, self])
 		)
 		player._use_new_path(new_path)
-	else:
-		print("[Closet] Staying inside the closet... :|")
-		
-	#player.visible = false
+	#else:
+		#print("[Closet] Staying inside the closet... :|")
+	player.visible = false
 	
 func interact(player_position: Vector2i) -> Callable:
 	return _result_of_interact
