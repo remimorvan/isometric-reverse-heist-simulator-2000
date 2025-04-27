@@ -5,6 +5,7 @@ extends Node2D
 @onready var dog: GameObject = $GameObjectHandler/Chien
 @onready var handler: Node2D = $GameObjectHandler
 @onready var player: Node2D = $"GameObjectHandler/Player"
+@export var window_vision_distance = 5
 
 var walkable_tiles : Array[Vector2i]
 var dog_FOV_effects: Array[Polygon2D]
@@ -119,17 +120,26 @@ func _process(_delta: float) -> void:
 	# -1, -7	;	0, 1
 	# -7, -5	;	1, 0
 	# check window vision
-	var window_positions = [Vector2i(-3,2), Vector2i(-1,-7), Vector2i(-7,5)]
-	var window_directions = [Vector2i(1,0),Vector2i(0,1),Vector2i(1,0)]
-	for i in range(3):
-		var window_pos = window_positions[i]
-		var window_dir = window_directions[i]
-		#var otherwindow = window_positions[i] + window_dir.yx
-		if MovementUtils.check_visibility(window_pos, window_dir, player_tile, blocked_tiles, 0.7, 1000):
-			print("Window1 sees")
-			#var timer := Timer.new()
-			#add_child(timer)
-			#timer.wait_time = 1.0
-			#timer.one_shot = true
-			#timer.timeout.connect(func(): $"GAME OVER SCREEN".visible = true)
-			#timer.start()
+	if player_tile != closet_pos1 and player_tile != closet_pos2:
+		blocked_tiles = $GameObjectHandler.occupied_tiles_but_objs([player])
+		var window_positions = [Vector2i(-3,2), Vector2i(-1,-7), Vector2i(-7,5)]
+		var windows = [$GameObjectHandler/WindowPeopleMainRoomKitchen,
+					   $GameObjectHandler/WindowPeopleMainRoom,
+					   $GameObjectHandler/WindowPeopleBedroom]
+		var window_directions = [Vector2i(1,0),Vector2i(0,1),Vector2i(1,0)]
+		for i in range(3):
+			var window = windows[i]
+			var window_pos = window_positions[i]
+			var window_dir = window_directions[i]
+			var otherwindow = window_positions[i] +	 Vector2i(window_dir.y, window_dir.x)
+			var extras = [window_pos, otherwindow]
+			var blocked_minus_extras = blocked_tiles.filter(func(o): return !extras.has(o))
+			if MovementUtils.check_visibility(window_pos, window_dir, player_tile, 
+					blocked_minus_extras, 0.7, window_vision_distance) and window.is_mean_person():
+				print(window.name," sees")
+				var timer := Timer.new()
+				#add_child(timer)
+				timer.wait_time = 1.0
+				timer.one_shot = true
+				timer.timeout.connect(func(): $"GAME OVER SCREEN".visible = true)
+				timer.start()
