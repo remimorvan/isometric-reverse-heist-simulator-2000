@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cy5sbokend7fg"]
+[gd_scene load_steps=16 format=3 uid="uid://cy5sbokend7fg"]
 
 [ext_resource type="Script" uid="uid://oi0r4ynbu0sa" path="res://scripts/main.gd" id="1_jsrw5"]
 [ext_resource type="PackedScene" uid="uid://bqtadeysdvdy" path="res://scenes/mayson.tscn" id="2_jsrw5"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://jpyfq50le85u" path="res://assets/level/background.jpeg" id="10_6ib6r"]
 [ext_resource type="PackedScene" uid="uid://copmddbeoxptn" path="res://scenes/player.tscn" id="10_rqv6b"]
 [ext_resource type="PackedScene" uid="uid://bbac7vf2pr0wi" path="res://scenes/bed_head.tscn" id="11_4t260"]
+[ext_resource type="PackedScene" uid="uid://dptrqojvi3uk4" path="res://scenes/mission_failed.tscn" id="13_wd4wg"]
 
 [sub_resource type="Gradient" id="Gradient_4t260"]
 offsets = PackedFloat32Array(0.36039, 1)
@@ -27,6 +28,12 @@ script = ExtResource("1_jsrw5")
 
 [node name="Mayson" parent="." instance=ExtResource("2_jsrw5")]
 tile_size = 240.0
+
+[node name="GAME OVER SCREEN" parent="Mayson" instance=ExtResource("13_wd4wg")]
+visible = false
+z_index = 2
+position = Vector2(319.09, -322.861)
+scale = Vector2(3, 3)
 
 [node name="Restart" type="Node2D" parent="Mayson"]
 position = Vector2(-2132, -677)

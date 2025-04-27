@@ -98,8 +98,12 @@ func _process(_delta: float) -> void:
 		if MovementUtils.check_visibility(dog_tile, dog_dir, pos, blocked_tiles, 0.7, 1000):
 			#print("Oui:",pos)
 			if pos == player_tile:
-				print("Player tile:", player_tile)
-				get_tree().change_scene_to_file("res://scenes/mission_failed.tscn")
+				var timer := Timer.new()
+				add_child(timer)
+				timer.wait_time = 1.0
+				timer.one_shot = true
+				timer.timeout.connect(func(): $"GAME OVER SCREEN".visible = true)
+				timer.start()
 			make_glow(pos, effect)
 		else:
 			#print("Non:",pos)
