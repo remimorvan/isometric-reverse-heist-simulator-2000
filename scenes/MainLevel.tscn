@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cy5sbokend7fg"]
+[gd_scene load_steps=11 format=3 uid="uid://cy5sbokend7fg"]
 
 [ext_resource type="Script" uid="uid://oi0r4ynbu0sa" path="res://scripts/main.gd" id="1_jsrw5"]
 [ext_resource type="PackedScene" uid="uid://bqtadeysdvdy" path="res://scenes/mayson.tscn" id="2_jsrw5"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bi8gdwd2ggyhy" path="res://scenes/chair.tscn" id="7_6ib6r"]
 [ext_resource type="PackedScene" uid="uid://c5wpxfi4qnx80" path="res://scenes/dog_eating_position.tscn" id="8_2cvyt"]
 [ext_resource type="PackedScene" uid="uid://4vr03d7x2ase" path="res://scenes/closet.tscn" id="9_wcvik"]
+[ext_resource type="Texture2D" uid="uid://jpyfq50le85u" path="res://assets/level/background.jpeg" id="10_6ib6r"]
 [ext_resource type="PackedScene" uid="uid://copmddbeoxptn" path="res://scenes/player.tscn" id="10_rqv6b"]
 
 [node name="MainLevel" type="Node2D"]
@@ -59,4 +60,10 @@ orientation = 1
 
 [node name="Camera2D" type="Camera2D" parent="Mayson"]
 position = Vector2(319.09, -322.861)
-zoom = Vector2(0.45, 0.45)
+zoom = Vector2(0.3, 0.3)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(426, -147)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("10_6ib6r")
