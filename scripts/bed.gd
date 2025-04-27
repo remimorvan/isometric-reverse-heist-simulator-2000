@@ -8,7 +8,9 @@ extends GameObject
 @onready var tilemap: Node2D = $"../.."
 @onready var game_object_handler: Node = $"../"
 @onready var bed_head: Node = $"../BedHead"
+@onready var underwear: Node = $"../Underwear"
 
+var has_underwear: bool = false;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,7 +30,7 @@ func is_adjacent(player_position: Vector2i) -> bool:
 
 func is_interactable(player_position: Vector2i) -> bool:
 	var is_adjacent = is_adjacent(player_position) or bed_head.is_adjacent(player_position)
-	return is_adjacent
+	return is_adjacent and not has_underwear
 
 func highlight() -> void:
 	#sprite.scale = init_scale*1.4
@@ -39,5 +41,6 @@ func unhighlight() -> void:
 	shader.set_shader_parameter("clr", Vector4(1.0, 0.9, 0.2, 0.0))
 	
 func interact(player_position: Vector2i) -> Callable:
-	print("[Bed] You've won!")
+	has_underwear = true
+	underwear.appear()
 	return func(player): pass

@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://jpyfq50le85u" path="res://assets/level/background.jpeg" id="10_6ib6r"]
 [ext_resource type="PackedScene" uid="uid://copmddbeoxptn" path="res://scenes/player.tscn" id="10_rqv6b"]
 [ext_resource type="PackedScene" uid="uid://bbac7vf2pr0wi" path="res://scenes/bed_head.tscn" id="11_4t260"]
-[ext_resource type="PackedScene" uid="uid://dptrqojvi3uk4" path="res://scenes/mission_failed.tscn" id="13_wd4wg"]
+[ext_resource type="PackedScene" uid="uid://cfepqixh57hnu" path="res://scenes/underwear.tscn" id="11_wd4wg"]
 
 [sub_resource type="Gradient" id="Gradient_4t260"]
 offsets = PackedFloat32Array(0.36039, 1)
@@ -28,12 +28,6 @@ script = ExtResource("1_jsrw5")
 
 [node name="Mayson" parent="." instance=ExtResource("2_jsrw5")]
 tile_size = 240.0
-
-[node name="GAME OVER SCREEN" parent="Mayson" instance=ExtResource("13_wd4wg")]
-visible = false
-z_index = 2
-position = Vector2(319.09, -322.861)
-scale = Vector2(3, 3)
 
 [node name="Restart" type="Node2D" parent="Mayson"]
 position = Vector2(-2132, -677)
@@ -90,6 +84,10 @@ position = Vector2(-1391.09, -1253.14)
 [node name="BedHead" parent="Mayson/GameObjectHandler" instance=ExtResource("11_4t260")]
 z_index = 1
 position = Vector2(-1146.09, -1372.14)
+
+[node name="Underwear" parent="Mayson/GameObjectHandler" instance=ExtResource("11_wd4wg")]
+z_index = 1
+position = Vector2(-1390.09, -1250.14)
 
 [node name="Player" parent="Mayson/GameObjectHandler" instance=ExtResource("10_rqv6b")]
 z_index = 1
