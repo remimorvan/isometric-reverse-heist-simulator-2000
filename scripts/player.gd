@@ -26,6 +26,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			var player_tile = game_object_handler.tile_of_object(self)
 			var interactable_objects = game_object_handler.get_interactable_objects(player_tile)
 			for obj in interactable_objects:
+				print("[Player Unhandled Input] interactable_objects: ", interactable_objects)
 				if game_object_handler.tile_of_object(obj) == cliked_tile:
 					var result_interaction = obj.interact(player_tile)
 					result_interaction.call(self)
@@ -76,7 +77,7 @@ func _physics_process(delta: float) -> void:
 		return
 		
 	var distance_to_target = global_position.distance_to(target_position)
-	print("[Player] Distance to target: ", distance_to_target)
+	#print("[Player] Distance to target: ", distance_to_target)
 	
 	if distance_to_target < arrival_threshold:
 		# Snap to exact center when close enough

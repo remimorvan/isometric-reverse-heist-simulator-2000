@@ -19,8 +19,8 @@ func get_interactable_objects(player_position: Vector2i) -> Array:
 	return output
 	
 func tile_of_object(obj: Node2D) -> Vector2i:
-	print(layer0)
-	print(get_parent().get_children())
+	# print(layer0)
+	# print(get_parent().get_children())
 	return layer0.local_to_map(obj.global_position)
 
 func occupied_tiles() -> Array:
@@ -47,8 +47,8 @@ func can_play() -> bool:
 		
 func make_new_turn() -> void:
 	if can_play():
-		print("Turn ", turn_nb)
+		print("[Game Object Handler] Turn ", turn_nb)
 		for obj in get_children():
 			obj.play(turn_nb)
 		turn_nb += 1
-	print("Error: Wait for end of turn")
+	print("[Game Object Handler] Error: Wait for end of turn")

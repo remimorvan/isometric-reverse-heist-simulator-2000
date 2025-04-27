@@ -45,6 +45,7 @@ func is_adjacent_or_in(player_position: Vector2i) -> bool:
 	return tile_position == player_position or tile_position in layer0.get_surrounding_cells(player_position)
 
 func is_interactable(player_position: Vector2i) -> bool:
+	print("[Closet] Is interactable: ", is_adjacent_or_in(player_position))
 	return is_adjacent_or_in(player_position)
 
 func highlight() -> void:
@@ -58,14 +59,20 @@ func unhighlight() -> void:
 func _result_of_interact(player:GameObject) -> void:
 	var start_tile = game_object_handler.tile_of_object(player)
 	var end_tile = game_object_handler.tile_of_object(self)
-	var new_path = MovementUtils.get_path_to_tile(
-		start_tile,
-		end_tile,
-		layer0,
-		get_parent().occupied_tiles_but_objs([player, self])
-	)
-	player._use_new_path(new_path)
-	player.visible = false
+	player.selected_tile = end_tile
+	print("[Closet] Start tile:", start_tile, " end tile: ", end_tile)
+	if start_tile != end_tile:
+		var new_path = MovementUtils.get_path_to_tile(
+			start_tile,
+			end_tile,
+			layer0,
+			get_parent().occupied_tiles_but_objs([player, self])
+		)
+		player._use_new_path(new_path)
+	else:
+		print("[Closet] Staying inside the closet... :|")
+		
+	#player.visible = false
 	
 func interact(player_position: Vector2i) -> Callable:
 	return _result_of_interact

@@ -25,8 +25,7 @@ func is_bowl_non_empty():
 	return _dog_bowl.is_non_empty()
 
 func play(tour_nb) -> void:
-	print("> Todo: play() of wouaf. Go to bowl if full.")
-	print("Dogo eating position is: ", get_dog_eating_position())
+	print("[Dog] Dogo eating position is: ", get_dog_eating_position())
 	var cyclic_path = []
 	cyclic_path.append(Vector2(2,2))
 	cyclic_path.append(Vector2(2,-2))
@@ -79,7 +78,7 @@ func check_visibility() -> bool:
 		var tile = Vector2i(dt * t * dir + current_tile)
 		#print(dt, dir," ",tile, " ", t, " dist: ", tile_distance)
 		if not get_parent().is_tile_free(tile):
-			print("hit blocking tile")
+			print("[Dog] Hit blocking tile")
 			return false
 	return true
 	
@@ -181,7 +180,7 @@ func _physics_process(delta: float) -> void:
 	
 	# true iff has seen player
 	if check_visibility():
-		print("Player seen")
+		print("[Dog] Player seen")
 
 func add_to_path(pos):
 	path.append(pos)
