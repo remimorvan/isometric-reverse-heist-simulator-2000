@@ -107,7 +107,7 @@ func _process(_delta: float) -> void:
 				add_child(timer)
 				timer.wait_time = 1.0
 				timer.one_shot = true
-				timer.timeout.connect(func(): $"GAME OVER SCREEN".visible = true)
+				#timer.timeout.connect(func(): $"GAME OVER SCREEN".visible = true)
 				timer.start()
 			make_glow(pos, effect)
 		else:
@@ -144,5 +144,5 @@ func _process(_delta: float) -> void:
 				#add_child(timer)
 				timer.wait_time = 1.0
 				timer.one_shot = true
-				timer.timeout.connect(func(): $"GAME OVER SCREEN".visible = true)
+				#timer.timeout.connect(func(): $"GAME OVER SCREEN".visible = true)
 				timer.start()
