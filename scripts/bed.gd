@@ -9,6 +9,7 @@ extends GameObject
 @onready var game_object_handler: Node = $"../"
 @onready var bed_head: Node = $"../BedHead"
 @onready var underwear: Node = $"../Underwear"
+@onready var victory_screen: Node = $"../../../VictoryScreen"
 
 var has_underwear: bool = false;
 
@@ -44,4 +45,11 @@ func interact(player_position: Vector2i) -> Callable:
 	if not has_underwear:
 		has_underwear = true
 		underwear.appear()
+		var timer := Timer.new()
+		add_child(timer)
+		timer.wait_time = 2.0
+		timer.one_shot = true
+		timer.timeout.connect(func(): victory_screen.visible = 1)
+		timer.start()
+	
 	return func(player): pass
