@@ -12,13 +12,19 @@ var is_highlighted: bool = false
 var should_move: bool = false
 var next_position:= Vector2i(0,0)
 
+var texture_closed: Resource;
+var texture_open: Resource;
+
 func occupies_space() -> bool:
 	return true
 	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	texture_closed = load("res://assets/level/placard/fermé.png")
+	texture_open = load("res://assets/level/placard/ouvert.png")
 	var current_tile = layer0.local_to_map(global_position)
 	global_position = layer0.map_to_local(current_tile)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -50,11 +56,11 @@ func is_interactable(player_position: Vector2i) -> bool:
 
 func highlight() -> void:
 	shader.set_shader_parameter("clr", Vector4(1.0, 0.9, 0.2, 1.0))
-	rotation = PI
+	sprite.texture = texture_open
 	
 func unhighlight() -> void:
 	shader.set_shader_parameter("clr", Vector4(1.0, 0.9, 0.2, 0.0))
-	rotation = 0
+	sprite.texture = texture_closed
 	
 func _result_of_interact(player:GameObject) -> void:
 	var start_tile = game_object_handler.tile_of_object(player)

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://da13tfhul617i" path="res://scripts/closet.gd" id="1_l4o33"]
 [ext_resource type="Shader" uid="uid://c8f3mp10uiiga" path="res://scenes/highlight.gdshader" id="2_71km3"]
-[ext_resource type="Texture2D" uid="uid://cb2rbd5nykaxi" path="res://icon.svg" id="2_uj11n"]
+[ext_resource type="Texture2D" uid="uid://bvx4j5gvo4a6p" path="res://assets/level/placard/fermé.png" id="3_uj11n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cgwhh"]
 shader = ExtResource("2_71km3")
@@ -23,7 +23,8 @@ y_sort_enabled = true
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_cgwhh")
-texture = ExtResource("2_uj11n")
+texture = ExtResource("3_uj11n")
+offset = Vector2(0, -240)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 y_sort_enabled = true
