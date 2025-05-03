@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://bqtadeysdvdy"]
+[gd_scene load_steps=10 format=4 uid="uid://bqtadeysdvdy"]
 
 [ext_resource type="Script" uid="uid://ck4o86td42s4m" path="res://scripts/tilemaps.gd" id="1_m1b3p"]
 [ext_resource type="TileSet" uid="uid://iwr8yvyyljif" path="res://assets/layer0.tres" id="2_svqss"]
 [ext_resource type="TileSet" uid="uid://cbnffwt8jxdgo" path="res://assets/layer1.tres" id="3_m1b3p"]
 [ext_resource type="Texture2D" uid="uid://dxp6qwnvmjya" path="res://assets/level/fenetre_arriere_plan.png" id="4_svqss"]
+[ext_resource type="AudioStream" uid="uid://mfeqhtvpcgea" path="res://assets/sound/WindowPeople.ogg" id="5_tswvv"]
+[ext_resource type="AudioStream" uid="uid://cmurtgtmpfan7" path="res://assets/sound/AngryDog.ogg" id="6_ykea8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_olmxp"]
 texture = ExtResource("4_svqss")
@@ -44,3 +46,11 @@ z_index = -1
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAD9/wAAAAAAAAAAAAD///r/AAAAAAAAAAADAPz/AQAAAAAAABA=")
 tile_set = SubResource("TileSet_m1b3p")
+
+[node name="WindowPeople" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_tswvv")
+volume_db = 3.0
+
+[node name="AngryDog" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_ykea8")
+volume_db = 20.0

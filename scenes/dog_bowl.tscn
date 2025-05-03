@@ -1,9 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjajyodhkxglj"]
+[gd_scene load_steps=10 format=3 uid="uid://cjajyodhkxglj"]
 
 [ext_resource type="Script" uid="uid://627utnhqsmd8" path="res://scripts/dog_bowl.gd" id="1_g8ekq"]
 [ext_resource type="Shader" uid="uid://c8f3mp10uiiga" path="res://scenes/highlight.gdshader" id="2_phhrf"]
 [ext_resource type="Texture2D" uid="uid://bjtvb3dfuiuly" path="res://assets/level/gamelle/gamelle-4.png" id="3_hfv8l"]
-[ext_resource type="AudioStream" uid="uid://dg07e65mqq48x" path="res://assets/sound/freefood.ogg" id="4_g837n"]
+[ext_resource type="AudioStream" uid="uid://c7335l172bect" path="res://assets/sound/DogBawl.ogg" id="4_g837n"]
+[ext_resource type="AudioStream" uid="uid://dljp2j0w7qkrl" path="res://assets/sound/EatingDog1.ogg" id="5_1tio1"]
+[ext_resource type="AudioStream" uid="uid://cg1gkg5rdtvkl" path="res://assets/sound/EatingDog2.ogg" id="6_yo28n"]
+[ext_resource type="AudioStream" uid="uid://ujxvq50syhnu" path="res://assets/sound/EatingDog3.ogg" id="7_1vg6n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dhd05"]
 shader = ExtResource("2_phhrf")
@@ -31,3 +34,12 @@ shape = SubResource("CircleShape2D_hxd06")
 
 [node name="ServeFreeFood" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_g837n")
+
+[node name="DogEating1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_1tio1")
+
+[node name="DogEating2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_yo28n")
+
+[node name="DogEating3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_1vg6n")

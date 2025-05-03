@@ -107,7 +107,7 @@ func _process(_delta: float) -> void:
 		# check dog vision
 		if MovementUtils.check_visibility(dog_tile, dog_dir, pos, blocked_tiles, 0.7, 1000):
 			if pos == player_tile and pos != closet_pos1 and pos != closet_pos2:
-				_launch_game_over(layer0.map_to_local(dog_tile))
+				_launch_game_over(layer0.map_to_local(dog_tile), $AngryDog)
 			do_glow = true
 			
 		# Window positions + viewdir
@@ -135,8 +135,7 @@ func _process(_delta: float) -> void:
 					blocked_minus_extras, 0.7, window_vision_distance) and window.is_mean_person():
 				do_glow = true
 				if pos == player_tile and pos != closet_pos1 and pos != closet_pos2:
-					print("Window : ", window_positions[j])
-					_launch_game_over(layer0.map_to_local(window_pos))
+					_launch_game_over(layer0.map_to_local(window_pos), $WindowPeople)
 					
 		
 		if do_glow:
@@ -144,9 +143,10 @@ func _process(_delta: float) -> void:
 		else:
 			stop_glow(effect)
 
-func _launch_game_over(position: Vector2):
+func _launch_game_over(position: Vector2, sound: AudioStreamPlayer2D):
 	if not game_over:
 		game_over = true
+		sound.play()
 		var timer := Timer.new()
 		add_child(timer)
 		timer.wait_time = 2

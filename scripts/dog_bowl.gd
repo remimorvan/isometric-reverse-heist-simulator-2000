@@ -13,6 +13,8 @@ var is_highlighted: bool = false
 var should_move: bool = false
 var next_position:= Vector2i(0,0)
 
+var rng = RandomNumberGenerator.new()
+
 @export var nb_turns_until_empty = 11#13
 const delay_until_dog_comes = 0
 var state = 0; # How many turns left until empty
@@ -59,6 +61,8 @@ func play(time: int):
 	if state >= nb_turns_until_empty:
 		state -= 1
 	elif state > 0 and dog_is_adjacent():
+		var rd = rng.randi_range(0, 2)
+		self.get_child(rd+2).play()
 		state -= 1
 		update_sprite()
 	

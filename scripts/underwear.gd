@@ -41,5 +41,6 @@ func appear() -> void:
 	tw.tween_property(self, "global_position", final_position, 1)
 	tw.tween_property(sprite, "rotation", PI*10, 1)
 	await tw.finished
+	$Ouf.play()
 	#global_position = player.global_position
 	#z_index = 2
