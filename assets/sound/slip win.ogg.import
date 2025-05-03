@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://d4lkknce3fyhv"
+path="res://.godot/imported/slip win.ogg-08cb8b17ccba679467ceafe9b45bea61.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/slip win.ogg"
+dest_files=["res://.godot/imported/slip win.ogg-08cb8b17ccba679467ceafe9b45bea61.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

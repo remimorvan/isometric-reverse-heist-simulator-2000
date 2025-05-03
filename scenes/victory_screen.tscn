@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://y84i4tiu0fcr"]
+[gd_scene load_steps=4 format=3 uid="uid://y84i4tiu0fcr"]
 
 [ext_resource type="Texture2D" uid="uid://d3m820fm8f84m" path="res://assets/level/victory.png" id="1_ujlt3"]
 [ext_resource type="Script" uid="uid://h6d2l1onlexc" path="res://scripts/victory_screen.gd" id="1_wdgif"]
+[ext_resource type="AudioStream" uid="uid://d4lkknce3fyhv" path="res://assets/sound/slip win.ogg" id="3_pfcnd"]
 
 [node name="VictoryScreen" type="Node2D"]
 scale = Vector2(0.64, 0.64)
@@ -21,5 +22,8 @@ offset_right = 1020.0
 offset_bottom = 772.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="BoiteaSonDeGameOver" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_pfcnd")
 
 [connection signal="pressed" from="Sprite2D/Button0" to="." method="_on_button_0_pressed"]
