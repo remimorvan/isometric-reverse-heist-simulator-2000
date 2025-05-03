@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://cswbi1lm3yxqi"]
+
+[ext_resource type="Script" uid="uid://x0fgkjrbmdc6" path="res://scripts/intermediate_screen.gd" id="1_isgb6"]
+
+[sub_resource type="Gradient" id="Gradient_uywg6"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_isgb6"]
+gradient = SubResource("Gradient_uywg6")
+
+[node name="IntermediateScreen" type="Node2D"]
+script = ExtResource("1_isgb6")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(33.1608, 18.2464)
+texture = SubResource("GradientTexture2D_isgb6")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -775.0
+offset_top = -40.0
+offset_right = 775.0
+offset_bottom = 56.0
+scale = Vector2(0.995166, 1.02863)
+theme_override_font_sizes/font_size = 70
+text = "You are now breaking into Mr Smith's house..."
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(-1200, -700)
+scale = Vector2(253.267, 138.073)
+
+[node name="Button" type="Button" parent="Node2D"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 8.0
+offset_bottom = 8.0
+scale = Vector2(1.13013, 1.16542)
+
+[connection signal="button_down" from="Node2D/Button" to="." method="_on_button_button_down"]
+[connection signal="pressed" from="Node2D/Button" to="." method="_on_button_pressed"]

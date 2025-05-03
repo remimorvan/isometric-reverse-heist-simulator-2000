@@ -10,4 +10,4 @@ func _on_first_button_pressed() -> void:
 
 func _on_second_button_pressed() -> void:
 	self.visible = false
-	get_tree().change_scene_to_file("res://scenes/MainLevel.tscn")
+	get_tree().change_scene_to_file("res://scenes/intermediate_screen.tscn")
