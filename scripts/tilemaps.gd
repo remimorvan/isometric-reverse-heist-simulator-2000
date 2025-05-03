@@ -6,12 +6,14 @@ extends Node2D
 @onready var handler: Node2D = $GameObjectHandler
 @onready var player: Node2D = $"GameObjectHandler/Player"
 @export var window_vision_distance = 5
+@onready var camera: Node2D = $"Camera2D"
 
 var walkable_tiles : Array[Vector2i]
 var dog_FOV_effects: Array[Polygon2D]
 var highlight_interactable_tiles: Dictionary[Vector2i, Polygon2D]
 var hover_effect: Polygon2D
 @export var tile_size = 480.
+var game_over: bool = false
 
 const color_interactable_tile = Color(1.0, 0.9, 0.3, 1.0)
 
@@ -105,12 +107,7 @@ func _process(_delta: float) -> void:
 		# check dog vision
 		if MovementUtils.check_visibility(dog_tile, dog_dir, pos, blocked_tiles, 0.7, 1000):
 			if pos == player_tile and pos != closet_pos1 and pos != closet_pos2:
-				var timer := Timer.new()
-				add_child(timer)
-				timer.wait_time = 1.0
-				timer.one_shot = true
-				timer.timeout.connect(func(): get_tree().change_scene_to_file("res://scenes/game_over_screen.tscn"))
-				timer.start()
+				_launch_game_over(layer0.map_to_local(dog_tile))
 			do_glow = true
 			
 		# Window positions + viewdir
@@ -138,15 +135,27 @@ func _process(_delta: float) -> void:
 					blocked_minus_extras, 0.7, window_vision_distance) and window.is_mean_person():
 				do_glow = true
 				if pos == player_tile and pos != closet_pos1 and pos != closet_pos2:
-					print(window.name," sees")
-					var timer := Timer.new()
-					add_child(timer)
-					timer.wait_time = 1.0
-					timer.one_shot = true
-					timer.timeout.connect(func(): get_tree().change_scene_to_file("res://scenes/game_over_screen.tscn"))
-					timer.start()
+					print("Window : ", window_positions[j])
+					_launch_game_over(layer0.map_to_local(window_pos))
+					
 		
 		if do_glow:
 			make_glow(pos, effect)
 		else:
 			stop_glow(effect)
+
+func _launch_game_over(position: Vector2):
+	if not game_over:
+		game_over = true
+		var timer := Timer.new()
+		add_child(timer)
+		timer.wait_time = 2
+		timer.one_shot = true
+		camera.global_position = position 
+		var final_zoom = camera.zoom*3
+		var tw = create_tween().set_parallel().set_trans(Tween.TRANS_ELASTIC)
+		#tw.tween_property(camera, "global_position", position, 1)
+		tw.tween_property(camera, "zoom", final_zoom, 1.5)
+		timer.timeout.connect(func(): get_tree().change_scene_to_file("res://scenes/game_over_screen.tscn"))
+		timer.start()
+		await tw.finished
