@@ -60,7 +60,10 @@ func play(tour_nb: int) -> void:
 
 func _use_new_path(new_path):
 	if not new_path.is_empty():
-		visible = true
+		if visible == false:
+			visible = true
+			$CloseSound.play(1.0)
+			
 		path = new_path
 		$CharacterBody2D/AnimatedSprite2D.play("run")
 		is_moving = true
