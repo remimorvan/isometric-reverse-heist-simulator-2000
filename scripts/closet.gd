@@ -60,6 +60,7 @@ func is_interactable(player_position: Vector2i) -> bool:
 	return is_adjacent_or_in(player_position)
 
 func highlight() -> void:
+	$OpenSound.play()
 	shader.set_shader_parameter("clr", Vector4(1.0, 0.9, 0.2, 1.0))
 	sprite.texture = texture_open[orientation]
 	
@@ -85,5 +86,6 @@ func _result_of_interact(player:GameObject) -> void:
 	player.visible = false
 	
 func interact(player_position: Vector2i) -> Callable:
+	$CloseSound.play()
 	return _result_of_interact
 		

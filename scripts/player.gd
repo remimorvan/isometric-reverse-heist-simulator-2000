@@ -22,6 +22,7 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if game_object_handler.can_play():
 		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			$Click.play()
 			var click_pos = get_global_mouse_position()
 			var cliked_tile = layer0.local_to_map(click_pos)
 			var player_tile = game_object_handler.tile_of_object(self)

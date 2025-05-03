@@ -80,6 +80,7 @@ func unhighlight() -> void:
 	
 func interact(player_position: Vector2i) -> Callable:
 	if state == 0:
+		$ServeFreeFood.play()
 		state = nb_turns_until_empty + delay_until_dog_comes
 		update_sprite()
 	return func(player): pass
