@@ -5,6 +5,7 @@
 
 [node name="GAME OVER SCREEN" type="Node2D"]
 z_index = 2
+scale = Vector2(0.64, 0.64)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(1.1, 1.1)

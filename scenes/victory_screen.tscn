@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://h6d2l1onlexc" path="res://scripts/victory_screen.gd" id="1_wdgif"]
 
 [node name="VictoryScreen" type="Node2D"]
+scale = Vector2(0.64, 0.64)
 script = ExtResource("1_wdgif")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
