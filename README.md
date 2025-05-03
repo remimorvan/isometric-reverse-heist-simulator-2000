@@ -1,8 +1,5 @@
-# Isometric 2D point and click demo
+**Reverse Heist: a short story** is an isometric reverse heist game
+made in 48 hours by Timothé, Rémi, Taïssir and Timothée, with some help from Émile
+for sound design.
 
-A simple demo showcasing isometric 2D point and click movement in Godot.
-
-![Demo of isometric movement](demo.gif)
-
-
-Iso tile assets from - https://godotengine.org/asset-library/asset/2476
+![Screenshot](assets/screenshot.png)
