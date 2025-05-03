@@ -42,13 +42,14 @@ func play(time: int) -> void:
 	if t < 0:
 		return #do nothing
 	t = t % (stay_time+away_time)
-	if not(home.game_over) && t < stay_time:
-		if t == 0:
-			start_mean_person()
-		if t >= 0 and t < stay_time:
-			update_mean_person(float(t+1)/(stay_time+1))
-		if t == stay_time:
-			return end_mean_person()
+	if home.game_over && t == stay_time:
+		return 
+	if t == 0:
+		start_mean_person()
+	if t >= 0 and t < stay_time:
+		update_mean_person(float(t+1)/(stay_time+1))
+	if t == stay_time:
+		return end_mean_person()
 
 func start_mean_person() -> void:
 	global_position = start_pos
