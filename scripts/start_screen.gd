@@ -4,6 +4,7 @@ extends Node2D
 @onready var letter1: Node = $"Letter1"
 
 func _on_first_button_pressed() -> void:
+	$Letter.play()
 	letter0.visible = false
 	letter1.visible = true
 
