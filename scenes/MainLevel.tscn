@@ -42,6 +42,12 @@ icon_alignment = 1
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_k2vfh")
 
+[node name="Tablo" parent="Mayson" instance=ExtResource("9_k2vfh")]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(29, -467)
+rotation = 0.0523599
+
 [node name="GameObjectHandler" type="Node2D" parent="Mayson"]
 y_sort_enabled = true
 position = Vector2(1402.09, 30.1388)
@@ -67,12 +73,6 @@ view_dir = Vector2(-1, 0)
 [node name="Chair" parent="Mayson/GameObjectHandler" instance=ExtResource("7_6ib6r")]
 z_index = 1
 position = Vector2(-687.09, -171.139)
-
-[node name="Tablo" parent="Mayson/GameObjectHandler" instance=ExtResource("9_k2vfh")]
-z_index = 1
-y_sort_enabled = true
-position = Vector2(-1373.09, -497.139)
-rotation = 0.0523599
 
 [node name="Closet" parent="Mayson/GameObjectHandler" instance=ExtResource("9_wcvik")]
 z_index = 1
