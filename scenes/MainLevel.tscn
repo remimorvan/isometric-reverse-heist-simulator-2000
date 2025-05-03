@@ -12,8 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://74ccwirwx4id" path="res://scenes/window_people.tscn" id="10_2cvyt"]
 [ext_resource type="Texture2D" uid="uid://jpyfq50le85u" path="res://assets/level/background.jpeg" id="10_6ib6r"]
 [ext_resource type="PackedScene" uid="uid://copmddbeoxptn" path="res://scenes/player.tscn" id="10_rqv6b"]
-[ext_resource type="PackedScene" path="res://scenes/bed_head.tscn" id="11_4t260"]
-[ext_resource type="PackedScene" path="res://scenes/bed.tscn" id="11_rqv6b"]
+[ext_resource type="PackedScene" uid="uid://bbac7vf2pr0wi" path="res://scenes/bed_head.tscn" id="11_4t260"]
+[ext_resource type="PackedScene" uid="uid://bw4ywe0ot1xtn" path="res://scenes/bed.tscn" id="11_rqv6b"]
 [ext_resource type="PackedScene" uid="uid://de1mdtgmcrxr4" path="res://scenes/underwear.tscn" id="11_wd4wg"]
 
 [node name="MainLevel" type="Node2D"]
@@ -117,8 +117,7 @@ zoom = Vector2(0.3, 0.3)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 z_index = -1
-position = Vector2(426, -147)
-scale = Vector2(3.5, 3.5)
+scale = Vector2(1000, 1000)
 texture = ExtResource("10_6ib6r")
 
 [connection signal="pressed" from="Mayson/Restart/Button" to="." method="_on_restart_button_pressed"]
