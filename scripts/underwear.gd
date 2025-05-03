@@ -2,7 +2,6 @@ extends GameObject
 
 @onready var layer0: TileMapLayer = $"../../Layer0"
 @onready var player: GameObject = $"../Player"
-@onready var collision: CollisionShape2D = $"CharacterBody2D/CollisionShape2D"
 @onready var sprite: Sprite2D = $"CharacterBody2D/Sprite2D"
 
 # Called when the node enters the scene tree for the first time.
