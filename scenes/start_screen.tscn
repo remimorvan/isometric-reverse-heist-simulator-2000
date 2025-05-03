@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://xs4el8hun23k"]
+[gd_scene load_steps=9 format=3 uid="uid://xs4el8hun23k"]
 
 [ext_resource type="Script" uid="uid://c3wef2oq6tlga" path="res://scripts/start_screen.gd" id="1_hm208"]
 [ext_resource type="Texture2D" uid="uid://cg3v1vqw7ta2" path="res://assets/level/start.png" id="1_r2jwc"]
 [ext_resource type="Shader" uid="uid://c8f3mp10uiiga" path="res://scenes/highlight.gdshader" id="2_hm208"]
 [ext_resource type="Texture2D" uid="uid://bafatihab2lh2" path="res://assets/level/lettre0.png" id="3_5pab1"]
 [ext_resource type="Texture2D" uid="uid://ds4jderwtfbsa" path="res://assets/level/lettre1.png" id="4_o30b1"]
+[ext_resource type="AudioStream" uid="uid://cmjqtkjynuhy1" path="res://assets/sound/letter.ogg" id="6_5pab1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ka6nf"]
 shader = ExtResource("2_hm208")
@@ -56,6 +57,9 @@ offset_right = 793.0
 offset_bottom = 134.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Letter" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_5pab1")
 
 [connection signal="pressed" from="Letter0/Button0" to="." method="_on_first_button_pressed"]
 [connection signal="pressed" from="Letter1/Button1" to="." method="_on_second_button_pressed"]

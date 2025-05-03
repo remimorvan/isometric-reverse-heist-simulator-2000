@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://4vr03d7x2ase"]
+[gd_scene load_steps=8 format=3 uid="uid://4vr03d7x2ase"]
 
 [ext_resource type="Script" uid="uid://da13tfhul617i" path="res://scripts/closet.gd" id="1_l4o33"]
+[ext_resource type="AudioStream" uid="uid://bxwccqixl6i1m" path="res://assets/sound/open.ogg" id="3_71km3"]
 [ext_resource type="Texture2D" uid="uid://bvx4j5gvo4a6p" path="res://assets/level/placard/fermé.png" id="3_uj11n"]
+[ext_resource type="AudioStream" uid="uid://cn41g6fb81lh6" path="res://assets/sound/close.ogg" id="4_cgwhh"]
 
 [sub_resource type="Shader" id="Shader_l4o33"]
 code = "shader_type canvas_item;
@@ -64,3 +66,9 @@ offset = Vector2(0, -240)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 y_sort_enabled = true
 shape = SubResource("CircleShape2D_fg8xd")
+
+[node name="OpenSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_71km3")
+
+[node name="CloseSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_cgwhh")

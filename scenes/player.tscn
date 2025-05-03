@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://copmddbeoxptn"]
+[gd_scene load_steps=9 format=3 uid="uid://copmddbeoxptn"]
 
 [ext_resource type="Script" uid="uid://c5kcj1ddxyujc" path="res://scripts/player.gd" id="1_hohfr"]
+[ext_resource type="AudioStream" uid="uid://ca68hd1ps42he" path="res://assets/sound/click.mp3" id="3_dqkch"]
 [ext_resource type="Texture2D" uid="uid://oerdirsqlmex" path="res://assets/player/walk1.png" id="3_qhqgy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fg8xd"]
@@ -52,3 +53,7 @@ y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_fjrip")
 animation = &"run"
 offset = Vector2(-30, -130)
+
+[node name="Click" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_dqkch")
+volume_db = -10.0
