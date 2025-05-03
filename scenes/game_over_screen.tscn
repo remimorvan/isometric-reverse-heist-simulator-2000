@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cj4q7r3l32epv"]
+[gd_scene load_steps=3 format=3 uid="uid://cr7bcb2f6hjle"]
 
 [ext_resource type="Texture2D" uid="uid://usnclef0bpgc" path="res://assets/level/gameover.png" id="1_61w2s"]
 [ext_resource type="Script" uid="uid://57m4k372d6m" path="res://scenes/try_again_button.gd" id="2_jw6e5"]
