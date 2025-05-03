@@ -17,6 +17,7 @@ func _ready() -> void:
 	var current_tile = layer0.local_to_map(global_position)
 	global_position = layer0.map_to_local(current_tile)
 	print("[Player] Initial position: ", global_position)
+	selected_tile = current_tile
 
 func _unhandled_input(event: InputEvent) -> void:
 	if game_object_handler.can_play():

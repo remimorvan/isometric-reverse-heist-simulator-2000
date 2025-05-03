@@ -5,13 +5,10 @@ extends GameObject
 @onready var collision: CollisionShape2D = $"CharacterBody2D/CollisionShape2D"
 @onready var sprite: Sprite2D = $"CharacterBody2D/Sprite2D"
 
-var final_position: Vector2i
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var current_tile = layer0.local_to_map(global_position)
-	global_position = layer0.map_to_local(current_tile)
-	final_position = global_position
+	#var current_tile = layer0.local_to_map(global_position)
+	#global_position = layer0.map_to_local(current_tile)
 	visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,7 +31,6 @@ func unhighlight() -> void:
 	pass
 	
 func appear() -> void:
-	collision.set_deferred("disabled", true)
 	visible = true
 	var final_scale = scale
 	var final_position = global_position

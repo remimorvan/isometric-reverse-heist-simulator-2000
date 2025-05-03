@@ -1,9 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://cy5sbokend7fg"]
+[gd_scene load_steps=16 format=3 uid="uid://cy5sbokend7fg"]
 
 [ext_resource type="Script" uid="uid://oi0r4ynbu0sa" path="res://scripts/main.gd" id="1_jsrw5"]
 [ext_resource type="PackedScene" uid="uid://bqtadeysdvdy" path="res://scenes/mayson.tscn" id="2_jsrw5"]
-[ext_resource type="Texture2D" uid="uid://usnclef0bpgc" path="res://assets/level/gameover.png" id="3_e5ycg"]
-[ext_resource type="Script" uid="uid://57m4k372d6m" path="res://scenes/try_again_button.gd" id="4_apwki"]
 [ext_resource type="Texture2D" uid="uid://b6n0tev3dttag" path="res://assets/level/restart_button.png" id="4_k2vfh"]
 [ext_resource type="Script" uid="uid://xth84ey1qovn" path="res://scripts/game_object_handler.gd" id="5_6ib6r"]
 [ext_resource type="PackedScene" uid="uid://cjajyodhkxglj" path="res://scenes/dog_bowl.tscn" id="5_huru0"]
@@ -17,8 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://bbac7vf2pr0wi" path="res://scenes/bed_head.tscn" id="11_4t260"]
 [ext_resource type="PackedScene" uid="uid://bw4ywe0ot1xtn" path="res://scenes/bed.tscn" id="11_rqv6b"]
 [ext_resource type="PackedScene" uid="uid://de1mdtgmcrxr4" path="res://scenes/underwear.tscn" id="11_wd4wg"]
-[ext_resource type="PackedScene" uid="uid://xs4el8hun23k" path="res://scenes/start_screen.tscn" id="17_2ve45"]
-[ext_resource type="PackedScene" uid="uid://y84i4tiu0fcr" path="res://scenes/victory_screen.tscn" id="18_u1f61"]
 
 [node name="MainLevel" type="Node2D"]
 y_sort_enabled = true
@@ -26,25 +22,6 @@ script = ExtResource("1_jsrw5")
 
 [node name="Mayson" parent="." instance=ExtResource("2_jsrw5")]
 tile_size = 240.0
-
-[node name="GAME OVER SCREEN" type="Node2D" parent="Mayson"]
-visible = false
-z_index = 2
-position = Vector2(319.09, -322.861)
-scale = Vector2(3, 3)
-
-[node name="Sprite2D" type="Sprite2D" parent="Mayson/GAME OVER SCREEN"]
-scale = Vector2(1.1, 1.1)
-texture = ExtResource("3_e5ycg")
-
-[node name="Button" type="Button" parent="Mayson/GAME OVER SCREEN"]
-offset_left = -314.0
-offset_top = 143.0
-offset_right = 315.0
-offset_bottom = 350.0
-theme_override_font_sizes/font_size = 70
-text = "TRY AGAIN"
-script = ExtResource("4_apwki")
 
 [node name="Restart" type="Node2D" parent="Mayson"]
 position = Vector2(-2207, -1001)
@@ -124,28 +101,18 @@ z_index = 1
 position = Vector2(-1146.09, -1372.14)
 
 [node name="Underwear" parent="Mayson/GameObjectHandler" instance=ExtResource("11_wd4wg")]
-z_index = 1
-position = Vector2(-1390.09, -1250.14)
+z_index = 2
+y_sort_enabled = false
+position = Vector2(-1281.09, -1387.14)
 
 [node name="Player" parent="Mayson/GameObjectHandler" instance=ExtResource("10_rqv6b")]
 z_index = 1
-position = Vector2(-694, 92)
+position = Vector2(-686.09, 94.8612)
 move_speed = 1000.0
-
-[node name="VictoryScreen" parent="Mayson" instance=ExtResource("18_u1f61")]
-visible = false
-z_index = 2
-position = Vector2(314, -358)
-scale = Vector2(3, 3)
 
 [node name="Camera2D" type="Camera2D" parent="Mayson"]
 position = Vector2(319.09, -322.861)
 zoom = Vector2(0.3, 0.3)
-
-[node name="StartScreen" parent="." instance=ExtResource("17_2ve45")]
-z_index = 2
-position = Vector2(314, -375)
-scale = Vector2(3, 3)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false

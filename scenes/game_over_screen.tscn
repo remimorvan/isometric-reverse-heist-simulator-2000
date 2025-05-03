@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj4q7r3l32epv"]
+
+[ext_resource type="Texture2D" uid="uid://usnclef0bpgc" path="res://assets/level/gameover.png" id="1_61w2s"]
+[ext_resource type="Script" uid="uid://57m4k372d6m" path="res://scenes/try_again_button.gd" id="2_jw6e5"]
+
+[node name="GAME OVER SCREEN" type="Node2D"]
+z_index = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("1_61w2s")
+
+[node name="Button" type="Button" parent="."]
+offset_left = -314.0
+offset_top = 143.0
+offset_right = 315.0
+offset_bottom = 350.0
+theme_override_font_sizes/font_size = 70
+text = "TRY AGAIN"
+script = ExtResource("2_jw6e5")
+
+[node name="Camera2D" type="Camera2D" parent="."]
