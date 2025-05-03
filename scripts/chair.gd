@@ -54,6 +54,7 @@ func _result_of_interact(player:GameObject, old_position:Vector2i) -> void:
 	player.selected_tile = old_position
 	
 func interact(player_position: Vector2i) -> Callable:
+	$MoveSound.play()
 	var old_pos = layer1.local_to_map(global_position)
 	var ret = func(p): _result_of_interact(p, old_pos)
 	global_position = layer0.map_to_local(get_opposite_tile(player_position))
