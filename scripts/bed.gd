@@ -9,7 +9,6 @@ extends GameObject
 @onready var game_object_handler: Node = $"../"
 @onready var bed_head: Node = $"../BedHead"
 @onready var underwear: Node = $"../Underwear"
-@onready var victory_screen: Node = $"../../VictoryScreen"
 
 var has_underwear: bool = false;
 
@@ -49,7 +48,7 @@ func interact(player_position: Vector2i) -> Callable:
 		add_child(timer)
 		timer.wait_time = 2.0
 		timer.one_shot = true
-		timer.timeout.connect(func(): victory_screen.visible = 1)
+		timer.timeout.connect(func(): get_tree().change_scene_to_file("res://scenes/victory_screen.tscn"))
 		timer.start()
 	
 	return func(player): pass

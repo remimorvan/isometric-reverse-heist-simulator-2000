@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Isometric Reverse Heist Simulator 2000"
-run/main_scene="uid://cy5sbokend7fg"
+run/main_scene="uid://xs4el8hun23k"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
